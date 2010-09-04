@@ -1627,22 +1627,9 @@ class Base:
 	def put_zoom_image_to_window(self, currimg_preloaded):
 		self.window.window.freeze_updates()
 		if not currimg_preloaded:
-			# Always start with the original image to preserve quality!
-			# Calculate image size:
-			finalimg_width = int(self.currimg.pixbuf_original.get_width() * self.currimg.zoomratio)
-			finalimg_height = int(self.currimg.pixbuf_original.get_height() * self.currimg.zoomratio)
-			if not self.currimg.animation:
-				# Scale image:
-				if not self.currimg.pixbuf_original.get_has_alpha():
-					self.currimg.pixbuf = self.currimg.pixbuf_original.scale_simple(finalimg_width, finalimg_height, self.zoom_quality)
-				else:
-					colormap = self.imageview.get_colormap()
-					light_grey = colormap.alloc_color('#666666', True, True)
-					dark_grey = colormap.alloc_color('#999999', True, True)
-					self.currimg.pixbuf = self.currimg.pixbuf_original.composite_color_simple(finalimg_width, finalimg_height, self.zoom_quality, 255, 8, light_grey.pixel, dark_grey.pixel)
-			else:
-				self.currimg.pixbuf = self.currimg.pixbuf_original
-			self.currimg.width, self.currimg.height = finalimg_width, finalimg_height
+			# Zoom the pixbuf
+			colormap = self.imageview.get_colormap()
+			self.currimg.zoom_pixbuf(self.currimg.zoomratio, self.zoom_quality, colormap)
 		self.layout.set_size(self.currimg.width, self.currimg.height)
 		self.center_image()
 		self.show_scrollbars_if_needed()
@@ -3435,13 +3422,13 @@ class Base:
 			if image_height > size:
 				image_width = int(size/float(image_height)*image_width)
 				image_height = size
-		if not pixbuf.get_has_alpha():
-			crop_pixbuf = pixbuf.scale_simple(image_width, image_height, zoom_quality)
-		else:
+		if pixbuf.get_has_alpha():
 			colormap = self.imageview.get_colormap()
 			light_grey = colormap.alloc_color('#666666', True, True)
 			dark_grey = colormap.alloc_color('#999999', True, True)
 			crop_pixbuf = pixbuf.composite_color_simple(image_width, image_height, zoom_quality, 255, 8, light_grey.pixel, dark_grey.pixel)
+		else:
+			crop_pixbuf = pixbuf.scale_simple(image_width, image_height, zoom_quality)
 		return (crop_pixbuf, image_width, image_height)
 
 	def pixbuf_add_border(self, pix):
@@ -4270,21 +4257,9 @@ class Base:
 					return
 				# Determine self.nextimg.zoomratio
 				self.zoom_check_and_execute(None, True, False)
-				# Always start with the original image to preserve quality!
-				# Calculate image size:
-				self.nextimg.width = int(self.nextimg.pixbuf_original.get_width() * self.nextimg.zoomratio)
-				self.nextimg.height = int(self.nextimg.pixbuf_original.get_height() * self.nextimg.zoomratio)
-				if not self.nextimg.animation:
-					# Scale image:
-					if not self.nextimg.pixbuf_original.get_has_alpha():
-						self.nextimg.pixbuf = self.nextimg.pixbuf_original.scale_simple(self.nextimg.width, self.nextimg.height, self.zoom_quality)
-					else:
-						colormap = self.imageview.get_colormap()
-						light_grey = colormap.alloc_color('#666666', True, True)
-						dark_grey = colormap.alloc_color('#999999', True, True)
-						self.nextimg.pixbuf = self.nextimg.pixbuf_original.composite_color_simple(self.nextimg.width, self.nextimg.height, self.zoom_quality, 255, 8, light_grey.pixel, dark_grey.pixel)
-				else:
-					self.nextimg.pixbuf = self.nextimg.pixbuf_original
+				# Zoom pixbuf
+				colormap = self.imageview.get_colormap()
+				self.nextimg.zoom_pixbuf(self.nextimg.zoomratio, colormap)
 				gc.collect()
 				if self.verbose:
 					print _("Preloading: %s") % self.nextimg.name
@@ -4318,20 +4293,8 @@ class Base:
 				# Determine self.previmg.zoomratio
 				self.zoom_check_and_execute(None, False, True)
 				# Always start with the original image to preserve quality!
-				# Calculate image size:
-				self.previmg.width = int(self.previmg.pixbuf_original.get_width() * self.previmg.zoomratio)
-				self.previmg.height = int(self.previmg.pixbuf_original.get_height() * self.previmg.zoomratio)
-				if not self.previmg.animation:
-					# Scale image:
-					if not self.previmg.pixbuf_original.get_has_alpha():
-						self.previmg.pixbuf = self.previmg.pixbuf_original.scale_simple(self.previmg.width, self.previmg.height, self.zoom_quality)
-					else:
-						colormap = self.imageview.get_colormap()
-						light_grey = colormap.alloc_color('#666666', True, True)
-						dark_grey = colormap.alloc_color('#999999', True, True)
-						self.previmg.pixbuf = self.previmg.pixbuf_original.composite_color_simple(self.previmg.width, self.previmg.height, self.zoom_quality, 255, 8, light_grey.pixel, dark_grey.pixel)
-				else:
-					self.previmg.pixbuf = self.previmg.pixbuf_original
+				colormap = self.imageview.get_colormap()
+				self.previmg.zoom_pixbuf(self.previmg.zoomratio, self.zoom_quality, colormap)
 				gc.collect()
 				if self.verbose:
 					print _("Preloading: %s") % self.previmg.name
@@ -4866,6 +4829,8 @@ class ImageData:
 				 pixbuf_original=None, pixbuf_rotated=None, zoomratio=1, animation=False):
 		self.index = index
 		self.name = name
+		self.width_original = width
+		self.height_original = heigth
 		self.width = width
 		self.height = heigth
 		self.pixbuf = pixbuf
@@ -4873,6 +4838,22 @@ class ImageData:
 		self.pixbuf_rotated = pixbuf_rotated
 		self.zoomratio = zoomratio
 		self.animation = animation
+	
+	def zoom_pixbuf(self,zoomratio, quality, colormap):
+		# Always start with the original image to preserve quality!
+		# Calculate image size:
+		if self.animation:
+			return
+		final_width = int(self.pixbuf_original.get_width() * zoomratio)
+		final_height = int(self.pixbuf_original.get_height() * zoomratio)
+		# Scale image:
+		if self.pixbuf_original.get_has_alpha():
+			light_grey = colormap.alloc_color('#666666', True, True)
+			dark_grey = colormap.alloc_color('#999999', True, True)
+			self.pixbuf = self.pixbuf_original.composite_color_simple(final_width, final_height, quality, 255, 8, light_grey.pixel, dark_grey.pixel)
+		else:
+			self.pixbuf = self.pixbuf_original.scale_simple(final_width, final_height, quality)
+		self.width, self.height = final_width, final_height
 
 if __name__ == "__main__":
 	base = Base()
