@@ -1624,12 +1624,12 @@ class Base:
 		self.save_settings()
 		sys.exit(0)
 
-	def put_zoom_image_to_window(self, currimg_preloaded):
+	def put_zoom_image_to_window(self, currimg_preloaded, zoom_ratio=1):
 		self.window.window.freeze_updates()
 		if not currimg_preloaded:
 			# Zoom the pixbuf
 			colormap = self.imageview.get_colormap()
-			self.currimg.zoom_pixbuf(self.currimg.zoomratio, self.zoom_quality, colormap)
+			self.currimg.zoom_pixbuf(zoom_ratio, self.zoom_quality, colormap)
 		self.layout.set_size(self.currimg.width, self.currimg.height)
 		self.center_image()
 		self.show_scrollbars_if_needed()
@@ -3216,10 +3216,10 @@ class Base:
 	def zoom_in(self, action):
 		if self.currimg.name != "" and self.UIManager.get_widget('/MainMenu/ViewMenu/In').get_property('sensitive'):
 			self.image_zoomed = True
-			self.currimg.zoomratio = self.currimg.zoomratio * 1.25
+			wanted_zoomratio = self.currimg.zoomratio * 1.25
 			self.set_zoom_sensitivities()
 			self.last_image_action_was_fit = False
-			self.put_zoom_image_to_window(False)
+			self.put_zoom_image_to_window(False, wanted_zoomratio)
 			self.update_statusbar()
 
 	def zoom_out(self, action):
@@ -3228,12 +3228,12 @@ class Base:
 				# No point in proceeding..
 				return
 			self.image_zoomed = True
-			self.currimg.zoomratio = self.currimg.zoomratio * 1/1.25
-			if self.currimg.zoomratio < self.min_zoomratio:
-				self.currimg.zoomratio = self.min_zoomratio
+			wanted_zoomratio = self.currimg.zoomratio * 1/1.25
+			if wanted_zoomratio < self.min_zoomratio:
+				wanted_zoomratio = self.min_zoomratio
 			self.set_zoom_sensitivities()
 			self.last_image_action_was_fit = False
-			self.put_zoom_image_to_window(False)
+			self.put_zoom_image_to_window(False, wanted_zoomratio)
 			self.update_statusbar()
 
 	def zoom_to_fit_window_action(self, action):
@@ -3283,9 +3283,9 @@ class Base:
 					max_ratio = height_ratio
 				else:
 					max_ratio = width_ratio
-				self.currimg.zoomratio = 1/float(max_ratio)
+				wanted_zoomratio = 1/float(max_ratio)
 				self.set_zoom_sensitivities()
-				self.put_zoom_image_to_window(False)
+				self.put_zoom_image_to_window(False, wanted_zoomratio)
 				self.update_statusbar()
 
 	def zoom_to_fit_or_1_to_1(self, action, is_preloadimg_next, is_preloadimg_prev):
@@ -3333,13 +3333,13 @@ class Base:
 					max_ratio = height_ratio
 				else:
 					max_ratio = width_ratio
-				self.currimg.zoomratio = 1/float(max_ratio)
+				wanted_zoomratio = 1/float(max_ratio)
 				self.set_zoom_sensitivities()
-				if self.currimg.zoomratio > 1:
+				if wanted_zoomratio > 1:
 					# Revert to 1:1 zoom
 					self.zoom_1_to_1(action, False, False)
 				else:
-					self.put_zoom_image_to_window(False)
+					self.put_zoom_image_to_window(False, wanted_zoomratio)
 					self.update_statusbar()
 				self.last_image_action_was_fit = True
 				self.last_image_action_was_smart_fit = True
@@ -3359,8 +3359,8 @@ class Base:
 				self.image_zoomed = True
 				self.usettings['last_mode'] = self.open_mode_1to1
 				self.last_image_action_was_fit = False
-				self.currimg.zoomratio = 1
-				self.put_zoom_image_to_window(False)
+				wanted_zoomratio = 1
+				self.put_zoom_image_to_window(False, wanted_zoomratio)
 				self.update_statusbar()
 
 	def zoom_check_and_execute(self,action, is_preloadimg_next, is_preloadimg_prev):
@@ -4839,7 +4839,7 @@ class ImageData:
 		self.zoomratio = zoomratio
 		self.animation = animation
 	
-	def zoom_pixbuf(self,zoomratio, quality, colormap):
+	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		# Always start with the original image to preserve quality!
 		# Calculate image size:
 		if self.animation:
