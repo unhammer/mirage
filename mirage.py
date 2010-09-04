@@ -1099,11 +1099,7 @@ class Base:
 				self.toolbar.set_style(gtk.TOOLBAR_ICONS)
 			elif style == "text":
 				self.toolbar.set_style(gtk.TOOLBAR_TEXT)
-			if self.image_loaded and self.last_image_action_was_fit:
-				if self.last_image_action_was_smart_fit:
-					self.zoom_to_fit_or_1_to_1(None, False, False)
-				else:
-					self.zoom_to_fit_window(None, False, False)
+			self.image_zoom_fit_update()
 
 	def toolbar_focused(self, widget, direction):
 		self.layout.grab_focus()
@@ -1527,10 +1523,7 @@ class Base:
 		if self.image_loaded:
 			if force_update or allocation.width != self.prevwinwidth or allocation.height != self.prevwinheight:
 				if self.last_image_action_was_fit:
-					if self.last_image_action_was_smart_fit:
-						self.zoom_to_fit_or_1_to_1(None, False, False)
-					else:
-						self.zoom_to_fit_window(None, False, False)
+					self.image_zoom_fit_update()
 				else:
 					self.center_image()
 				self.load_new_image_stop_now()
@@ -1960,11 +1953,7 @@ class Base:
 			self.statusbar.show()
 			self.statusbar2.show()
 			self.usettings['statusbar_show'] = True
-		if self.image_loaded and self.last_image_action_was_fit:
-			if self.last_image_action_was_smart_fit:
-				self.zoom_to_fit_or_1_to_1(None, False, False)
-			else:
-				self.zoom_to_fit_window(None, False, False)
+		self.image_zoom_fit_update()
 
 	def toggle_thumbpane(self, action):
 		if self.thumbscroll.get_property('visible'):
@@ -1977,11 +1966,7 @@ class Base:
 			self.usettings['thumbpane_show'] = True
 			self.stop_now = False
 			gobject.idle_add(self.thumbpane_update_images, True, self.curr_img_in_list)
-		if self.image_loaded and self.last_image_action_was_fit:
-			if self.last_image_action_was_smart_fit:
-				self.zoom_to_fit_or_1_to_1(None, False, False)
-			else:
-				self.zoom_to_fit_window(None, False, False)
+		self.image_zoom_fit_update()
 
 	def toggle_toolbar(self, action):
 		if self.toolbar.get_property('visible'):
@@ -1990,11 +1975,7 @@ class Base:
 		else:
 			self.toolbar.show()
 			self.usettings['toolbar_show'] = True
-		if self.image_loaded and self.last_image_action_was_fit:
-			if self.last_image_action_was_smart_fit:
-				self.zoom_to_fit_or_1_to_1(None, False, False)
-			else:
-				self.zoom_to_fit_window(None, False, False)
+		self.image_zoom_fit_update()
 
 	def update_statusbar(self):
 		# Update status bar:
@@ -3212,6 +3193,13 @@ class Base:
 		if event.button == 2 or event.button == 1:
 			self.change_cursor(None)
 		return True
+
+	def image_zoom_fit_update(self):
+		if self.image_loaded and self.last_image_action_was_fit:
+			if self.last_image_action_was_smart_fit:
+				self.zoom_to_fit_or_1_to_1(None, False, False)
+			else:
+				self.zoom_to_fit_window(None, False, False)
 
 	def zoom_in(self, action):
 		if self.currimg.name != "" and self.UIManager.get_widget('/MainMenu/ViewMenu/In').get_property('sensitive'):
