@@ -4238,7 +4238,7 @@ class Base:
 					next_index = self.curr_img_in_list + 1
 					if next_index > len(self.image_list)-1:
 						if self.usettings['listwrap_mode'] == 0:
-							self.nextimg.index == -1
+							self.nextimg.index = -1
 							return
 						else:
 							next_index = 0
@@ -4273,7 +4273,7 @@ class Base:
 					prev_index = self.curr_img_in_list - 1
 					if prev_index < 0:
 						if self.usettings['listwrap_mode'] == 0:
-							self.previmg.index == -1
+							self.previmg.index = -1
 							return
 						else:
 							prev_index = len(self.image_list)-1
