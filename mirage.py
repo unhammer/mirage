@@ -1165,28 +1165,28 @@ class Base:
 		while gtk.events_pending():
 			gtk.main_iteration()
 		if not os.path.exists(self.previmg.name):
-			self.previmg.index = -1
+			self.previmg.unload_pixbuf()
 		else:
 			animtest = gtk.gdk.PixbufAnimation(self.previmg.name)
 			if animtest.is_static_image():
 				if self.images_are_different(animtest.get_static_image(), self.previmg.pixbuf_original):
-					self.previmg.index = -1
+					self.previmg.unload_pixbuf()
 					self.preload_when_idle = gobject.idle_add(self.preload_prev_image, False)
 			else:
 				if self.images_are_different(animtest, self.previmg.pixbuf_original):
-					self.previmg.index = -1
+					self.previmg.unload_pixbuf()
 					self.preload_when_idle = gobject.idle_add(self.preload_prev_image, False)
 		if not os.path.exists(self.nextimg.name):
-			self.nextimg.index = -1
+			self.nextimg.unload_pixbuf()
 		else:
 			animtest = gtk.gdk.PixbufAnimation(self.nextimg.name)
 			if animtest.is_static_image():
 				if self.images_are_different(animtest.get_static_image(), self.nextimg.pixbuf_original):
-					self.nextimg.index = -1
+					self.nextimg.unload_pixbuf()
 					self.preload_when_idle = gobject.idle_add(self.preload_next_image, False)
 			else:
 				if self.images_are_different(animtest, self.nextimg.pixbuf_original):
-					self.nextimg.index = -1
+					self.nextimg.unload_pixbuf()
 					self.preload_when_idle = gobject.idle_add(self.preload_next_image, False)
 		self.stop_now = False
 		if batchmode:
@@ -2404,13 +2404,10 @@ class Base:
 		show_props.set_resizable(False)
 		table = gtk.Table(3, 4, False)
 		image = gtk.Image()
-		animtest = gtk.gdk.PixbufAnimation(self.currimg.name)
-		image_is_anim = False
-		if animtest.is_static_image():
-			pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original, 180, self.zoom_quality)
+		if self.currimg.animation:
+			pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original.get_static_image(), 180, self.zoom_quality)
 		else:
-			pixbuf, image_width, image_height = self.get_pixbuf_of_size(animtest.get_static_image(), 180, self.zoom_quality)
-			image_is_anim = True
+			pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original, 180, self.zoom_quality)
 		image.set_from_pixbuf(self.pixbuf_add_border(pixbuf))
 
 		# The generic info
@@ -2452,14 +2449,14 @@ class Base:
 		imagesize2 = gtk.Label(str(self.currimg.pixbuf_original.get_width()) + "x" + str(self.currimg.pixbuf_original.get_height()))
 		filetype2 = gtk.Label(gtk.gdk.pixbuf_get_file_info(self.currimg.name)[0]['mime_types'][0])
 		filesize2 = gtk.Label(str(filestat[stat.ST_SIZE]/1000) + "KB")
-		if not image_is_anim and pixbuf.get_has_alpha():
+		if not self.currimg.animation and pixbuf.get_has_alpha():
 			transparency2 = gtk.Label(_("Yes"))
 		else:
 			transparency2 = gtk.Label(_("No"))
-		if animtest.is_static_image():
-			animation2 = gtk.Label(_("No"))
-		else:
+		if self.currimg.animation:
 			animation2 = gtk.Label(_("Yes"))
+		else:
+			animation2 = gtk.Label(_("No"))
 		bits2 = gtk.Label(str(pixbuf.get_bits_per_sample()))
 		channels2 = gtk.Label(str(pixbuf.get_n_channels()))
 		filename2.set_alignment(0, 1)
@@ -2893,11 +2890,10 @@ class Base:
 			renameimage = gtk.Image()
 			renameimage.set_from_stock(gtk.STOCK_OK, gtk.ICON_SIZE_BUTTON)
 			renamebutton.set_image(renameimage)
-			animtest = gtk.gdk.PixbufAnimation(self.currimg.name)
-			if animtest.is_static_image():
-				pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original, 60, self.zoom_quality)
+			if self.currimg.animation:
+				pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original.get_static_image(), 60, self.zoom_quality)
 			else:
-				pixbuf, image_width, image_height = self.get_pixbuf_of_size(animtest.get_static_image(), 60, self.zoom_quality)
+				pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original, 60, self.zoom_quality)
 			image = gtk.Image()
 			image.set_from_pixbuf(pixbuf)
 			instructions = gtk.Label(_("Enter the new name:"))
@@ -3718,11 +3714,10 @@ class Base:
 		vbox.pack_start(hbox_aspect, False, False, 0)
 		vbox.pack_start(gtk.Label(), False, False, 0)
 		hbox_total = gtk.HBox()
-		animtest = gtk.gdk.PixbufAnimation(self.currimg.name)
-		if animtest.is_static_image():
-			pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original, 96, self.zoom_quality)
+		if self.currimg.animation:
+			pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original.get_static_image(), 96, self.zoom_quality)
 		else:
-			pixbuf, image_width, image_height = self.get_pixbuf_of_size(animtest.get_static_image(), 96, self.zoom_quality)
+			pixbuf, image_width, image_height = self.get_pixbuf_of_size(self.currimg.pixbuf_original, 96, self.zoom_quality)
 		image = gtk.Image()
 		image.set_from_pixbuf(self.pixbuf_add_border(pixbuf))
 		hbox_total.pack_start(image, False, False, 10)
@@ -4132,7 +4127,7 @@ class Base:
 					self.set_image_sensitivities(False)
 		return used_prev, used_next
 
-	def load_new_image2(self, check_prev_last, use_current_pixbuf_original, reset_cursor, perform_onload_action, skip_recentfiles=False):
+	def load_new_image2(self, check_prev_last, use_current_pixbuf_original, reset_cursor, perform_onload_action, skip_recentfiles=False, image_name=""):
 		# check_prev_last is used to determine if we should check whether
 		# preloadimg_prev can be reused last. This should really only
 		# be done if the user just clicked the previous image button in
@@ -4168,9 +4163,9 @@ class Base:
 			else:
 				self.check_preloadimg_next_for_existing(next_index, reset_preloadimg_next_in_list)
 			if reset_preloadimg_prev_in_list:
-				self.previmg.index = -1
+				self.previmg.unload_pixbuf()
 			if reset_preloadimg_next_in_list:
-				self.nextimg.index = -1
+				self.nextimg.unload_pixbuf()
 		if used_prev or used_next:
 			# If we used a preload image, set the correct boolean variables
 			if self.usettings['open_mode'] == self.open_mode_smart or (self.usettings['open_mode'] == self.open_mode_last and self.usettings['last_mode'] == self.open_mode_smart):
@@ -4183,28 +4178,21 @@ class Base:
 				self.last_image_action_was_fit = False
 		else:
 			# Need to load the current image
-			self.currimg.pixbuf = None
-			self.currimg.zoomratio = 1
-			try:
-				self.currimg.name = str(self.image_list[self.curr_img_in_list])
-			except:
-				pass
-			if self.verbose and self.currimg.name != "":
-				print _("Loading: %s") % self.currimg.name
-			animtest = gtk.gdk.PixbufAnimation(self.currimg.name)
-			if animtest.is_static_image() or (use_current_pixbuf_original and not self.currimg.animation):
-				self.currimg.animation = False
-				if not use_current_pixbuf_original:
-					self.currimg.pixbuf_original = animtest.get_static_image()
-				self.set_image_sensitivities(True)
-				# Check zoomratio
-				self.zoom_check_and_execute(None, False, False)
+			self.currimg.unload_pixbuf()
+			if image_name == "":
+				image_name = str(self.image_list[self.curr_img_in_list])
+			if self.verbose and image_name != "":
+				print _("Loading: %s") % image_name
+			if self.curr_img_in_list:
+				self.currimg.load_pixbuf(image_name, self.curr_img_in_list)
 			else:
-				self.currimg.animation = True
-				if not use_current_pixbuf_original:
-					self.currimg.pixbuf_original = animtest
+				self.currimg.load_pixbuf(image_name)
+			if self.currimg.animation:
 				self.zoom_1_to_1(None, False, False)
 				self.set_image_sensitivities(False)
+			else:
+				self.zoom_check_and_execute(None, False, False)
+				self.set_image_sensitivities(True)
 		if self.onload_cmd != None and perform_onload_action:
 			self.parse_action_command(self.onload_cmd, False)
 		self.update_statusbar()
@@ -4226,21 +4214,14 @@ class Base:
 					next_index = self.curr_img_in_list + 1
 					if next_index > len(self.image_list)-1:
 						if self.usettings['listwrap_mode'] == 0:
-							self.nextimg.index = -1
+							self.nextimg.unload_pixbuf()
 							return
 						else:
 							next_index = 0
 					if next_index == self.nextimg.index:
 						return
-					self.nextimg.index = next_index
-					self.nextimg.name = str(self.image_list[next_index])
-					pre_animtest = gtk.gdk.PixbufAnimation(self.nextimg.name)
-					if pre_animtest.is_static_image():
-						self.nextimg.animation = False
-						self.nextimg.pixbuf_original = pre_animtest.get_static_image()
-					else:
-						self.nextimg.animation = True
-						self.nextimg.pixbuf_original = pre_animtest
+					name = str(self.image_list[next_index])
+					self.nextimg.load_pixbuf(name, next_index)
 				if self.nextimg.index == -1:
 					return
 				# Determine self.nextimg.zoomratio
@@ -4252,30 +4233,23 @@ class Base:
 				if self.verbose:
 					print _("Preloading: %s") % self.nextimg.name
 		except:
-			self.nextimg.index = -1
+			self.nextimg.unload_pixbuf()
 
 	def preload_prev_image(self, use_existing_image):
 		try:
 			if self.usettings['preloading_images'] and len(self.image_list) > 1:
 				if not use_existing_image:
-					prev_index = self.curr_img_in_list - 1
-					if prev_index < 0:
+					index = self.curr_img_in_list - 1
+					if index < 0:
 						if self.usettings['listwrap_mode'] == 0:
-							self.previmg.index = -1
+							self.previmg.unload_pixbuf()
 							return
 						else:
 							prev_index = len(self.image_list)-1
-					if prev_index == self.previmg.index:
+					if index == self.previmg.index:
 						return
-					self.previmg.index = prev_index
-					self.previmg.name = str(self.image_list[prev_index])
-					pre_animtest = gtk.gdk.PixbufAnimation(self.previmg.name)
-					if pre_animtest.is_static_image():
-						self.previmg.animation = False
-						self.previmg.pixbuf_original = pre_animtest.get_static_image()
-					else:
-						self.previmg.animation = True
-						self.previmg.pixbuf_original = pre_animtest
+					name = str(self.image_list[index])
+					self.previmg.load_pixbuf(name, index)
 				if self.previmg.index == -1:
 					return
 				# Determine self.previmg.zoomratio
@@ -4287,7 +4261,7 @@ class Base:
 				if self.verbose:
 					print _("Preloading: %s") % self.previmg.name
 		except:
-			self.previmg.index = -1
+			self.previmg.unload_pixbuf()
 
 	def change_cursor(self, type):
 		for i in gtk.gdk.window_get_toplevels():
@@ -4304,8 +4278,8 @@ class Base:
 		self.stop_now = True # Make sure that any previous search process is stopped
 		self.change_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
 		# Reset preload images:
-		self.nextimg.index = -1
-		self.previmg.index = -1
+		self.nextimg.unload_pixbuf()
+		self.previmg.unload_pixbuf()
 		# If any directories were passed, display "Searching..." in statusbar:
 		self.searching_for_images = False
 		for item in inputlist:
@@ -4373,19 +4347,18 @@ class Base:
 		init_image = os.path.abspath(inputlist[0])
 		if self.valid_image(init_image):
 			try:
-				self.currimg.name = init_image
-				self.load_new_image2(False, False, True, True)
+				self.load_new_image2(False, False, True, True, image_name=init_image)
 				# Calling load_new_image2 will reset the following two vars
 				# to 0, so ensure they are -1 again (no images preloaded)
-				self.previmg.index = -1
-				self.nextimg.index = -1
+				self.previmg.unload_pixbuf()
+				self.nextimg.unload_pixbuf()
 				if not self.currimg.animation:
-					self.previmg_width = self.currimg.pixbuf.get_width()
+					self.previmg_width = self.currimg.width
 				else:
-					self.previmg_width = self.currimg.pixbuf.get_static_image().get_width()
+					self.previmg_width = self.currimg.width
 				self.image_loaded = True
 				first_image_loaded_successfully = True
-				print "quickloaded image ahead of imagelist"
+				print "Quickloaded image ahead of imagelist"
 				if not self.closing_app:
 					while gtk.events_pending():
 						gtk.main_iteration(True)
@@ -4472,12 +4445,12 @@ class Base:
 						self.load_new_image2(False, False, True, True)
 						# Calling load_new_image2 will reset the following two vars
 						# to 0, so ensure they are -1 again (no images preloaded)
-						self.previmg.index = -1
-						self.nextimg.index = -1
+						self.previmg.unload_pixbuf()
+						self.nextimg.unload_pixbuf()
 						if not self.currimg.animation:
-							self.previmg_width = self.currimg.pixbuf.get_width()
+							self.previmg_width = self.currimg.width
 						else:
-							self.previmg_width = self.currimg.pixbuf.get_static_image().get_width()
+							self.previmg_width = self.currimg.width
 						self.image_loaded = True
 						first_image_loaded_successfully = True
 						if not self.closing_app:
@@ -4817,8 +4790,8 @@ class ImageData:
 				 pixbuf_original=None, pixbuf_rotated=None, zoomratio=1, animation=False):
 		self.index = index
 		self.name = name
-		self.width_original = width
-		self.height_original = heigth
+		self.width_orig = width
+		self.height_orig = heigth
 		self.width = width
 		self.height = heigth
 		self.pixbuf = pixbuf
@@ -4826,6 +4799,37 @@ class ImageData:
 		self.pixbuf_rotated = pixbuf_rotated
 		self.zoomratio = zoomratio
 		self.animation = animation
+
+	def load_pixbuf(self, name, index=-2):
+		# Load the image in name into self.pixbuf_original
+		animtest = gtk.gdk.PixbufAnimation(name)
+		self.animation = not animtest.is_static_image()
+		if self.animation:
+			self.pixbuf_original = animtest
+		else:
+			self.pixbuf_original = animtest.get_static_image()
+		self.name = name
+		self.index = index
+		self.pixbuf = self.pixbuf_original
+		self.width = self.pixbuf.get_width()
+		self.height = self.pixbuf.get_height()
+		self.width_orig = self.width
+		self.height_orig = self.height
+		self.pixbuf_rotated = None
+		self.zoomratio = 1
+
+	def unload_pixbuf(self):
+		self.index = -1
+		self.width = 0
+		self.height = 0
+		self.width_original = 0
+		self.height_original = 0
+		self.name = ""
+		self.zoomratio = 1
+		self.animation = False
+		self.pixbuf = None
+		self.pixbuf_original = None
+		self.pixbuf_rotated = None
 	
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		# Always start with the original image to preserve quality!
@@ -4842,6 +4846,7 @@ class ImageData:
 		else:
 			self.pixbuf = self.pixbuf_original.scale_simple(final_width, final_height, quality)
 		self.width, self.height = final_width, final_height
+		self.zoomratio = zoomratio
 
 if __name__ == "__main__":
 	base = Base()
