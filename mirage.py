@@ -4116,7 +4116,7 @@ class Base:
 					self.set_image_sensitivities(False)
 			elif self.curr_img_in_list == self.nextimg.index:
 				# Use preload_next_image as current image
-				self.currimg = self.previmg
+				self.currimg = self.nextimg
 				used_next = True
 				if self.verbose and self.currimg.name != "":
 					print _("Loading: %s") % self.currimg.name
