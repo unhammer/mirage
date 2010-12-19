@@ -3091,26 +3091,29 @@ class Base:
 
 	def browser_load(self, docslink):
 		try:
-			pid = subprocess.Popen(["gnome-open", docslink]).pid
+			pid = subprocess.Popen(["xdg-open", docslink]).pid
 		except:
 			try:
-				pid = subprocess.Popen(["exo-open", docslink]).pid
+				pid = subprocess.Popen(["gnome-open", docslink]).pid
 			except:
 				try:
-					pid = subprocess.Popen(["kfmclient", "openURL", docslink]).pid
+					pid = subprocess.Popen(["exo-open", docslink]).pid
 				except:
 					try:
-						pid = subprocess.Popen(["firefox", docslink]).pid
+						pid = subprocess.Popen(["kfmclient", "openURL", docslink]).pid
 					except:
 						try:
-							pid = subprocess.Popen(["mozilla", docslink]).pid
+							pid = subprocess.Popen(["firefox", docslink]).pid
 						except:
 							try:
-								pid = subprocess.Popen(["opera", docslink]).pid
+								pid = subprocess.Popen(["mozilla", docslink]).pid
 							except:
-								error_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE, _('Unable to launch a suitable browser.'))
-								error_dialog.run()
-								error_dialog.destroy()
+								try:
+									pid = subprocess.Popen(["opera", docslink]).pid
+								except:
+									error_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_CLOSE, _('Unable to launch a suitable browser.'))
+									error_dialog.run()
+									error_dialog.destroy()
 
 	def close_about(self, event, data=None):
 		self.about_dialog.hide()
