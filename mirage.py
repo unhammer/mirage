@@ -116,7 +116,7 @@ class Base:
 		# like when the user presses 'next image' multiple times in a row.
 		# In this case, self.curr_img_in_list will increment while
 		# self.loaded_img_in_list will retain the current loaded image.
-		self.loaded_img_in_list = 0
+		self.loaded_img_in_list = -2
 		self.currimg = ImageData(index=0)
 		#self.currimg_name = ""
 		#self.currimg_width = 0 #Changed
