@@ -22,7 +22,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
+import traceback
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -1618,6 +1618,10 @@ class Base:
 		sys.exit(0)
 
 	def put_zoom_image_to_window(self, currimg_preloaded, zoom_ratio=1):
+		try:
+			traceback.print_stack()
+		except:
+			pass
 		self.window.window.freeze_updates()
 		if not currimg_preloaded:
 			# Zoom the pixbuf
@@ -4361,6 +4365,7 @@ class Base:
 					self.previmg_width = self.currimg.width
 				self.image_loaded = True
 				first_image_loaded_successfully = True
+				first_image_loaded = True
 				print "Quickloaded image ahead of imagelist"
 				if not self.closing_app:
 					while gtk.events_pending():
@@ -4496,6 +4501,7 @@ class Base:
 		if not first_image_loaded_successfully:
 			self.image_load_failed(False, init_image)
 		else:
+			print "name:" + self.currimg.name
 			self.curr_img_in_list =  self.image_list.index(self.currimg.name)
 		self.searching_for_images = False
 		self.update_statusbar()
