@@ -3800,7 +3800,13 @@ class Base:
 			and "PREV". """
 		if self.slideshow_mode and action != "ss":
 			gobject.source_remove(self.timer_delay)
-		if ((location=="PREV" or location=="NEXT" or location=="RANDOM") and len(self.image_list) > 1) or ((location == "PREV_SUBFOLDER" or location == "NEXT_SUBFOLDER") and len(self.firstimgindex_subfolders_list) >= 2) or (location=="FIRST" and (len(self.image_list) > 1 and self.curr_img_in_list != 0)) or (location=="LAST" and (len(self.image_list) > 1 and self.curr_img_in_list != len(self.image_list)-1)) or valid_int(location):
+		if ((location=="PREV" or location=="NEXT" or location=="RANDOM")\
+				and len(self.image_list) > 1) or ((location == "PREV_SUBFOLDER" \
+				or location == "NEXT_SUBFOLDER") and len(self.firstimgindex_subfolders_list) >= 2)\
+				or (location=="FIRST" and (len(self.image_list) > 1 \
+				and self.curr_img_in_list != 0)) or (location=="LAST"\
+				and (len(self.image_list) > 1 and self.curr_img_in_list != len(self.image_list)-1))\
+				or valid_int(location):
 			self.load_new_image_stop_now()
 			cancel = self.autosave_image()
 			if cancel:
@@ -4022,9 +4028,7 @@ class Base:
 		self.set_random_image_sensitivities(enable)
 
 	def reinitialize_randomlist(self):
-		self.randomlist = []
-		for i in range(len(self.image_list)):
-			self.randomlist.append(False)
+		self.randomlist = [False]*len(self.image_list)
 		self.randomlist[self.curr_img_in_list] = True
 
 	def image_load_failed(self, reset_cursor, filename=""):
