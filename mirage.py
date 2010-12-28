@@ -152,13 +152,14 @@ class Base:
 		self.usettings['toolbar_show'] = True
 		self.usettings['thumbpane_show'] = True
 		self.usettings['statusbar_show'] = True
+		self.going_random = False
 		self.fullscreen_mode = False
 		self.opendialogpath = ""
 		self.zoom_quality = gtk.gdk.INTERP_BILINEAR
 		self.recursive = False
 		self.verbose = False
 		self.image_loaded = False
-		self.usettings['open_all_images'] = True				# open all images in the directory(ies)
+		self.usettings['open_all_images'] = True # open all images in the directory(ies)
 		self.usettings['use_last_dir'] = True
 		self.usettings['last_dir'] = os.path.expanduser("~")
 		self.usettings['fixed_dir'] = os.path.expanduser("~")
@@ -166,12 +167,12 @@ class Base:
 		self.firstimgindex_subfolders_list = []
 		self.usettings['open_mode'] = self.open_mode_smart
 		self.usettings['last_mode'] = self.open_mode_smart
-		self.usettings['listwrap_mode'] = 0					# 0=no, 1=yes, 2=ask
-		self.user_prompt_visible = False			# the "wrap?" prompt
-		self.usettings['slideshow_delay'] = 1					# seconds
+		self.usettings['listwrap_mode'] = 0	# 0=no, 1=yes, 2=ask
+		self.user_prompt_visible = False	# the "wrap?" prompt
+		self.usettings['slideshow_delay'] = 1	# seconds
 		self.slideshow_mode = False
 		self.usettings['slideshow_random'] = False
-		self.slideshow_controls_visible = False		# fullscreen slideshow controls
+		self.slideshow_controls_visible = False	# fullscreen slideshow controls
 		self.controls_moving = False
 		self.usettings['zoomvalue'] = 2
 		self.usettings['quality_save'] = 90
@@ -352,7 +353,8 @@ class Base:
 		toggle_actions = (
 			('Status Bar', None, _('_Status Bar'), None, _('Status Bar'), self.toggle_status_bar, self.usettings['statusbar_show']),
 			('Toolbar', None, _('_Toolbar'), None, _('Toolbar'), self.toggle_toolbar, self.usettings['toolbar_show']),
-			('Thumbnails Pane', None, _('Thumbnails _Pane'), None, _('Thumbnails Pane'), self.toggle_thumbpane, self.usettings['thumbpane_show'])
+			('Thumbnails Pane', None, _('Thumbnails _Pane'), None, _('Thumbnails Pane'), self.toggle_thumbpane, self.usettings['thumbpane_show']),
+			('Randomize list', None, _('_Randomize list'), '<Ctrl>R', _('Randomize list'), self.shall_we_randomize, self.going_random),
 			)
 
 		# Populate keys[]:
@@ -427,11 +429,12 @@ class Base:
 			      <menuitem action="Status Bar"/>
 			      <separator name="FM1"/>
 			      <menuitem action="Full Screen"/>
-			   </menu>
+			    </menu>
 			    <menu action="GoMenu">
 			      <menuitem action="Next Image"/>
 			      <menuitem action="Previous Image"/>
 			      <menuitem action="Random Image"/>
+			      <menuitem action="Randomize list"/>
 			      <separator name="FM1"/>
 			      <menuitem action="First Image"/>
 			      <menuitem action="Last Image"/>
@@ -3815,6 +3818,8 @@ class Base:
 			prev_img = self.curr_img_in_list
 			if location != "RANDOM":
 				self.randomlist = []
+				self.random_image_list = []
+				self.current_random = -9
 			if location == "FIRST":
 				self.curr_img_in_list = 0
 			elif location == "RANDOM":
@@ -3870,6 +3875,10 @@ class Base:
 						self.curr_img_in_list = self.firstimgindex_subfolders_list[-1]
 					elif location == "RANDOM": #always next random image
 						self.reinitialize_randomlist()
+					if (location == "PREV" or location == "NEXT") and self.going_random:
+						self.randomize_list
+						self.thumblist.clear()
+						self.thumbpane_update_images(True, self.curr_img_in_list)
 				elif self.usettings['listwrap_mode'] == 2:
 					if self.curr_img_in_list != self.loaded_img_in_list:
 						# Ensure that the user is looking at the correct "last" image before
@@ -3910,6 +3919,7 @@ class Base:
 							gtk.gdk.threads_leave()
 						self.user_prompt_visible = False
 					if response == gtk.RESPONSE_YES:
+						print "WE got something"
 						if location == "PREV":
 							self.curr_img_in_list = len(self.image_list)-1
 						elif location == "NEXT" or location == "NEXT_SUBFOLDER":
@@ -3918,6 +3928,10 @@ class Base:
 							self.curr_img_in_list = self.firstimgindex_subfolders_list[-1]
 						elif location == "RANDOM":
 							self.reinitialize_randomlist()
+						if (location == "PREV" or location == "NEXT") and self.going_random:
+							self.randomize_list()
+							self.thumblist.clear()
+							self.thumbpane_update_images(True, self.curr_img_in_list)
 						if self.fullscreen_mode:
 							self.hide_cursor
 					else:
@@ -3951,9 +3965,9 @@ class Base:
 					self.load_when_idle = gobject.idle_add(self.load_new_image, False, False, True, True, True, True)
 				self.set_go_navigation_sensitivities(False)
 			if self.slideshow_mode:
-				if self.curr_slideshow_random:
-					self.timer_delay = gobject.timeout_add(int(self.curr_slideshow_delay*1000), self.goto_random_image, "ss",True)
-				else:
+				#if self.curr_slideshow_random:
+				#	self.timer_delay = gobject.timeout_add(int(self.curr_slideshow_delay*1000), self.goto_random_image, "ss",True)
+				#else:
 					self.timer_delay = gobject.timeout_add(int(self.curr_slideshow_delay*1000), self.goto_next_image, "ss", True)
 			gobject.idle_add(self.thumbpane_select, self.curr_img_in_list)
 
@@ -4030,6 +4044,25 @@ class Base:
 	def reinitialize_randomlist(self):
 		self.randomlist = [False]*len(self.image_list)
 		self.randomlist[self.curr_img_in_list] = True
+
+	def shall_we_randomize(self,action):
+		if self.UIManager.get_widget('/MainMenu/GoMenu/Randomize list').get_active():
+			
+			self.going_random = True
+			if len(self.image_list) > 0:
+				self.randomize_list()
+				self.thumblist.clear()
+				self.curr_img_in_list = self.image_list.index(self.currimg.name)
+				self.thumbpane_update_images(True, self.curr_img_in_list)
+				self.currimg.index = self.curr_img_in_list
+				self.update_title()
+		else:
+			self.going_random = False
+
+	def randomize_list(self):
+		random.shuffle(self.image_list)
+		self.previmg.unload_pixbuf()
+		self.nextimg.unload_pixbuf()
 
 	def image_load_failed(self, reset_cursor, filename=""):
 		# If a filename is provided, use it for display:
@@ -4303,13 +4336,16 @@ class Base:
 		first_image = ""
 		first_image_found = False
 		first_image_loaded = False
+		first_image_loaded_successfully = False
+		self.previmg.unload_pixbuf()
+		self.nextimg.unload_pixbuf()
 		second_image = ""
 		second_image_found = False
 		second_image_preloaded = False
 		self.randomlist = []
 		folderlist = []
 		self.image_list = []
-		self.curr_img_in_list = 0
+		self.curr_img_in_list = -2
 		go_buttons_enabled = False
 		self.set_go_sensitivities(False)
 		# Clean up list (remove preceding "file://" or "file:" and trailing "/")
