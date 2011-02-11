@@ -292,7 +292,7 @@ class Base:
 			('Save', gtk.STOCK_SAVE, _('_Save Image'), '<Ctrl>S', _('Save Image'), self.save_image),
 			('Save As', gtk.STOCK_SAVE, _('Save Image _As...'), '<Shift><Ctrl>S', _('Save Image As'), self.save_image_as),
 			('Crop', None, _('_Crop...'), None, _('Crop Image'), self.crop_image),
-			('Resize', None, _('R_esize...'), None, _('Resize Image'), self.resize_image),
+			('Resize', None, _('R_esize...'), '<Ctrl>R', _('Resize Image'), self.resize_image),
 			('Saturation', None, _('_Saturation...'), None, _('Modify saturation'), self.saturation),
 			('Quit', gtk.STOCK_QUIT, _('_Quit'), '<Ctrl>Q', _('Quit'), self.exit_app),
 			('Previous Image', gtk.STOCK_GO_BACK, _('_Previous Image'), 'Left', _('Previous Image'), self.goto_prev_image),
@@ -354,7 +354,7 @@ class Base:
 			('Status Bar', None, _('_Status Bar'), None, _('Status Bar'), self.toggle_status_bar, self.usettings['statusbar_show']),
 			('Toolbar', None, _('_Toolbar'), None, _('Toolbar'), self.toggle_toolbar, self.usettings['toolbar_show']),
 			('Thumbnails Pane', None, _('Thumbnails _Pane'), None, _('Thumbnails Pane'), self.toggle_thumbpane, self.usettings['thumbpane_show']),
-			('Randomize list', None, _('_Randomize list'), '<Ctrl>R', _('Randomize list'), self.shall_we_randomize, self.going_random),
+			('Randomize list', None, _('_Randomize list'), None, _('Randomize list'), self.shall_we_randomize, self.going_random),
 			)
 
 		# Populate keys[]:
