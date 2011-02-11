@@ -30,7 +30,7 @@ import os, sys, getopt, ConfigParser, string, gc
 import random, urllib, gobject, gettext, locale
 import stat, time, subprocess, shutil, filecmp
 import tempfile, socket, threading
-from fractions import Fraction 
+from fractions import Fraction
 
 try:
 	import mirage_numacomp as numacomp
@@ -87,9 +87,8 @@ def valid_int(inputstring):
 class Base:
 
 	def __init__(self):
-		
 		gtk.gdk.threads_init()
-		
+
 		# FIX THIS! Does not work on windows and what happens if mo-files exists
 		# in both dirs?
 		gettext.install('mirage', '/usr/share/locale', unicode=1)
@@ -120,11 +119,11 @@ class Base:
 		self.currimg = ImageData(index=0)
 		#self.currimg_name = ""
 		#self.currimg_width = 0 #Changed
-		#self.currimg_height = 0 #Changed 
-		#self.currimg_pixbuf = None #Changed 
+		#self.currimg_height = 0 #Changed
+		#self.currimg_pixbuf = None #Changed
 		#self.currimg_pixbuf_original = None #Changed
 		#self.currimg_zoomratio = 1 #Changed
-		#self.currimg_is_animation = False #Changed 
+		#self.currimg_is_animation = False #Changed
 
 		# Next preloaded image:
 		self.nextimg = ImageData(index=-1)
@@ -143,7 +142,7 @@ class Base:
 		#self.preloadimg_prev_name = ""
 		#self.preloadimg_prev_width = 0 #Changed
 		#self.preloadimg_prev_height = 0 #Changed
-		#self.preloadimg_prev_pixbuf = None #Changed 
+		#self.preloadimg_prev_pixbuf = None #Changed
 		#self.preloadimg_prev_pixbuf_original = None #Changed
 		#self.preloadimg_prev_zoomratio = 1 #changed
 		#self.preloadimg_prev_is_animation = False #changed
@@ -366,127 +365,127 @@ class Base:
 
 		uiDescription = """
 			<ui>
-			  <popup name="Popup">
-			    <menuitem action="Next Image"/>
-			    <menuitem action="Previous Image"/>
-			    <separator name="FM1"/>
-			    <menuitem action="Out"/>
-			    <menuitem action="In"/>
-			    <menuitem action="1:1"/>
-			    <menuitem action="Fit"/>
-			    <separator name="FM4"/>
-			    <menuitem action="Start Slideshow"/>
-			    <menuitem action="Stop Slideshow"/>
-			    <separator name="FM3"/>
-			    <menuitem action="Exit Full Screen"/>
-			    <menuitem action="Full Screen"/>
-			  </popup>
-			  <menubar name="MainMenu">
-			    <menu action="FileMenu">
-			      <menuitem action="Open Image"/>
-			      <menuitem action="Open Folder"/>
-			      <menuitem action="Open Remote Image"/>
-			      <separator name="FM1"/>
-			      <menuitem action="Save"/>
-			      <menuitem action="Save As"/>
-			      <separator name="FM2"/>
-			      <menuitem action="Take Screenshot"/>
-			      <separator name="FM3"/>
-			      <menuitem action="Properties"/>
-			      <separator name="FM4"/>
-			      <placeholder name="Recent Files">
-			      </placeholder>
-			      <separator name="FM5"/>
-			      <menuitem action="Quit"/>
-			    </menu>
-			    <menu action="EditMenu">
-			      <menuitem action="Rotate Left"/>
-			      <menuitem action="Rotate Right"/>
-			      <menuitem action="Flip Vertically"/>
-			      <menuitem action="Flip Horizontally"/>
-			      <separator name="FM1"/>
-			      <menuitem action="Crop"/>
-			      <menuitem action="Resize"/>
-			      <menuitem action="Saturation"/>
-			      <separator name="FM2"/>
-			      <menuitem action="Rename Image"/>
-			      <menuitem action="Delete Image"/>
-			      <separator name="FM3"/>
-			      <menu action="ActionSubMenu">
-    			    <separator name="FM4" position="bot"/>
-    			    <menuitem action="Custom Actions" position="bot"/>
-			      </menu>
-			      <menuitem action="Preferences"/>
-			    </menu>
-			    <menu action="ViewMenu">
-			      <menuitem action="Out"/>
-			      <menuitem action="In"/>
-			      <menuitem action="1:1"/>
-			      <menuitem action="Fit"/>
-			      <separator name="FM2"/>
-			      <menuitem action="Toolbar"/>
-			      <menuitem action="Thumbnails Pane"/>
-			      <menuitem action="Status Bar"/>
-			      <separator name="FM1"/>
-			      <menuitem action="Full Screen"/>
-			    </menu>
-			    <menu action="GoMenu">
-			      <menuitem action="Next Image"/>
-			      <menuitem action="Previous Image"/>
-			      <menuitem action="Random Image"/>
-			      <menuitem action="Randomize list"/>
-			      <separator name="FM1"/>
-			      <menuitem action="First Image"/>
-			      <menuitem action="Last Image"/>
-			      <separator name="FM2"/>
-			      <menuitem action="Next Subfolder"/>
-			      <menuitem action="Previous Subfolder"/>
-			      <separator name="FM3"/>
-			      <menuitem action="Start Slideshow"/>
-			      <menuitem action="Stop Slideshow"/>
-			    </menu>
-			    <menu action="HelpMenu">
-			      <menuitem action="Contents"/>
-			      <menuitem action="About"/>
-			    </menu>
-			    <menu action="MiscKeysMenuHidden">
-			      <menuitem action="Minus"/>
-			      <menuitem action="Escape"/>
-			      <menuitem action="Plus"/>
-			      <menuitem action="Equal"/>
-			      <menuitem action="Space"/>
-			      <menuitem action="Ctrl-KP_Insert"/>
-			      <menuitem action="Ctrl-KP_End"/>
-			      <menuitem action="Ctrl-KP_Subtract"/>
-			      <menuitem action="Ctrl-KP_Add"/>
-			      <menuitem action="Ctrl-KP_0"/>
-			      <menuitem action="Ctrl-KP_1"/>
-			      <menuitem action="Full Screen Key"/>
-			      <menuitem action="Prev"/>
-			      <menuitem action="Next"/>
-			      <menuitem action="PgUp"/>
-			      <menuitem action="PgDn"/>
-			      <menuitem action="Prev Subfolder 2"/>
-			      <menuitem action="Next Subfolder 2"/>
-			      <menuitem action="Prev Subfolder 3"/>
-			      <menuitem action="Next Subfolder 3"/>
-			      <menuitem action="OriginalSize"/>	
-			      <menuitem action="BackSpace"/>
-			      <menuitem action="ZoomIn"/>
-			      <menuitem action="ZoomOut"/>
-			    </menu>
-			  </menubar>
-			  <toolbar name="MainToolbar">
-			    <toolitem action="Open Image"/>
-			    <separator name="FM1"/>
-			    <toolitem action="Previous2"/>
-			    <toolitem action="Next2"/>
-			    <separator name="FM2"/>
-			    <toolitem action="Out"/>
-			    <toolitem action="In"/>
-			    <toolitem action="1:1"/>
-			    <toolitem action="Fit"/>
-			  </toolbar>
+				<popup name="Popup">
+				<menuitem action="Next Image"/>
+				<menuitem action="Previous Image"/>
+				<separator name="FM1"/>
+				<menuitem action="Out"/>
+				<menuitem action="In"/>
+				<menuitem action="1:1"/>
+				<menuitem action="Fit"/>
+				<separator name="FM4"/>
+				<menuitem action="Start Slideshow"/>
+				<menuitem action="Stop Slideshow"/>
+				<separator name="FM3"/>
+				<menuitem action="Exit Full Screen"/>
+				<menuitem action="Full Screen"/>
+				</popup>
+				<menubar name="MainMenu">
+					<menu action="FileMenu">
+						<menuitem action="Open Image"/>
+						<menuitem action="Open Folder"/>
+						<menuitem action="Open Remote Image"/>
+						<separator name="FM1"/>
+						<menuitem action="Save"/>
+						<menuitem action="Save As"/>
+						<separator name="FM2"/>
+						<menuitem action="Take Screenshot"/>
+						<separator name="FM3"/>
+						<menuitem action="Properties"/>
+						<separator name="FM4"/>
+						<placeholder name="Recent Files">
+						</placeholder>
+						<separator name="FM5"/>
+						<menuitem action="Quit"/>
+					</menu>
+					<menu action="EditMenu">
+						<menuitem action="Rotate Left"/>
+						<menuitem action="Rotate Right"/>
+						<menuitem action="Flip Vertically"/>
+						<menuitem action="Flip Horizontally"/>
+						<separator name="FM1"/>
+						<menuitem action="Crop"/>
+						<menuitem action="Resize"/>
+						<menuitem action="Saturation"/>
+						<separator name="FM2"/>
+						<menuitem action="Rename Image"/>
+						<menuitem action="Delete Image"/>
+						<separator name="FM3"/>
+						<menu action="ActionSubMenu">
+							<separator name="FM4" position="bot"/>
+							<menuitem action="Custom Actions" position="bot"/>
+						</menu>
+						<menuitem action="Preferences"/>
+					</menu>
+					<menu action="ViewMenu">
+						<menuitem action="Out"/>
+						<menuitem action="In"/>
+						<menuitem action="1:1"/>
+						<menuitem action="Fit"/>
+						<separator name="FM2"/>
+						<menuitem action="Toolbar"/>
+						<menuitem action="Thumbnails Pane"/>
+						<menuitem action="Status Bar"/>
+						<separator name="FM1"/>
+						<menuitem action="Full Screen"/>
+					</menu>
+					<menu action="GoMenu">
+						<menuitem action="Next Image"/>
+						<menuitem action="Previous Image"/>
+						<menuitem action="Random Image"/>
+						<menuitem action="Randomize list"/>
+						<separator name="FM1"/>
+						<menuitem action="First Image"/>
+						<menuitem action="Last Image"/>
+						<separator name="FM2"/>
+						<menuitem action="Next Subfolder"/>
+						<menuitem action="Previous Subfolder"/>
+						<separator name="FM3"/>
+						<menuitem action="Start Slideshow"/>
+						<menuitem action="Stop Slideshow"/>
+					</menu>
+					<menu action="HelpMenu">
+						<menuitem action="Contents"/>
+						<menuitem action="About"/>
+					</menu>
+					<menu action="MiscKeysMenuHidden">
+						<menuitem action="Minus"/>
+						<menuitem action="Escape"/>
+						<menuitem action="Plus"/>
+						<menuitem action="Equal"/>
+						<menuitem action="Space"/>
+						<menuitem action="Ctrl-KP_Insert"/>
+						<menuitem action="Ctrl-KP_End"/>
+						<menuitem action="Ctrl-KP_Subtract"/>
+						<menuitem action="Ctrl-KP_Add"/>
+						<menuitem action="Ctrl-KP_0"/>
+						<menuitem action="Ctrl-KP_1"/>
+						<menuitem action="Full Screen Key"/>
+						<menuitem action="Prev"/>
+						<menuitem action="Next"/>
+						<menuitem action="PgUp"/>
+						<menuitem action="PgDn"/>
+						<menuitem action="Prev Subfolder 2"/>
+						<menuitem action="Next Subfolder 2"/>
+						<menuitem action="Prev Subfolder 3"/>
+						<menuitem action="Next Subfolder 3"/>
+						<menuitem action="OriginalSize"/>
+						<menuitem action="BackSpace"/>
+						<menuitem action="ZoomIn"/>
+						<menuitem action="ZoomOut"/>
+					</menu>
+				</menubar>
+				<toolbar name="MainToolbar">
+					<toolitem action="Open Image"/>
+					<separator name="FM1"/>
+					<toolitem action="Previous2"/>
+					<toolitem action="Next2"/>
+					<separator name="FM2"/>
+					<toolitem action="Out"/>
+					<toolitem action="In"/>
+					<toolitem action="1:1"/>
+					<toolitem action="Fit"/>
+				</toolbar>
 			</ui>
 			"""
 
@@ -845,9 +844,9 @@ class Base:
 					self.actionGroupRecent.add_actions(action)
 		uiDescription = """
 			<ui>
-			  <menubar name="MainMenu">
-			    <menu action="FileMenu">
-			      <placeholder name="Recent Files">
+				<menubar name="MainMenu">
+				<menu action="FileMenu">
+					<placeholder name="Recent Files">
 			"""
 		for i in range(len(self.usettings['recentfiles'])):
 			if len(self.usettings['recentfiles'][i]) > 0:
@@ -870,9 +869,9 @@ class Base:
 			self.actionGroupCustom.add_actions(action)
 		uiDescription = """
 			<ui>
-			  <menubar name="MainMenu">
-			    <menu action="EditMenu">
-			      <menu action="ActionSubMenu">
+				<menubar name="MainMenu">
+					<menu action="EditMenu">
+					<menu action="ActionSubMenu">
 			"""
 		for i in range(len(self.usettings['action_names'])):
 			uiDescription = uiDescription + """<menuitem action=\"""" + self.usettings['action_names'][len(self.usettings['action_names'])-i-1].replace('&','&amp;') + """\" position="top"/>"""
@@ -1221,7 +1220,7 @@ class Base:
 			self.image_list.append(self.usettings['recentfiles'][index])
 			self.image_load_failed(False)
 			self.recent_file_remove_and_refresh(index)
-	
+
 	def recent_file_remove_and_refresh_name(self, rmfile):
 		index_num = 0
 		for imgfile in self.usettings['recentfiles']:
@@ -1708,7 +1707,7 @@ class Base:
 			self.register_file_with_recent_docs(filename)
 		else:
 			dialog.destroy()
-			
+
 	def save_image_now(self, dest_name, filetype):
 		try:
 			self.change_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
@@ -1793,7 +1792,7 @@ class Base:
 		while gtk.events_pending():
 			gtk.main_iteration()
 		self.open_file_or_folder(action, True)
-	
+
 	def open_file_remote(self, action):
 		# Prompt user for the url:
 		dialog = gtk.Dialog(_("Open Remote"), self.window, gtk.DIALOG_MODAL, buttons=(gtk.STOCK_CANCEL,gtk.RESPONSE_CANCEL,gtk.STOCK_OPEN,gtk.RESPONSE_OK))
@@ -2651,7 +2650,7 @@ class Base:
 		case_numacomp.set_active(self.usettings['case_numacomp'])
 		case_numacomp.set_tooltip_text(_("If checked, a case-sensitive sort will be used"))
 		case_numacomp.set_sensitive(usenumacomp.get_active())
-		usenumacomp.connect('toggled', self.toggle_sensitivy_of_other,case_numacomp) 		
+		usenumacomp.connect('toggled', self.toggle_sensitivy_of_other,case_numacomp)
 
 		openpref = gtk.RadioButton()
 		openpref1 = gtk.RadioButton(group=openpref, label=_("Use last chosen directory"))
@@ -3394,7 +3393,7 @@ class Base:
 
 	def flip_image_horiz(self, action):
 		self.flip_image_vert_or_horiz(self.UIManager.get_widget('/MainMenu/EditMenu/Flip Horizontally'), False)
-			
+
 	def flip_image_vert_or_horiz(self, widget, vertical):
 		if self.currimg.name != "" and widget.get_property('sensitive'):
 			self.currimg.pixbuf = self.image_flip(self.currimg.pixbuf, vertical)
@@ -4047,7 +4046,7 @@ class Base:
 
 	def shall_we_randomize(self,action):
 		if self.UIManager.get_widget('/MainMenu/GoMenu/Randomize list').get_active():
-			
+
 			self.going_random = True
 			if len(self.image_list) > 0:
 				self.randomize_list()
@@ -4836,7 +4835,7 @@ class Base:
 
 class ImageData:
 	def __init__(self, index=-1, name="", width=0, heigth=0, pixbuf=None,
-				 pixbuf_original=None, pixbuf_rotated=None, zoomratio=1, animation=False):
+				pixbuf_original=None, pixbuf_rotated=None, zoomratio=1, animation=False):
 		self.index = index
 		self.name = name
 		self.width_orig = width
@@ -4879,7 +4878,7 @@ class ImageData:
 		self.pixbuf = None
 		self.pixbuf_original = None
 		self.pixbuf_rotated = None
-	
+
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		# Always start with the original image to preserve quality!
 		# Calculate image size:
