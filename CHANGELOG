@@ -6,6 +6,11 @@ v0.10.0 - Future
 	+ Changes: various code updates
 	+ Changes: Behaviour of slideshow mode modified
 
+v0.9.5.2 - February 13, 2011
+	+ Added ukrainian translation
+	+ Bug: Screenshot did not work correctly
+	+ Bug: Fixed a bug in the use of keymodifiers
+
 v0.9.5.1 - July 23, 2010
 	+ Added dutch translation
 	+ Bug: Mirage showed verbose output by default
