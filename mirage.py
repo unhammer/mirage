@@ -1,7 +1,7 @@
 # $HeadURL$
 # $Id$
 
-__version__ = "0.10-svn"
+__version__ = "1.0-svn"
 
 __license__ = """
 Mirage, a fast GTK+ Image Viewer
