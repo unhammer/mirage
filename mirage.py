@@ -32,12 +32,14 @@ import stat, time, subprocess, shutil, filecmp
 import tempfile, socket, threading
 from fractions import Fraction
 
+gettext.install("mirage", unicode=1)
+
 try:
 	import mirage_numacomp as numacomp
 	HAVE_NUMACOMP = True
 except:
 	HAVE_NUMACOMP = False
-	print "mirage_numacomp.so not found, unable to do numerical aware sorting."
+	print _("mirage_numacomp.so not found, unable to do numerical aware sorting.")
 
 try:
 	import hashlib
@@ -50,33 +52,31 @@ try:
 	HAS_IMGFUNCS = True
 except:
 	HAS_IMGFUNCS = False
-	print "imgfuncs.so module not found, rotating/flipping images will be disabled."
+	print _("imgfuncs.so module not found, rotating/flipping images will be disabled.")
 try:
 	import xmouse
 	HAS_XMOUSE = True
 except:
 	HAS_XMOUSE = False
-	print "xmouse.so module not found, some screenshot capabilities will be disabled."
+	print _("xmouse.so module not found, some screenshot capabilities will be disabled.")
 
 try:
 	import pyexiv2
 	HAS_EXIF = True
 except:
 	HAS_EXIF = False
-	print "pyexiv2 module not found, exifdata reading/writing are disabled"
+	print _("pyexiv2 module not found, exifdata reading/writing are disabled")
 
 try:
 	import gconf
 except:
 	pass
 
-gettext.install("mirage", unicode=1)
-
 if gtk.gtk_version < (2, 10, 0):
-	sys.stderr.write("Mirage requires GTK+ 2.10.0 or newer..\n")
+	sys.stderr.write(_("Mirage requires GTK+ %s or newer..\n") % "2.10.0")
 	sys.exit(1)
 if gtk.pygtk_version < (2, 12, 0):
-	sys.stderr.write("Mirage requires PyGTK 2.12.0 or newer.\n")
+	sys.stderr.write(_("Mirage requires PyGTK 2.12.0 or newer.\n") % "2.12.0")
 	sys.exit(1)
 
 def valid_int(inputstring):
