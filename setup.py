@@ -7,28 +7,6 @@ import os
 
 from distutils.core import setup, Extension
 
-def removeall(path):
-	if not os.path.isdir(path):
-		return
-
-	files=os.listdir(path)
-
-	for x in files:
-		fullpath=os.path.join(path, x)
-		if os.path.isfile(fullpath):
-			f=os.remove
-			rmgeneric(fullpath, f)
-		elif os.path.isdir(fullpath):
-			removeall(fullpath)
-			f=os.rmdir
-			rmgeneric(fullpath, f)
-
-def rmgeneric(path, __func__):
-	try:
-		__func__(path)
-	except OSError, (errno, strerror):
-		pass
-
 # Create mo files:
 if not os.path.exists("mo/"):
 	os.mkdir("mo/")
@@ -74,26 +52,6 @@ setup(name='Mirage',
 			('share/locale/nl/LC_MESSAGES', ['mo/nl/mirage.mo']),
 			('share/locale/pt_BR/LC_MESSAGES', ['mo/pt_BR/mirage.mo']),
 			('share/locale/zh_CN/LC_MESSAGES', ['mo/zh_CN/mirage.mo']),
-			('share/locale/it/LC_MESSAGES', ['mo/it/mirage.mo'])],
+			('share/locale/it/LC_MESSAGES', ['mo/it/mirage.mo']),
 			('share/locale/ua/LC_MESSAGES', ['mo/ua/mirage.mo'])],
 		)
-
-# Cleanup (remove /build, /mo, and *.pyc files:
-print "Cleaning up..."
-try:
-	removeall("build/")
-	os.rmdir("build/")
-except:
-	pass
-try:
-	removeall("mo/")
-	os.rmdir("mo/")
-except:
-	pass
-try:
-	for f in os.listdir("."):
-		if os.path.isfile(f):
-			if os.path.splitext(os.path.basename(f))[1] == ".pyc":
-				os.remove(f)
-except:
-	pass
