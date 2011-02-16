@@ -70,6 +70,8 @@ try:
 except:
 	pass
 
+gettext.install("mirage", unicode=1)
+
 if gtk.gtk_version < (2, 10, 0):
 	sys.stderr.write("Mirage requires GTK+ 2.10.0 or newer..\n")
 	sys.exit(1)
@@ -88,11 +90,6 @@ class Base:
 
 	def __init__(self):
 		gtk.gdk.threads_init()
-
-		# FIX THIS! Does not work on windows and what happens if mo-files exists
-		# in both dirs?
-		gettext.install('mirage', '/usr/share/locale', unicode=1)
-		gettext.install('mirage', '/usr/local/share/locale', unicode=1)
 
 		# Constants
 		self.open_mode_smart = 0
