@@ -29,7 +29,7 @@ import gtk
 import os, sys, getopt, ConfigParser, string, gc
 import random, urllib, gobject, gettext, locale
 import stat, time, subprocess, shutil, filecmp
-import tempfile, socket, threading
+import tempfile, socket, threading, copy
 from fractions import Fraction
 
 gettext.install("mirage", unicode=1)
@@ -1617,10 +1617,6 @@ class Base:
 		sys.exit(0)
 
 	def put_zoom_image_to_window(self, currimg_preloaded, zoom_ratio=1):
-		try:
-			traceback.print_stack()
-		except:
-			pass
 		self.window.window.freeze_updates()
 		if not currimg_preloaded:
 			# Zoom the pixbuf
@@ -4100,73 +4096,6 @@ class Base:
 		if preload_prev_image_after:
 			self.preload_when_idle2 = gobject.idle_add(self.preload_prev_image, False)
 
-	def check_preloadimg_prev_for_existing(self, prev_index, reset_preloadimg_prev_in_list):
-		# Determines if preloadimg_prev needs to be updated; if so,
-		# checks if the image is already stored in self.currimg
-		# or self.preloadimg_next and can be reused.
-		reset_preloadimg_prev_in_list = False
-		if prev_index != self.previmg.index and prev_index != -1:
-			# Need to update preloadimg_prev:
-			if prev_index == self.loaded_img_in_list and not self.image_modified and not self.image_zoomed:
-				self.previmg = self.currimg
-				self.previmg.index = self.loaded_img_in_list
-			elif prev_index == self.nextimg.index:
-				self.previmg = self.nextimg
-			else:
-				reset_preloadimg_prev_in_list = True
-		elif prev_index == -1:
-			reset_preloadimg_prev_in_list = True
-
-	def check_preloadimg_next_for_existing(self, next_index, reset_preloadimg_next_in_list):
-		# Determines if preloadimg_next needs to be updated; if so,
-		# checks if the image is already stored in self.currimg
-		# or self.preloadimg_prev and can be reused.
-		reset_preloadimg_next_in_list = False
-		if next_index != self.nextimg.index and next_index != -1:
-			# Need to update preloadimg_next:
-			if next_index == self.loaded_img_in_list and not self.image_modified and not self.image_zoomed:
-				self.nextimg = self.currimg
-				self.nextimg.index = self.loaded_img_in_list
-			elif next_index == self.previmg.index:
-				self.nextimg = self.previmg
-			else:
-				reset_preloadimg_next_in_list = True
-		elif next_index == -1:
-			reset_preloadimg_next_in_list = True
-
-	def check_currimg_for_existing(self):
-		# Determines if currimg needs to be updated; if so,
-		# checks if the image is already stored in self.preloadimg_next
-		# or self.preloadimg_prev and can be reused (the whole point of
-		# preloading!)
-		used_prev = False
-		used_next = False
-		if self.curr_img_in_list != self.loaded_img_in_list:
-			# Need to update currimg:
-			if self.curr_img_in_list == self.previmg.index:
-				# Set preload_prev_image as current image
-				self.currimg = self.previmg
-				used_prev = True
-				if self.verbose and self.currimg.name != "":
-					print _("Loading: %s") % self.currimg.name
-				self.put_zoom_image_to_window(True)
-				if not self.currimg.animation:
-					self.set_image_sensitivities(True)
-				else:
-					self.set_image_sensitivities(False)
-			elif self.curr_img_in_list == self.nextimg.index:
-				# Use preload_next_image as current image
-				self.currimg = self.nextimg
-				used_next = True
-				if self.verbose and self.currimg.name != "":
-					print _("Loading: %s") % self.currimg.name
-				self.put_zoom_image_to_window(True)
-				if not self.currimg.animation:
-					self.set_image_sensitivities(True)
-				else:
-					self.set_image_sensitivities(False)
-		return used_prev, used_next
-
 	def load_new_image2(self, check_prev_last, use_current_pixbuf_original, reset_cursor, perform_onload_action, skip_recentfiles=False, image_name=""):
 		# check_prev_last is used to determine if we should check whether
 		# preloadimg_prev can be reused last. This should really only
@@ -4189,24 +4118,44 @@ class Base:
 				prev_index = -1
 			else:
 				prev_index = len(self.image_list)-1
+		used_prev = False
+		used_next = False
 		if self.usettings['preloading_images']:
-			reset_preloadimg_next_in_list = False
-			reset_preloadimg_prev_in_list = False
-			if check_prev_last:
-				self.check_preloadimg_next_for_existing(next_index, reset_preloadimg_next_in_list)
-			else:
-				self.check_preloadimg_prev_for_existing(prev_index, reset_preloadimg_prev_in_list)
-		used_prev, used_next = self.check_currimg_for_existing()
-		if self.usettings['preloading_images']:
-			if check_prev_last:
-				self.check_preloadimg_prev_for_existing(prev_index, reset_preloadimg_prev_in_list)
-			else:
-				self.check_preloadimg_next_for_existing(next_index, reset_preloadimg_next_in_list)
-			if reset_preloadimg_prev_in_list:
-				self.previmg.unload_pixbuf()
-			if reset_preloadimg_next_in_list:
-				self.nextimg.unload_pixbuf()
+			if self.curr_img_in_list != self.loaded_img_in_list:
+				if self.curr_img_in_list == self.previmg.index:
+					#Can Copy previmg into currimg
+					if self.loaded_img_in_list == next_index:
+						self.nextimg = copy.copy(self.currimg)
+						self.currimg = copy.copy(self.previmg)
+					else:
+						self.currimg = copy.copy(self.previmg)
+					self.previmg.unload_pixbuf()
+					used_prev = True
+				elif self.curr_img_in_list == self.nextimg.index:
+					#Can Copy nextimg into currimg
+					if self.loaded_img_in_list == prev_index:
+						self.previmg = copy.copy(self.currimg)
+						self.currimg = copy.copy(self.nextimg)
+					else:
+						self.currimg = copy.copy(self.nextimg)
+					self.nextimg.unload_pixbuf()
+					used_next = True
+				else:
+					if self.previmg.index == next_index:
+						self.nextimg = self.previmg
+						self.previmg.unload_pixbuf()
+					elif self.nextimg.index == prev_index:
+						self.previmg = self.nextimg
+						self.nextimg.unload_pixbuf()
+
 		if used_prev or used_next:
+			if self.verbose and self.currimg.name != "":
+				print _("Loading(preloaded): %s") % self.currimg.name
+			self.put_zoom_image_to_window(True)
+			if not self.currimg.animation:
+				self.set_image_sensitivities(True)
+			else:
+				self.set_image_sensitivities(False)
 			# If we used a preload image, set the correct boolean variables
 			if self.usettings['open_mode'] == self.open_mode_smart or (self.usettings['open_mode'] == self.open_mode_last and self.usettings['last_mode'] == self.open_mode_smart):
 				self.last_image_action_was_fit = True
@@ -4222,7 +4171,7 @@ class Base:
 			if image_name == "":
 				image_name = str(self.image_list[self.curr_img_in_list])
 			if self.verbose and image_name != "":
-				print _("Loading: %s") % image_name
+				print _("Loading(not preloaded): %s") % image_name
 			if self.curr_img_in_list:
 				self.currimg.load_pixbuf(image_name, self.curr_img_in_list)
 			else:
@@ -4268,11 +4217,12 @@ class Base:
 				self.zoom_check_and_execute(None, True, False)
 				# Zoom pixbuf
 				colormap = self.imageview.get_colormap()
-				self.nextimg.zoom_pixbuf(self.nextimg.zoomratio, colormap)
+				self.nextimg.zoom_pixbuf(self.nextimg.zoomratio, self.zoom_quality, colormap)
 				gc.collect()
 				if self.verbose:
 					print _("Preloading: %s") % self.nextimg.name
-		except:
+		except Exception as e:
+			print (e)
 			self.nextimg.unload_pixbuf()
 
 	def preload_prev_image(self, use_existing_image):
@@ -4300,7 +4250,8 @@ class Base:
 				gc.collect()
 				if self.verbose:
 					print _("Preloading: %s") % self.previmg.name
-		except:
+		except Exception as e:
+			print(e)
 			self.previmg.unload_pixbuf()
 
 	def change_cursor(self, type):
