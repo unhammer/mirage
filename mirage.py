@@ -1083,7 +1083,7 @@ class Base:
 		# If we reached here, we didn't find the pixmap
 		if exit_on_fail:
 			print _("Couldn't find the image %s. Please check your installation.") % filename
-			sys.exit(1)
+			gtk.main_quit(1)
 		else:
 			return None
 
@@ -1597,7 +1597,7 @@ class Base:
 		self.stop_now = True
 		self.closing_app = True
 		self.save_settings()
-		sys.exit(0)
+		gtk.main_quit(0)
 
 	def destroy(self, event, data=None):
 		cancel = self.autosave_image()
@@ -1614,7 +1614,7 @@ class Base:
 		self.stop_now = True
 		self.closing_app = True
 		self.save_settings()
-		sys.exit(0)
+		gtk.main_quit(0)
 
 	def put_zoom_image_to_window(self, currimg_preloaded, zoom_ratio=1):
 		self.window.window.freeze_updates()
