@@ -2,7 +2,7 @@
 # $Id$
 
 __version__ = "1.0-svn"
-
+__appname__ = "Mirage"
 __license__ = """
 Mirage, a fast GTK+ Image Viewer
 Copyright 2007 Scott Horowitz <stonecrest@gmail.com>
@@ -275,6 +275,7 @@ class Base:
 			# This will allow gtk 2.6 users to run Mirage
 			leave_fullscreen_icon = 'leave-fullscreen'
 			fullscreen_icon = 'fullscreen'
+		# Note. Stock items intentionally set to None to use standard stock defaults
 		actions = (
 			('FileMenu', None, _('_File')),
 			('EditMenu', None, _('_Edit')),
@@ -282,15 +283,15 @@ class Base:
 			('GoMenu', None, _('_Go')),
 			('HelpMenu', None, _('_Help')),
 			('ActionSubMenu', None, _('Custom _Actions')),
-			('Open Image', gtk.STOCK_FILE, _('_Open Image...'), '<Ctrl>O', _('Open Image'), self.open_file),
+			('Open Image', gtk.STOCK_FILE, _('_Open Image...'), None, _('Open Image'), self.open_file),
 			('Open Remote Image', gtk.STOCK_NETWORK, _('Open _Remote image...'), None, _('Open Remote Image'), self.open_file_remote),
 			('Open Folder', gtk.STOCK_DIRECTORY, _('Open _Folder...'), '<Ctrl>F', _('Open Folder'), self.open_folder),
-			('Save', gtk.STOCK_SAVE, _('_Save Image'), '<Ctrl>S', _('Save Image'), self.save_image),
-			('Save As', gtk.STOCK_SAVE, _('Save Image _As...'), '<Shift><Ctrl>S', _('Save Image As'), self.save_image_as),
-			('Crop', None, _('_Crop...'), None, _('Crop Image'), self.crop_image),
+			('Save', gtk.STOCK_SAVE, _('_Save Image'), None, None, self.save_image),
+			('Save As', gtk.STOCK_SAVE_AS, _('Save Image _As...'), '<Ctrl><Shift>S', None, self.save_image_as),
+			('Crop', None, _('C_rop...'), None, _('Crop Image'), self.crop_image),
 			('Resize', None, _('R_esize...'), '<Ctrl>R', _('Resize Image'), self.resize_image),
 			('Saturation', None, _('_Saturation...'), None, _('Modify saturation'), self.saturation),
-			('Quit', gtk.STOCK_QUIT, _('_Quit'), '<Ctrl>Q', _('Quit'), self.exit_app),
+			('Quit', gtk.STOCK_QUIT, None, None, None, self.exit_app),
 			('Previous Image', gtk.STOCK_GO_BACK, _('_Previous Image'), 'Left', _('Previous Image'), self.goto_prev_image),
 			('Previous Subfolder', gtk.STOCK_MEDIA_REWIND, _('Pre_vious Subfolder'), '<Shift>Left', _('Previous Subfolder'), self.goto_first_image_prev_subfolder),
 			('Next Image', gtk.STOCK_GO_FORWARD, _('_Next Image'), 'Right', _('Next Image'), self.goto_next_image),
@@ -302,16 +303,16 @@ class Base:
 			('Last Image', gtk.STOCK_GOTO_LAST, _('_Last Image'), 'End', _('Last Image'), self.goto_last_image),
 			('In', gtk.STOCK_ZOOM_IN, _('Zoom _In'), '<Ctrl>Up', _('Zoom In'), self.zoom_in),
 			('Out', gtk.STOCK_ZOOM_OUT, _('Zoom _Out'), '<Ctrl>Down', _('Zoom Out'), self.zoom_out),
-			('Fit', gtk.STOCK_ZOOM_FIT, _('Zoom To _Fit'), '<Ctrl>0', _('Fit'), self.zoom_to_fit_window_action),
-			('1:1', gtk.STOCK_ZOOM_100, _('_1:1'), '<Ctrl>1', _('1:1'), self.zoom_1_to_1_action),
+			('Fit', gtk.STOCK_ZOOM_FIT, _('Zoom To _Fit'), '<Ctrl>1', _('Fit'), self.zoom_to_fit_window_action),
+			('1:1', gtk.STOCK_ZOOM_100, _('_1:1'), '<Ctrl>0', _('1:1'), self.zoom_1_to_1_action),
 			('Rotate Left', None, _('Rotate _Left'), '<Ctrl>Left', _('Rotate Left'), self.rotate_left),
 			('Rotate Right', None, _('Rotate _Right'), '<Ctrl>Right', _('Rotate Right'), self.rotate_right),
 			('Flip Vertically', None, _('Flip _Vertically'), '<Ctrl>V', _('Flip Vertically'), self.flip_image_vert),
 			('Flip Horizontally', None, _('Flip _Horizontally'), '<Ctrl>H', _('Flip Horizontally'), self.flip_image_horiz),
-			('About', gtk.STOCK_ABOUT, _('_About'), None, _('About'), self.show_about),
+			('About', gtk.STOCK_ABOUT, None, None, None, self.show_about),
 			('Contents', gtk.STOCK_HELP, _('_Contents'), 'F1', _('Contents'), self.show_help),
-			('Preferences', gtk.STOCK_PREFERENCES, _('_Preferences...'), '<Ctrl>P', _('Preferences'), self.show_prefs),
-			('Full Screen', fullscreen_icon, _('_Full Screen'), 'F11', _('Full Screen'), self.enter_fullscreen),
+			('Preferences', gtk.STOCK_PREFERENCES, _('Pr_eferences...'), None, _('Preferences'), self.show_prefs),
+			('Full Screen', gtk.STOCK_FULLSCREEN, None, 'F11', None, self.enter_fullscreen),
 			('Exit Full Screen', leave_fullscreen_icon, _('E_xit Full Screen'), None, _('Exit Full Screen'), self.leave_fullscreen),
 			('Start Slideshow', gtk.STOCK_MEDIA_PLAY, _('_Start Slideshow'), 'F5', _('Start Slideshow'), self.toggle_slideshow),
 			('Stop Slideshow', gtk.STOCK_MEDIA_STOP, _('_Stop Slideshow'), 'F5', _('Stop Slideshow'), self.toggle_slideshow),
@@ -349,7 +350,7 @@ class Base:
 		toggle_actions = (
 			('Status Bar', None, _('_Status Bar'), None, _('Status Bar'), self.toggle_status_bar, self.usettings['statusbar_show']),
 			('Toolbar', None, _('_Toolbar'), None, _('Toolbar'), self.toggle_toolbar, self.usettings['toolbar_show']),
-			('Thumbnails Pane', None, _('Thumbnails _Pane'), None, _('Thumbnails Pane'), self.toggle_thumbpane, self.usettings['thumbpane_show']),
+			('Thumbnails Pane', None, _('Thumbnails _Pane'), 'F9', _('Thumbnails Pane'), self.toggle_thumbpane, self.usettings['thumbpane_show']),
 			('Randomize list', None, _('_Randomize list'), None, _('Randomize list'), self.shall_we_randomize, self.going_random),
 			)
 
@@ -1439,7 +1440,7 @@ class Base:
 			self.set_zoom_in_sensitivities(False)
 
 	def print_version(self):
-		print _("Version: Mirage"), __version__
+		print _("Version: %s" % __appname__), __version__
 		print _("Website: http://mirageiv.berlios.de")
 
 	def print_usage(self):
@@ -2559,7 +2560,7 @@ class Base:
 
 	def show_prefs(self, action):
 		prev_thumbnail_size = self.usettings['thumbnail_size']
-		self.prefs_dialog = gtk.Dialog(_("Mirage Preferences"), self.window)
+		self.prefs_dialog = gtk.Dialog(_("%s Preferences" % __appname__), self.window)
 		self.prefs_dialog.set_has_separator(False)
 		self.prefs_dialog.set_resizable(False)
 		# "Interface" prefs:
@@ -3063,7 +3064,7 @@ class Base:
 			self.about_dialog.set_modal(True)
 		except:
 			pass
-		self.about_dialog.set_name('Mirage')
+		self.about_dialog.set_name(__appname__)
 		self.about_dialog.set_version(__version__)
 		self.about_dialog.set_comments(_('A fast GTK+ Image Viewer.'))
 		self.about_dialog.set_license(__license__)
@@ -4697,7 +4698,7 @@ class Base:
 
 	def update_title(self):
 		if len(self.image_list) == 0:
-			title = "Mirage"
+			title = __appname__
 		else:
 			subfoldertitle = ''
 			firstimgindex_curr_subfolder = self.get_firstimgindex_curr_next_prev_subfolder(self.curr_img_in_list)[0]
@@ -4705,7 +4706,7 @@ class Base:
 				currimg_subfolder = self.curr_img_in_list - firstimgindex_curr_subfolder + 1
 				numimg_curr_subfolder = self.get_numimg_subfolder(firstimgindex_curr_subfolder)
 				subfoldertitle = _("%(current)i of %(total)i") % {'current': currimg_subfolder, 'total': numimg_curr_subfolder} + ' '
-			title = "Mirage - " + subfoldertitle + _("[%(current)i of %(total)i]") % {'current': self.curr_img_in_list+1, 'total': len(self.image_list)} + ' ' + os.path.basename(self.currimg.name)
+			title = __appname__ + " - " + subfoldertitle + _("[%(current)i of %(total)i]") % {'current': self.curr_img_in_list+1, 'total': len(self.image_list)} + ' ' + os.path.basename(self.currimg.name)
 
 			if self.slideshow_mode:
 				title = title + ' - ' + _('Slideshow Mode')
