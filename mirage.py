@@ -6,6 +6,7 @@ __appname__ = "Mirage"
 __license__ = """
 Mirage, a fast GTK+ Image Viewer
 Copyright 2007 Scott Horowitz <stonecrest@gmail.com>
+Copyright 2010-2011 Fredric Johansson <fredric.miscmail@gmail.com>
 
 This file is part of Mirage.
 
