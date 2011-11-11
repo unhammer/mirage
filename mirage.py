@@ -1441,7 +1441,7 @@ class Base:
 			self.set_zoom_in_sensitivities(False)
 
 	def print_version(self):
-		print _("Version: %s" % __appname__), __version__
+		print _("Version: %s") % __appname__, __version__
 		print _("Website: http://mirageiv.berlios.de")
 
 	def print_usage(self):
@@ -2561,7 +2561,7 @@ class Base:
 
 	def show_prefs(self, action):
 		prev_thumbnail_size = self.usettings['thumbnail_size']
-		self.prefs_dialog = gtk.Dialog(_("%s Preferences" % __appname__), self.window)
+		self.prefs_dialog = gtk.Dialog(_("%s Preferences") % __appname__, self.window)
 		self.prefs_dialog.set_has_separator(False)
 		self.prefs_dialog.set_resizable(False)
 		# "Interface" prefs:
