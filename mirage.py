@@ -1,3 +1,4 @@
+#!/usr/bin/python2
 # $HeadURL$
 # $Id$
 
@@ -4781,7 +4782,9 @@ class Base:
 				timer_screensaver = gobject.timeout_add(1000, self.disable_screensaver_in_slideshow_mode)
 
 	def main(self):
+		gtk.gdk.threads_enter()
 		gtk.main()
+		gtk.gdk.threads_leave()
 
 class ImageData:
 	def __init__(self, index=-1, name="", width=0, heigth=0, pixbuf=None,
@@ -4848,6 +4851,4 @@ class ImageData:
 
 if __name__ == "__main__":
 	base = Base()
-	gtk.gdk.threads_enter()
 	base.main()
-	gtk.gdk.threads_leave()
