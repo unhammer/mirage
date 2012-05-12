@@ -2984,6 +2984,17 @@ class Base:
 						self.thumbpane_update_images()
 					except:
 						pass
+					
+					#Decrease the subfolder indexes of folders after the current folder
+					myidx = self.get_firstimgindex_curr_next_prev_subfolder(self.curr_img_in_list)[0]
+					if myidx < self.firstimgindex_subfolders_list[-1]:
+						for idx in xrange(1+self.firstimgindex_subfolders_list.index(myidx),
+								len(self.firstimgindex_subfolders_list)):
+							#Decrease the idxes in the list
+							self.firstimgindex_subfolders_list[idx] -= 1
+						omgset = set(self.firstimgindex_subfolders_list)
+						self.firstimgindex_subfolders_list = sorted(list(omgset))
+					
 					self.thumblist.remove(iter)
 					templist = self.image_list
 					self.image_list = []
