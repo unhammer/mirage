@@ -709,7 +709,7 @@ class Base:
 		self.image_list = []
 		if args != []:
 			for i in range(len(args)):
-				args[i] = urllib.url2pathname(args[i])
+				args[i] = urllib.url2pathname(args[i]).decode('utf-8')
 			self.expand_filelist_and_load_image(args)
 		else:
 			self.set_go_sensitivities(False)
@@ -953,7 +953,7 @@ class Base:
 
 	def thumbnail_get_name(self, image_name):
 		filename = os.path.expanduser('file://' + image_name)
-		uriname = os.path.expanduser('file://' + urllib.pathname2url(image_name))
+		uriname = os.path.expanduser('file://' + urllib.pathname2url(image_name.encode('utf-8')))
 		if HAS_HASHLIB:
 			m = hashlib.md5()
 		else:
@@ -981,7 +981,7 @@ class Base:
 					if pix_mtime == file_mtime:
 						return pix
 			# Create the 128x128 thumbnail:
-			uri = 'file://' + urllib.pathname2url(imgfile)
+			uri = 'file://' + urllib.pathname2url(imgfile.encode('utf-8'))
 			pix = gtk.gdk.pixbuf_new_from_file(imgfile)
 			pix, image_width, image_height = self.get_pixbuf_of_size(pix, 128, gtk.gdk.INTERP_TILES)
 			st = os.stat(imgfile)
@@ -1481,7 +1481,7 @@ class Base:
 
 	def drop_cb(self, widget, context, x, y, selection, info, time):
 		uri = selection.data.strip()
-		path = urllib.url2pathname(uri)
+		path = urllib.url2pathname(uri.encode('utf-8'))
 		paths = path.rsplit('\n')
 		for i, path in enumerate(paths):
 			paths[i] = path.rstrip('\r')
@@ -4302,9 +4302,9 @@ class Base:
 		for itemnum in range(len(inputlist)):
 			# Strip off preceding file..
 			if inputlist[itemnum].startswith('file://'):
-				inputlist[itemnum] = inputlist[itemnum][7:]
+				inputlist[itemnum] = inputlist[itemnum][7:].decode('utf-8')
 			elif inputlist[itemnum].startswith('file:'):
-				inputlist[itemnum] = inputlist[itemnum][5:]
+				inputlist[itemnum] = inputlist[itemnum][5:].decode('utf-8')
 			# Strip off trailing "/" if it exists:
 			if inputlist[itemnum][len(inputlist[itemnum])-1] == "/":
 				inputlist[itemnum] = inputlist[itemnum][:(len(inputlist[itemnum])-1)]
@@ -4317,7 +4317,7 @@ class Base:
 					tmpfile = tmpdir + os.path.basename(inputlist[itemnum])
 					socket.setdefaulttimeout(5)
 					urllib.urlretrieve(inputlist[itemnum], tmpfile)
-					inputlist[itemnum] = tmpfile
+					inputlist[itemnum] = tmpfile.decode('utf-8')
 				except:
 					pass
 		# Remove hidden files from list:
@@ -4540,6 +4540,7 @@ class Base:
 			filelist = []
 			if not os.access(item, os.R_OK):
 				return False
+			item = item.decode('utf-8')
 			for item2 in os.listdir(item):
 				if not self.closing_app and not self.stop_now:
 					while gtk.events_pending():
@@ -4600,7 +4601,7 @@ class Base:
 				uri = ''
 				if imgfile[:7] != 'file://':
 					uri = 'file://'
-				uri = uri + urllib.pathname2url(os.path.abspath(imgfile))
+				uri = uri + urllib.pathname2url(os.path.abspath(imgfile.encode('utf-8')))
 				gtk_recent_manager.add_item(uri)
 			except:
 				#Isnt currently functional on win32
