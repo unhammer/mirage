@@ -4204,8 +4204,8 @@ class Base:
 		self.image_modified = False
 		self.image_zoomed = False
 		self.set_slideshow_sensitivities()
-		if not skip_recentfiles:
-			self.register_file_with_recent_docs(self.currimg.name)
+		#if not skip_recentfiles:
+		#	self.register_file_with_recent_docs(self.currimg.name)
 		if reset_cursor:
 			if not self.fullscreen_mode:
 				self.change_cursor(None)
@@ -4502,10 +4502,12 @@ class Base:
 		if not first_image_loaded_successfully:
 			self.image_load_failed(False, init_image)
 		else:
-			print "name:" + self.currimg.name
+			if self.verbose:
+				print "name:" + self.currimg.name
 			self.curr_img_in_list =  self.image_list.index(self.currimg.name)
 		self.searching_for_images = False
 		self.update_statusbar()
+		self.register_file_with_recent_docs(self.currimg.name)
 		self.set_go_navigation_sensitivities(False)
 		self.set_slideshow_sensitivities()
 		self.thumbpane_update_images(True, self.curr_img_in_list)
