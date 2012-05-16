@@ -2,640 +2,641 @@
 # Copyright (C) 2007 Scott Horowitz (msgids)
 # This file is distributed under the same license as the mirage package.
 # Petr Pisar <petr.pisar@atlas.cz>, 2008
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mirage r238\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-11 12:51+0100\n"
+"POT-Creation-Date: 2012-05-16 13:12+0200\n"
 "PO-Revision-Date: 2008-03-26 15:41+0100\n"
 "Last-Translator: Petr Pisar <petr.pisar@atlas.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 
-#: mirage.py:43
+#: mirage.py:45
 msgid "mirage_numacomp.so not found, unable to do numerical aware sorting."
 msgstr ""
 
-#: mirage.py:56
+#: mirage.py:58
 msgid ""
 "imgfuncs.so module not found, rotating/flipping images will be disabled."
 msgstr ""
 
-#: mirage.py:62
+#: mirage.py:64
 msgid ""
 "xmouse.so module not found, some screenshot capabilities will be disabled."
 msgstr ""
 
-#: mirage.py:69
+#: mirage.py:71
 msgid "pyexiv2 module not found, exifdata reading/writing are disabled"
 msgstr ""
 
-#: mirage.py:77
+#: mirage.py:79
 #, python-format
 msgid "Mirage requires GTK+ %s or newer..\n"
 msgstr ""
 
-#: mirage.py:80
-msgid "Mirage requires PyGTK 2.12.0 or newer.\n"
+#: mirage.py:82
+#, python-format
+msgid "Mirage requires PyGTK %s or newer.\n"
 msgstr ""
 
-#: mirage.py:183
+#: mirage.py:185
 msgid "Open in GIMP"
 msgstr ""
 
-#: mirage.py:183
+#: mirage.py:185
 msgid "Create Thumbnail"
 msgstr ""
 
-#: mirage.py:183
+#: mirage.py:185
 #, fuzzy
 msgid "Create Thumbnails"
 msgstr "Panel s náhledy"
 
-#: mirage.py:183
+#: mirage.py:185
 msgid "Move to Favorites"
 msgstr ""
 
-#: mirage.py:281
+#: mirage.py:283
 msgid "_File"
 msgstr "_Soubor"
 
-#: mirage.py:282
+#: mirage.py:284
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: mirage.py:283
+#: mirage.py:285
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: mirage.py:284
+#: mirage.py:286
 msgid "_Go"
 msgstr "_Jít"
 
-#: mirage.py:285
+#: mirage.py:287
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: mirage.py:286
+#: mirage.py:288
 #, fuzzy
 msgid "Custom _Actions"
 msgstr "Uživatelské akce"
 
-#: mirage.py:287
+#: mirage.py:289
 msgid "_Open Image..."
 msgstr "_Otevřít obrázek…"
 
-#: mirage.py:287
+#: mirage.py:289
 msgid "Open Image"
 msgstr "Otevřít obrázek"
 
-#: mirage.py:288
+#: mirage.py:290
 #, fuzzy
 msgid "Open _Remote image..."
 msgstr "Otevřít vz_dálený obrázek…"
 
-#: mirage.py:288
+#: mirage.py:290
 msgid "Open Remote Image"
 msgstr "Otevřít vzdálený obrázek"
 
-#: mirage.py:289
+#: mirage.py:291
 msgid "Open _Folder..."
 msgstr "Otevřít s_ložku…"
 
-#: mirage.py:289
+#: mirage.py:291
 msgid "Open Folder"
 msgstr "Otevřít složku"
 
-#: mirage.py:290
+#: mirage.py:292
 msgid "_Save Image"
 msgstr "_Uložit obrázek"
 
-#: mirage.py:291
+#: mirage.py:293
 msgid "Save Image _As..."
 msgstr "Uložit obrázek _jako…"
 
-#: mirage.py:292
+#: mirage.py:294
 #, fuzzy
 msgid "C_rop..."
 msgstr "_Oříznout…"
 
-#: mirage.py:292 mirage.py:3436
+#: mirage.py:294 mirage.py:3438
 msgid "Crop Image"
 msgstr "Oříznout obrázek"
 
-#: mirage.py:293
+#: mirage.py:295
 #, fuzzy
 msgid "R_esize..."
 msgstr "Změnit veliko_st…"
 
-#: mirage.py:293 mirage.py:3681
+#: mirage.py:295 mirage.py:3683
 msgid "Resize Image"
 msgstr "Změnit velikost"
 
-#: mirage.py:294
+#: mirage.py:296
 #, fuzzy
 msgid "_Saturation..."
 msgstr "Sytost…"
 
-#: mirage.py:294
+#: mirage.py:296
 msgid "Modify saturation"
 msgstr "Upravit sytost"
 
 # FIXME: do i18n on shortcut name. E.g. "Left" is "Vlevo" in Czech, "Ctrl" is
 # "Strg" in German.
-#: mirage.py:296
+#: mirage.py:298
 msgid "_Previous Image"
 msgstr "_Předchozí obrázek"
 
-#: mirage.py:296 mirage.py:338 mirage.py:340 mirage.py:342
+#: mirage.py:298 mirage.py:340 mirage.py:342 mirage.py:344
 msgid "Previous Image"
 msgstr "Předchozí obrázek"
 
-#: mirage.py:297
+#: mirage.py:299
 #, fuzzy
 msgid "Pre_vious Subfolder"
 msgstr "Předchozí obrázek"
 
-#: mirage.py:297 mirage.py:343 mirage.py:345
+#: mirage.py:299 mirage.py:345 mirage.py:347
 #, fuzzy
 msgid "Previous Subfolder"
 msgstr "Předchozí obrázek"
 
-#: mirage.py:298
+#: mirage.py:300
 msgid "_Next Image"
 msgstr "_Následující obrázek"
 
-#: mirage.py:298 mirage.py:330 mirage.py:339 mirage.py:341
+#: mirage.py:300 mirage.py:332 mirage.py:341 mirage.py:343
 msgid "Next Image"
 msgstr "Následující obrázek"
 
-#: mirage.py:299
+#: mirage.py:301
 msgid "Ne_xt Subfolder"
 msgstr ""
 
-#: mirage.py:299 mirage.py:344 mirage.py:346
+#: mirage.py:301 mirage.py:346 mirage.py:348
 msgid "Next Subfolder"
 msgstr ""
 
-#: mirage.py:300
+#: mirage.py:302
 msgid "_Previous"
 msgstr "_Předchozí"
 
-#: mirage.py:300
+#: mirage.py:302
 msgid "Previous"
 msgstr "Předchozí"
 
-#: mirage.py:301
+#: mirage.py:303
 msgid "_Next"
 msgstr "_Následující"
 
-#: mirage.py:301
+#: mirage.py:303
 msgid "Next"
 msgstr "Následující"
 
-#: mirage.py:302
+#: mirage.py:304
 msgid "_Random Image"
 msgstr "Náhodný ob_rázek"
 
-#: mirage.py:302
+#: mirage.py:304
 msgid "Random Image"
 msgstr "Náhodný obrázek"
 
-#: mirage.py:303
+#: mirage.py:305
 msgid "_First Image"
 msgstr "Pr_vní obrázek"
 
-#: mirage.py:303
+#: mirage.py:305
 msgid "First Image"
 msgstr "První obrázek"
 
-#: mirage.py:304
+#: mirage.py:306
 msgid "_Last Image"
 msgstr "Pos_lední obrázek"
 
-#: mirage.py:304
+#: mirage.py:306
 msgid "Last Image"
 msgstr "Poslední obrázek"
 
-#: mirage.py:305
+#: mirage.py:307
 msgid "Zoom _In"
 msgstr "Př_iblížit"
 
-#: mirage.py:305 mirage.py:328 mirage.py:329 mirage.py:334 mirage.py:348
+#: mirage.py:307 mirage.py:330 mirage.py:331 mirage.py:336 mirage.py:350
 msgid "Zoom In"
 msgstr "Přiblížit"
 
-#: mirage.py:306
+#: mirage.py:308
 msgid "Zoom _Out"
 msgstr "_Oddálit"
 
-#: mirage.py:306 mirage.py:327 mirage.py:333 mirage.py:349
+#: mirage.py:308 mirage.py:329 mirage.py:335 mirage.py:351
 msgid "Zoom Out"
 msgstr "Oddálit"
 
-#: mirage.py:307
+#: mirage.py:309
 msgid "Zoom To _Fit"
 msgstr "_Vměstnat do okna"
 
-#: mirage.py:307 mirage.py:331 mirage.py:335
+#: mirage.py:309 mirage.py:333 mirage.py:337
 msgid "Fit"
 msgstr "Vměstnat"
 
-#: mirage.py:308
+#: mirage.py:310
 msgid "_1:1"
 msgstr "_1:1"
 
-#: mirage.py:308 mirage.py:332 mirage.py:336 mirage.py:347
+#: mirage.py:310 mirage.py:334 mirage.py:338 mirage.py:349
 msgid "1:1"
 msgstr "1:1"
 
-#: mirage.py:309
+#: mirage.py:311
 msgid "Rotate _Left"
 msgstr "Rotovat do_leva"
 
-#: mirage.py:309
+#: mirage.py:311
 msgid "Rotate Left"
 msgstr "Rotovat doleva"
 
-#: mirage.py:310
+#: mirage.py:312
 msgid "Rotate _Right"
 msgstr "Rotovat dop_rava"
 
-#: mirage.py:310
+#: mirage.py:312
 msgid "Rotate Right"
 msgstr "Rotovat doprava"
 
-#: mirage.py:311
+#: mirage.py:313
 msgid "Flip _Vertically"
 msgstr "Překlopit s_visle"
 
-#: mirage.py:311
+#: mirage.py:313
 msgid "Flip Vertically"
 msgstr "Překlopit svisle"
 
-#: mirage.py:312
+#: mirage.py:314
 msgid "Flip _Horizontally"
 msgstr "Překlopit _vodorovně"
 
-#: mirage.py:312
+#: mirage.py:314
 msgid "Flip Horizontally"
 msgstr "Překlopit vodorovně"
 
-#: mirage.py:314
+#: mirage.py:316
 msgid "_Contents"
 msgstr "_Obsah"
 
-#: mirage.py:314
+#: mirage.py:316
 msgid "Contents"
 msgstr "Obsah"
 
-#: mirage.py:315
+#: mirage.py:317
 #, fuzzy
 msgid "Pr_eferences..."
 msgstr "_Předvolby…"
 
-#: mirage.py:315
+#: mirage.py:317
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: mirage.py:317
+#: mirage.py:319
 msgid "E_xit Full Screen"
 msgstr "U_končit zobrazení přes celou obrazovku"
 
-#: mirage.py:317 mirage.py:326
+#: mirage.py:319 mirage.py:328
 msgid "Exit Full Screen"
 msgstr "Ukončit zobrazení přes celou obrazovku"
 
-#: mirage.py:318
+#: mirage.py:320
 msgid "_Start Slideshow"
 msgstr "_Spustit prezentaci"
 
-#: mirage.py:318
+#: mirage.py:320
 msgid "Start Slideshow"
 msgstr "Spustit prezentaci"
 
-#: mirage.py:319
+#: mirage.py:321
 msgid "_Stop Slideshow"
 msgstr "Za_stavit prezentaci"
 
-#: mirage.py:319
+#: mirage.py:321
 msgid "Stop Slideshow"
 msgstr "Zastavit prezentaci"
 
-#: mirage.py:320
+#: mirage.py:322
 msgid "_Delete..."
 msgstr "_Smazat…"
 
-#: mirage.py:320 mirage.py:2950
+#: mirage.py:322 mirage.py:2952
 msgid "Delete Image"
 msgstr "Smazat obrázek"
 
-#: mirage.py:321
+#: mirage.py:323
 msgid "Re_name..."
 msgstr "Přejme_novat…"
 
-#: mirage.py:321 mirage.py:2884
+#: mirage.py:323 mirage.py:2886
 msgid "Rename Image"
 msgstr "Přejmenovat obrázek"
 
-#: mirage.py:322
+#: mirage.py:324
 #, fuzzy
 msgid "_Take Screenshot..."
 msgstr "_Sejmout obrazovku"
 
-#: mirage.py:322
+#: mirage.py:324
 msgid "Take Screenshot"
 msgstr "Sejmout obrazovku"
 
-#: mirage.py:323
+#: mirage.py:325
 msgid "_Properties..."
 msgstr "_Vlastnosti…"
 
-#: mirage.py:323 mirage.py:2403
+#: mirage.py:325 mirage.py:2405
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: mirage.py:324
+#: mirage.py:326
 msgid "_Configure..."
 msgstr "_Nastavit…"
 
-#: mirage.py:324
+#: mirage.py:326
 msgid "Custom Actions"
 msgstr "Uživatelské akce"
 
-#: mirage.py:352
+#: mirage.py:354
 msgid "_Status Bar"
 msgstr "_Stavový řádek"
 
-#: mirage.py:352
+#: mirage.py:354
 msgid "Status Bar"
 msgstr "Stavový řádek"
 
-#: mirage.py:353
+#: mirage.py:355
 msgid "_Toolbar"
 msgstr "Nás_trojová lišta"
 
-#: mirage.py:353
+#: mirage.py:355
 msgid "Toolbar"
 msgstr "Nástrojová lišta"
 
-#: mirage.py:354
+#: mirage.py:356
 #, fuzzy
 msgid "Thumbnails _Pane"
 msgstr "Panel s náhledy"
 
-#: mirage.py:354
+#: mirage.py:356
 msgid "Thumbnails Pane"
 msgstr "Panel s náhledy"
 
-#: mirage.py:355
+#: mirage.py:357
 #, fuzzy
 msgid "_Randomize list"
 msgstr "Zamíchat pořadím obrázků"
 
-#: mirage.py:355
+#: mirage.py:357
 #, fuzzy
 msgid "Randomize list"
 msgstr "Zamíchat pořadím obrázků"
 
-#: mirage.py:1087
+#: mirage.py:1089
 #, python-format
 msgid "Couldn't find the image %s. Please check your installation."
 msgstr ""
 
-#: mirage.py:1304
+#: mirage.py:1306
 #, fuzzy, python-format
 msgid "Action: %s"
 msgstr "Akce"
 
-#: mirage.py:1307
+#: mirage.py:1309
 #, python-format
 msgid "Action return code: %s"
 msgstr "Návratový kód akce: %s"
 
-#: mirage.py:1309
+#: mirage.py:1311
 #, fuzzy, python-format
 msgid ""
 "Unable to launch \"%s\". Please specify a valid command from Edit > Custom "
 "Actions."
 msgstr "Prosím, určete platný příkaz z Upravit → Uživatelské akce."
 
-#: mirage.py:1311 mirage.py:2146 mirage.py:2181
+#: mirage.py:1313 mirage.py:2148 mirage.py:2183
 msgid "Invalid Custom Action"
 msgstr "Neplatná uživatelská akce"
 
-#: mirage.py:1444
+#: mirage.py:1446
 #, fuzzy, python-format
 msgid "Version: %s"
 msgstr "Verze: Mirage"
 
 # FIXME: missing trailing slash
-#: mirage.py:1445
+#: mirage.py:1447
 msgid "Website: http://mirageiv.berlios.de"
 msgstr "Webová stránka: http://mirageiv.berlios.de/"
 
 # FIXME: "FILES|FOLDERS..." is non-standard notation.
 # Use "[FILE|FOLDER]..." instead.
-#: mirage.py:1450
+#: mirage.py:1452
 msgid "Usage: mirage [OPTION]... FILES|FOLDERS..."
 msgstr "Použití: mirage [PŘEPÍNAČ]… SOUBOR|SLOŽKA…"
 
-#: mirage.py:1452
+#: mirage.py:1454
 msgid "Options"
 msgstr "Přepínače"
 
-#: mirage.py:1453
+#: mirage.py:1455
 msgid "Show this help and exit"
 msgstr "Ukáže tuto nápovědu a skončí"
 
-#: mirage.py:1454
+#: mirage.py:1456
 msgid "Show version information and exit"
 msgstr "Ukáže informace o verzi a skončí"
 
-#: mirage.py:1455
+#: mirage.py:1457
 msgid "Show more detailed information"
 msgstr "Ukáže více podrobností"
 
 # FIXME: Use whole message
-#: mirage.py:1456
+#: mirage.py:1458
 msgid "Recursively include all images found in"
 msgstr "Rekurzivně zahrne všechny obrázky nalezené"
 
 # FIXME: Use whole message
 # FIXME: So, we're on UNIX with (sub)folders or on Windows with folders?
-#: mirage.py:1457
+#: mirage.py:1459
 msgid "subdirectories of FOLDERS"
 msgstr "v podadresářích SLOŽEK"
 
-#: mirage.py:1458
+#: mirage.py:1460
 msgid "Start in slideshow mode"
 msgstr "Začne v režimu prezentace"
 
-#: mirage.py:1459
+#: mirage.py:1461
 msgid "Start in fullscreen mode"
 msgstr "Začne v celoobrazovkovém režimu"
 
 # FIXME: do i18n of complete usage lines with option strings
-#: mirage.py:1460
+#: mirage.py:1462
 msgid "Execute 'cmd' when an image is loaded"
 msgstr "Až se obrázek nahraje, provede „cmd“"
 
-#: mirage.py:1461
+#: mirage.py:1463
 #, fuzzy
 msgid "uses same syntax as custom actions,"
 msgstr "(používá stejnou syntax jako uživatelské akce,"
 
-#: mirage.py:1462
+#: mirage.py:1464
 #, fuzzy
 msgid "i.e. mirage -o 'echo file is %F'"
 msgstr "např. mirage -o 'echo Soubor je %F')"
 
-#: mirage.py:1682
+#: mirage.py:1684
 msgid "Save As"
 msgstr "Uložit jako"
 
-#: mirage.py:1723
+#: mirage.py:1725
 #, python-format
 msgid ""
 "The %s format is not supported for saving. Do you wish to save the file in a "
 "different format?"
 msgstr ""
 
-#: mirage.py:1724 mirage.py:1735
+#: mirage.py:1726 mirage.py:1737
 msgid "Save"
 msgstr "Uložit"
 
 # FIXME: Need whole message. Czech has different word orderd. 
-#: mirage.py:1734
+#: mirage.py:1736
 #, fuzzy, python-format
 msgid "Unable to save %s"
 msgstr "Nelze uložit "
 
-#: mirage.py:1751
+#: mirage.py:1753
 msgid "The current image has been modified. Save changes?"
 msgstr "Současný obrázek byl změněn. Uložit změny?"
 
-#: mirage.py:1755
+#: mirage.py:1757
 msgid "Save?"
 msgstr "Uložit?"
 
-#: mirage.py:1793
+#: mirage.py:1795
 msgid "Open Remote"
 msgstr "Otevřít vzdálený"
 
-#: mirage.py:1798
+#: mirage.py:1800
 #, fuzzy
 msgid "Image Location (URL):"
 msgstr "Umístění obrázku (URL)"
 
-#: mirage.py:1829
+#: mirage.py:1831
 msgid "Open"
 msgstr "Otevřít"
 
-#: mirage.py:1832
+#: mirage.py:1834
 msgid "Images"
 msgstr "Obrázek"
 
-#: mirage.py:1836
+#: mirage.py:1838
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: mirage.py:1846
+#: mirage.py:1848
 msgid "Include images in subdirectories"
 msgstr "Zahrnout soubory v podadresářích"
 
-#: mirage.py:1989
+#: mirage.py:1991
 msgid "Cannot load image."
 msgstr "Obrázek nelze načíst."
 
-#: mirage.py:1993
+#: mirage.py:1995
 #, python-format
 msgid "Custom actions: %(current)i of  %(total)i"
 msgstr ""
 
-#: mirage.py:1995
+#: mirage.py:1997
 msgid "Scanning..."
 msgstr ""
 
-#: mirage.py:1999
+#: mirage.py:2001
 msgid "Configure Custom Actions"
 msgstr "Nastavit uživatelské akce"
 
-#: mirage.py:2017
+#: mirage.py:2019
 msgid "Batch"
 msgstr "Dávka"
 
-#: mirage.py:2018
+#: mirage.py:2020
 msgid "Action"
 msgstr "Akce"
 
-#: mirage.py:2019
+#: mirage.py:2021
 msgid "Shortcut"
 msgstr "Zkratka"
 
 # FIXME: full stop missing
-#: mirage.py:2031
+#: mirage.py:2033
 msgid "Add action"
 msgstr "Přidat akci"
 
-#: mirage.py:2035
+#: mirage.py:2037
 msgid "Edit selected action."
 msgstr "Upravit vybranou akci."
 
-#: mirage.py:2039
+#: mirage.py:2041
 msgid "Remove selected action."
 msgstr "Odstranit vybra|nou akci."
 
-#: mirage.py:2043
+#: mirage.py:2045
 msgid "Move selected action up."
 msgstr "Posunout vybranou akci nahoru."
 
-#: mirage.py:2047
+#: mirage.py:2049
 msgid "Move selected action down."
 msgstr "Posunout vybranou akci dolu."
 
 # FIXME: Append colon. E.g. French inserts space.
-#: mirage.py:2050
+#: mirage.py:2052
 msgid "Parameters"
 msgstr "Parametry"
 
-#: mirage.py:2050
+#: mirage.py:2052
 msgid "File path, name, and extension"
 msgstr "Cesta, název a přípona souboru"
 
-#: mirage.py:2050
+#: mirage.py:2052
 msgid "File path"
 msgstr "Cesta k souboru"
 
-#: mirage.py:2050
+#: mirage.py:2052
 msgid "File name without file extension"
 msgstr "Název souboru be přípony"
 
-#: mirage.py:2050
+#: mirage.py:2052
 msgid "File extension (i.e. \".png\")"
 msgstr "Přípona souboru (např. „.png“)"
 
-#: mirage.py:2050
+#: mirage.py:2052
 msgid "List of files, space-separated"
 msgstr "Seznam souborů dělený mezerou"
 
-#: mirage.py:2053
+#: mirage.py:2055
 msgid "Operations"
 msgstr "Operace"
 
-#: mirage.py:2053
+#: mirage.py:2055
 msgid "Go to next image"
 msgstr "Přejít na následující obrázek"
 
-#: mirage.py:2053
+#: mirage.py:2055
 msgid "Go to previous image"
 msgstr "Přejít na předchozí obrázek"
 
-#: mirage.py:2072
+#: mirage.py:2074
 msgid ""
 "Here you can define custom actions with shortcuts. Actions use the built-in "
 "parameters and operations listed below and can have multiple statements "
@@ -645,261 +646,261 @@ msgstr ""
 "parametry a operace uvedené níže a mohou mít více bloků oddělených "
 "středníkem. Dávkové akce se provedou s každým obrázkem ze seznamu."
 
-#: mirage.py:2108
+#: mirage.py:2110
 msgid "Add Custom Action"
 msgstr "Přidat uživatelskou akci"
 
-#: mirage.py:2110
+#: mirage.py:2112
 msgid "Edit Custom Action"
 msgstr "Upravit uživatelskou akci"
 
-#: mirage.py:2113
+#: mirage.py:2115
 #, fuzzy
 msgid "Action Name:"
 msgstr "Název akce"
 
-#: mirage.py:2115
+#: mirage.py:2117
 #, fuzzy
 msgid "Command:"
 msgstr "Příkaz"
 
-#: mirage.py:2117
+#: mirage.py:2119
 #, fuzzy
 msgid "Shortcut:"
 msgstr "Zkratka"
 
-#: mirage.py:2131
+#: mirage.py:2133
 msgid "Perform action on all images (Batch)"
 msgstr "Provést akci na všech obrázcích (dávka)"
 
-#: mirage.py:2145
+#: mirage.py:2147
 msgid "[PREV] and [NEXT] are only valid alone or at the end of the command"
 msgstr ""
 
-#: mirage.py:2180
+#: mirage.py:2182
 msgid "Incomplete custom action specified."
 msgstr "Zadána neúplná uživatelská akce."
 
-#: mirage.py:2258
+#: mirage.py:2260
 msgid "Action Shortcut"
 msgstr "Zkratka akce"
 
-#: mirage.py:2259
+#: mirage.py:2261
 msgid "Press the desired shortcut for the action."
 msgstr "Stiskněte zkratku zamýšlenou pro tuto akci."
 
-#: mirage.py:2276 mirage.py:2283
+#: mirage.py:2278 mirage.py:2285
 #, python-format
 msgid "The shortcut '%(shortcut)s' is already used for '%(key)s'."
 msgstr ""
 
-#: mirage.py:2277 mirage.py:2284
+#: mirage.py:2279 mirage.py:2286
 msgid "Invalid Shortcut"
 msgstr "Neplatná zkratka"
 
-#: mirage.py:2326
+#: mirage.py:2328
 msgid "Screenshot"
 msgstr "Snímek obrazovky"
 
-#: mirage.py:2327
+#: mirage.py:2329
 #, fuzzy
 msgid "_Snap"
 msgstr "Zachytit"
 
-#: mirage.py:2332
+#: mirage.py:2334
 msgid "Location"
 msgstr "Umístnění"
 
-#: mirage.py:2335
+#: mirage.py:2337
 msgid "Entire screen"
 msgstr "Celá obrazovka"
 
 # FIXME: Don't say "mouse". One can use tabled, touch screen, etc.
 # Use "pointer" as provided in X11 terminology
-#: mirage.py:2336
+#: mirage.py:2338
 #, fuzzy
 msgid "Window under pointer"
 msgstr "Okno pod kurzorem myši"
 
-#: mirage.py:2341
+#: mirage.py:2343
 msgid "Delay"
 msgstr "Zpoždění"
 
 # FIXME: Use plural forms
-#: mirage.py:2349
+#: mirage.py:2351
 msgid " seconds"
 msgstr " sekund"
 
-#: mirage.py:2416
+#: mirage.py:2418
 msgid "Generic:"
 msgstr ""
 
-#: mirage.py:2418
+#: mirage.py:2420
 #, fuzzy
 msgid "File name:"
 msgstr "Název souboru"
 
-#: mirage.py:2420
+#: mirage.py:2422
 #, fuzzy
 msgid "File modified:"
 msgstr "Název souboru"
 
 # FIXME: use whole string. Especially the dimension delimiter can be (and
 # should in Czech) translated (as cross insted of ex)
-#: mirage.py:2422
+#: mirage.py:2424
 #, fuzzy
 msgid "Dimensions:"
 msgstr "Rozměry"
 
 # FIXME: use whole message. There can be delimiter betwean value and unit and
 # special thousand delimiters too.
-#: mirage.py:2424
+#: mirage.py:2426
 #, fuzzy
 msgid "File size:"
 msgstr "Velikost souboru"
 
-#: mirage.py:2426
+#: mirage.py:2428
 #, fuzzy
 msgid "File type:"
 msgstr "Druh souboru"
 
-#: mirage.py:2428
+#: mirage.py:2430
 #, fuzzy
 msgid "Transparency:"
 msgstr "Průhlednost"
 
-#: mirage.py:2430
+#: mirage.py:2432
 #, fuzzy
 msgid "Animation:"
 msgstr "Animace"
 
-#: mirage.py:2432
+#: mirage.py:2434
 #, fuzzy
 msgid "Bits per sample:"
 msgstr "Bitů na vzorek"
 
-#: mirage.py:2434
+#: mirage.py:2436
 #, fuzzy
 msgid "Channels:"
 msgstr "Kanálů"
 
-#: mirage.py:2454 mirage.py:2458 mirage.py:2700
+#: mirage.py:2456 mirage.py:2460 mirage.py:2702
 msgid "Yes"
 msgstr "Ano"
 
-#: mirage.py:2456 mirage.py:2460 mirage.py:2699
+#: mirage.py:2458 mirage.py:2462 mirage.py:2701
 msgid "No"
 msgstr "Ne"
 
-#: mirage.py:2494
+#: mirage.py:2496
 msgid "Exifdata"
 msgstr ""
 
-#: mirage.py:2500
+#: mirage.py:2502
 msgid "Exposure time:"
 msgstr ""
 
-#: mirage.py:2500
+#: mirage.py:2502
 #, python-format
 msgid "%s sec"
 msgstr ""
 
-#: mirage.py:2501
+#: mirage.py:2503
 msgid "Aperture:"
 msgstr ""
 
-#: mirage.py:2501 mirage.py:2503 mirage.py:2504 mirage.py:2505 mirage.py:2506
+#: mirage.py:2503 mirage.py:2505 mirage.py:2506 mirage.py:2507 mirage.py:2508
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: mirage.py:2502
+#: mirage.py:2504
 msgid "Focal length:"
 msgstr ""
 
-#: mirage.py:2502
+#: mirage.py:2504
 #, python-format
 msgid "%s mm"
 msgstr ""
 
-#: mirage.py:2503
+#: mirage.py:2505
 msgid "Time taken:"
 msgstr ""
 
-#: mirage.py:2504
+#: mirage.py:2506
 msgid "ISO Speed:"
 msgstr ""
 
-#: mirage.py:2505
+#: mirage.py:2507
 msgid "Exposure bias:"
 msgstr ""
 
-#: mirage.py:2506
+#: mirage.py:2508
 msgid "Camera:"
 msgstr ""
 
-#: mirage.py:2564
+#: mirage.py:2566
 #, fuzzy, python-format
 msgid "%s Preferences"
 msgstr "Předvolby"
 
-#: mirage.py:2570 mirage.py:2804
+#: mirage.py:2572 mirage.py:2806
 msgid "Interface"
 msgstr "Rozhraní"
 
-#: mirage.py:2573
+#: mirage.py:2575
 #, fuzzy
 msgid "Background color:"
 msgstr "Barva pozadí"
 
-#: mirage.py:2577
+#: mirage.py:2579
 msgid "Sets the background color for the application."
 msgstr "Nastaví barvu pozadí aplikace."
 
-#: mirage.py:2583
+#: mirage.py:2585
 #, fuzzy
 msgid "Simple background color:"
 msgstr "Barva pozadí"
 
-#: mirage.py:2592
+#: mirage.py:2594
 msgid "Open Mirage in fullscreen mode"
 msgstr "Spouštět Mirage v celoobrazovkovém režimu"
 
-#: mirage.py:2595
+#: mirage.py:2597
 #, fuzzy
 msgid "Thumbnail size:"
 msgstr "Velikost náhledů"
 
-#: mirage.py:2622
+#: mirage.py:2624
 msgid "Open Behavior"
 msgstr "Způsob otevírání"
 
-#: mirage.py:2625
+#: mirage.py:2627
 #, fuzzy
 msgid "Open new image in:"
 msgstr "Otevřít nový obrázek v"
 
-#: mirage.py:2627
+#: mirage.py:2629
 msgid "Smart Mode"
 msgstr "Chytrém režimu"
 
-#: mirage.py:2628
+#: mirage.py:2630
 msgid "Zoom To Fit Mode"
 msgstr "Režimu vměstnání do okna"
 
-#: mirage.py:2629
+#: mirage.py:2631
 msgid "1:1 Mode"
 msgstr "režimu 1:1"
 
-#: mirage.py:2630
+#: mirage.py:2632
 msgid "Last Active Mode"
 msgstr "Poslední aktivním režimu"
 
-#: mirage.py:2633
+#: mirage.py:2635
 msgid "Load all images in current directory"
 msgstr "Načítat všechny obrázky v současném adresáři"
 
-#: mirage.py:2635
+#: mirage.py:2637
 msgid ""
 "If enabled, opening an image in Mirage will automatically load all images "
 "found in that image's directory."
@@ -907,11 +908,11 @@ msgstr ""
 "Je-li zapnuto, otevření obrázku v Mirage automaticky načte všechny obrázky, "
 "které se nacházejí v tomtéž adresáři."
 
-#: mirage.py:2636
+#: mirage.py:2638
 msgid "Allow loading hidden files"
 msgstr "Načítat skryté soubory"
 
-#: mirage.py:2638
+#: mirage.py:2640
 #, fuzzy
 msgid ""
 "If checked, Mirage will open hidden files. Otherwise, hidden files will be "
@@ -920,11 +921,11 @@ msgstr ""
 "Je-li zapnuto, Mirage bude načítat i skryté soubory. V opačném případě budou "
 "ignorovány."
 
-#: mirage.py:2640
+#: mirage.py:2642
 msgid "Use Numerical aware sort"
 msgstr ""
 
-#: mirage.py:2642
+#: mirage.py:2644
 #, fuzzy
 msgid ""
 "If checked, Mirage will sort the images based on a numerical aware sort."
@@ -932,40 +933,40 @@ msgstr ""
 "Je-li zapnuto, Mirage bude načítat i skryté soubory. V opačném případě budou "
 "ignorovány."
 
-#: mirage.py:2644
+#: mirage.py:2646
 msgid "Casesensitive sort"
 msgstr ""
 
-#: mirage.py:2646
+#: mirage.py:2648
 msgid "If checked, a case-sensitive sort will be used"
 msgstr ""
 
-#: mirage.py:2651
+#: mirage.py:2653
 msgid "Use last chosen directory"
 msgstr "Použít poslední vybraný adresář"
 
-#: mirage.py:2652
+#: mirage.py:2654
 msgid "The default 'Open' directory will be the last directory used."
 msgstr "Výchozí adresář pro „Otevřít“ bude adresář posledně požitý."
 
-#: mirage.py:2653
+#: mirage.py:2655
 #, fuzzy
 msgid "Use this fixed directory:"
 msgstr "Vždy použít tento adresář"
 
-#: mirage.py:2655
+#: mirage.py:2657
 msgid "The default 'Open' directory will be this specified directory."
 msgstr "Výchozí adresář pro „Otevřít“ bude adresář zde určený."
 
-#: mirage.py:2691 mirage.py:2803
+#: mirage.py:2693 mirage.py:2805
 msgid "Navigation"
 msgstr "Navigace"
 
-#: mirage.py:2693
+#: mirage.py:2695
 msgid "Preload images for faster navigation"
 msgstr "Pro rychlejší pohyb načítat obrázky dopředu"
 
-#: mirage.py:2695
+#: mirage.py:2697
 msgid ""
 "If enabled, the next and previous images in the list will be preloaded "
 "during idle time. Note that the speed increase comes at the expense of "
@@ -977,29 +978,29 @@ msgstr ""
 "spotřebované paměti. Takže na strojích s malou pamětí je lepší tuto funkci "
 "vypnout."
 
-#: mirage.py:2697
+#: mirage.py:2699
 #, fuzzy
 msgid "Wrap around imagelist:"
 msgstr "Spojit seznam obrázků do kruhu"
 
-#: mirage.py:2701
+#: mirage.py:2703
 msgid "Prompt User"
 msgstr "Zeptat se uživatele"
 
-#: mirage.py:2720 mirage.py:4713
+#: mirage.py:2722 mirage.py:4715
 msgid "Slideshow Mode"
 msgstr "Režim prezentace"
 
-#: mirage.py:2723
+#: mirage.py:2725
 #, fuzzy
 msgid "Delay between images in seconds:"
 msgstr "Zpoždění mezi obrázky"
 
-#: mirage.py:2728
+#: mirage.py:2730
 msgid "Randomize order of images"
 msgstr "Zamíchat pořadím obrázků"
 
-#: mirage.py:2730
+#: mirage.py:2732
 msgid ""
 "If enabled, a random image will be chosen during slideshow mode (without "
 "loading any image twice)."
@@ -1007,189 +1008,189 @@ msgstr ""
 "Je-li zapnuto, budou obrázky během prezentace vybírány náhodně (avšak žádný "
 "dva krát)."
 
-#: mirage.py:2731
+#: mirage.py:2733
 msgid "Disable screensaver in slideshow mode"
 msgstr "Během prezentace vypnout šetřič obrazovky"
 
-#: mirage.py:2733
+#: mirage.py:2735
 msgid ""
 "If enabled, xscreensaver will be temporarily disabled during slideshow mode."
 msgstr "Je-li povoleno, xscreensaver bude po dobu prezentace dočasně zakázán."
 
-#: mirage.py:2734
+#: mirage.py:2736
 msgid "Always start in fullscreen mode"
 msgstr "Vždy začít v režimu přes celou obrazovku"
 
-#: mirage.py:2735
+#: mirage.py:2737
 msgid ""
 "If enabled, starting a slideshow will put the application in fullscreen mode."
 msgstr ""
 "Je-li zapnuto, zahájení prezentace přepne aplikaci do celoobrazovkového "
 "režimu."
 
-#: mirage.py:2753
+#: mirage.py:2755
 msgid "Image Editing"
 msgstr "Úprava obrázků"
 
-#: mirage.py:2755
+#: mirage.py:2757
 msgid "Confirm image delete"
 msgstr "Potvrzovat mazání obrázku"
 
-#: mirage.py:2759
+#: mirage.py:2761
 #, fuzzy
 msgid "Scaling quality:"
 msgstr "Kvalita škálování"
 
-#: mirage.py:2761
+#: mirage.py:2763
 msgid "Nearest (Fastest)"
 msgstr "Nejbližší (nejrychlejší)"
 
-#: mirage.py:2762
+#: mirage.py:2764
 msgid "Tiles"
 msgstr "Dlaždice"
 
-#: mirage.py:2763
+#: mirage.py:2765
 msgid "Bilinear"
 msgstr "Bilineární"
 
-#: mirage.py:2764
+#: mirage.py:2766
 msgid "Hyper (Best)"
 msgstr "Hyper (Nejlepší)"
 
-#: mirage.py:2770
+#: mirage.py:2772
 #, fuzzy
 msgid "Modified images:"
 msgstr "Pozměněné obrázky"
 
-#: mirage.py:2772
+#: mirage.py:2774
 msgid "Ignore Changes"
 msgstr "Ignorovat změny"
 
-#: mirage.py:2773
+#: mirage.py:2775
 msgid "Auto-Save"
 msgstr "Automaticky uložit"
 
-#: mirage.py:2774
+#: mirage.py:2776
 msgid "Prompt For Action"
 msgstr "Zeptat se"
 
 # FIXME: Need whole message. Czech has different word orderd. 
-#: mirage.py:2780
+#: mirage.py:2782
 #, fuzzy
 msgid "Quality to save in:"
 msgstr "Nelze uložit "
 
-#: mirage.py:2802
+#: mirage.py:2804
 msgid "Behavior"
 msgstr "Chování"
 
-#: mirage.py:2805
+#: mirage.py:2807
 msgid "Slideshow"
 msgstr "Prezentace"
 
-#: mirage.py:2806
+#: mirage.py:2808
 msgid "Image"
 msgstr "Obrázek"
 
-#: mirage.py:2890
+#: mirage.py:2892
 #, fuzzy
 msgid "_Rename"
 msgstr "Přejmenovat"
 
-#: mirage.py:2900
+#: mirage.py:2902
 #, fuzzy
 msgid "Enter the new name:"
 msgstr "Zadejte nový název"
 
-#: mirage.py:2932
+#: mirage.py:2934
 #, fuzzy, python-format
 msgid "Unable to rename %s"
 msgstr "Nelze přejmenovat"
 
-#: mirage.py:2933
+#: mirage.py:2935
 msgid "Unable to rename"
 msgstr "Nelze přejmenovat"
 
-#: mirage.py:2952
+#: mirage.py:2954
 #, fuzzy, python-format
 msgid "Are you sure you wish to permanently delete %s?"
 msgstr "Opravdu chcete na trvalo smazat"
 
-#: mirage.py:3013
+#: mirage.py:3015
 #, fuzzy, python-format
 msgid "Unable to delete %s"
 msgstr "Nelze smazat"
 
-#: mirage.py:3014
+#: mirage.py:3016
 msgid "Unable to delete"
 msgstr "Nelze smazat"
 
-#: mirage.py:3022
+#: mirage.py:3024
 msgid "Choose directory"
 msgstr "Vyberte adresář"
 
-#: mirage.py:3070
+#: mirage.py:3072
 msgid "A fast GTK+ Image Viewer."
 msgstr "Rychlý prohlížeč obrázků v GTK."
 
-#: mirage.py:3115
+#: mirage.py:3117
 msgid "Unable to launch a suitable browser."
 msgstr "Nelze spustit vhodný prohlížeč."
 
-#: mirage.py:3437
+#: mirage.py:3439
 #, fuzzy
 msgid "C_rop"
 msgstr "Oříznout"
 
-#: mirage.py:3479 mirage.py:3692
+#: mirage.py:3481 mirage.py:3694
 #, fuzzy
 msgid "Width:"
 msgstr "Šířka"
 
-#: mirage.py:3486 mirage.py:3703
+#: mirage.py:3488 mirage.py:3705
 #, fuzzy
 msgid "Height:"
 msgstr "Výška"
 
-#: mirage.py:3632
+#: mirage.py:3634
 msgid "Saturation"
 msgstr "Sytost"
 
-#: mirage.py:3633
+#: mirage.py:3635
 #, fuzzy
 msgid "_Saturate"
 msgstr "Sytit"
 
-#: mirage.py:3644
+#: mirage.py:3646
 msgid "Saturation level:"
 msgstr "Úroveň sytosti"
 
-#: mirage.py:3682
+#: mirage.py:3684
 #, fuzzy
 msgid "_Resize"
 msgstr "Změnit velikost"
 
-#: mirage.py:3696 mirage.py:3708
+#: mirage.py:3698 mirage.py:3710
 msgid "pixels"
 msgstr "pixelů"
 
-#: mirage.py:3710
+#: mirage.py:3712
 msgid "Preserve aspect ratio"
 msgstr "Zachovat poměr stran"
 
-#: mirage.py:3889
+#: mirage.py:3891
 msgid ""
 "You are viewing the first image in the list. Wrap around to the last image?"
 msgstr ""
 "Právě se díváte na první obrázek v seznamu. Přejít na poslední obrázek?"
 
-#: mirage.py:3891
+#: mirage.py:3893
 msgid ""
 "You are viewing the last image in the list. Wrap around to the first image?"
 msgstr ""
 "Právě se díváte na poslední obrázek v seznamu. Přejít na první obrázek?"
 
-#: mirage.py:3893
+#: mirage.py:3895
 #, fuzzy
 msgid ""
 "You are viewing the first folder in the list. Wrap around to the first image "
@@ -1197,7 +1198,7 @@ msgid ""
 msgstr ""
 "Právě se díváte na první obrázek v seznamu. Přejít na poslední obrázek?"
 
-#: mirage.py:3895
+#: mirage.py:3897
 #, fuzzy
 msgid ""
 "You are viewing the last folder in the list. Wrap around to the first image "
@@ -1205,57 +1206,57 @@ msgid ""
 msgstr ""
 "Právě se díváte na poslední obrázek v seznamu. Přejít na první obrázek?"
 
-#: mirage.py:3897
+#: mirage.py:3899
 msgid ""
 "All images have been viewed. Would you like to cycle through the images "
 "again?"
 msgstr "Všechny obrázky byly shlédnuty. Přejete si je vidět znova od začátku?"
 
-#: mirage.py:3898
+#: mirage.py:3900
 msgid "Wrap?"
 msgstr "Vrátit se?"
 
-#: mirage.py:4068 mirage.py:4440
+#: mirage.py:4070 mirage.py:4442
 #, fuzzy, python-format
 msgid "Loading: %s"
 msgstr "Nahrávám"
 
-#: mirage.py:4155
+#: mirage.py:4157
 #, fuzzy, python-format
 msgid "Loading(preloaded): %s"
 msgstr "Nahrávám"
 
-#: mirage.py:4176
+#: mirage.py:4178
 #, python-format
 msgid "Loading(not preloaded): %s"
 msgstr ""
 
-#: mirage.py:4225 mirage.py:4254
+#: mirage.py:4227 mirage.py:4256
 #, fuzzy, python-format
 msgid "Preloading: %s"
 msgstr "Načítám dopředu"
 
-#: mirage.py:4329 mirage.py:4557
+#: mirage.py:4331 mirage.py:4559
 #, fuzzy, python-format
 msgid "Skipping: %s"
 msgstr "Přeskakuji"
 
-#: mirage.py:4407
+#: mirage.py:4409
 #, python-format
 msgid "Found: %(item)s [%(number)i]"
 msgstr ""
 
-#: mirage.py:4553
+#: mirage.py:4555
 #, python-format
 msgid "Found: %(fullpath)s [%(number)i]"
 msgstr ""
 
-#: mirage.py:4709
+#: mirage.py:4711
 #, python-format
 msgid "%(current)i of %(total)i"
 msgstr ""
 
-#: mirage.py:4710
+#: mirage.py:4712
 #, python-format
 msgid "[%(current)i of %(total)i]"
 msgstr ""
