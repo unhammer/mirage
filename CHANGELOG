@@ -4,6 +4,7 @@ v1.0 - Future
 	+ Bug: Fixing an issue where the Wrap?-dialog would hangup in slideshow mode
 		when wrap mode was set to ask
 	+ Bug: Fixed broken support for non-ASCII filenames
+	+ Bug: Rename overwrote existing files without user confirmation (bug #18678)
 	+ Changes: Changed how files are registered in recent docs
 	+ Changes: various code updates
 	+ Changes: Behaviour of slideshow mode modified

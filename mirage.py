@@ -2915,25 +2915,8 @@ class Base:
 			rename_dialog.set_size_request(300, -1)
 			rename_dialog.vbox.show_all()
 			rename_dialog.connect('show', self.select_rename_text)
+			rename_dialog.connect('response', self.on_rename_dialog_response)
 			response = rename_dialog.run()
-			if response == gtk.RESPONSE_ACCEPT:
-				try:
-					new_filename = os.path.dirname(self.currimg.name) + "/" + self.rename_txt.get_text()
-					shutil.move(self.currimg.name, new_filename)
-					# Update thumbnail filename:
-					try:
-						shutil.move(self_get_name(self.currimg.name)[1], self.thumbnail_get_name(new_filename)[1])
-					except:
-						pass
-					self.recent_file_remove_and_refresh_name(self.currimg.name)
-					self.currimg.name = new_filename
-					self.register_file_with_recent_docs(self.currimg.name)
-					self.update_title()
-				except:
-					error_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, _('Unable to rename %s') % self.currimg.name)
-					error_dialog.set_title(_("Unable to rename"))
-					error_dialog.run()
-					error_dialog.destroy()
 			rename_dialog.destroy()
 			if temp_slideshow_mode:
 				self.toggle_slideshow(None)
@@ -2942,6 +2925,37 @@ class Base:
 		filename = os.path.basename(self.currimg.name)
 		fileext = os.path.splitext(os.path.basename(self.currimg.name))[1]
 		self.rename_txt.select_region(0, len(filename) - len(fileext))
+		
+	def on_rename_dialog_response(self, dialog, response, data=None):
+		if response == gtk.RESPONSE_ACCEPT:
+			try:
+				new_filename = os.path.join(os.path.dirname(self.currimg.name), self.rename_txt.get_text())
+				if os.path.exists(new_filename):
+					exists_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK_CANCEL, _('Overwrite existing file %s?') % new_filename)
+					exists_dialog.set_title(_("File exists"))
+					resp = exists_dialog.run()
+					if resp != gtk.RESPONSE_OK:
+						exists_dialog.destroy()
+						dialog.emit_stop_by_name('response')
+						return
+					exists_dialog.destroy()
+				shutil.move(self.currimg.name, new_filename)
+				# Update thumbnail filename:
+				try:
+					shutil.move(self_get_name(self.currimg.name)[1], self.thumbnail_get_name(new_filename)[1])
+				except:
+					pass
+				self.recent_file_remove_and_refresh_name(self.currimg.name)
+				self.currimg.name = new_filename
+				self.register_file_with_recent_docs(self.currimg.name)
+				self.update_title()
+				dialog.destroy()
+			except:
+				error_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, _('Unable to rename %s') % self.currimg.name)
+				error_dialog.set_title(_("Unable to rename"))
+				error_dialog.run()
+				error_dialog.destroy()
+				dialog.emit_stop_by_name('response')
 
 	def delete_image(self, action):
 		if len(self.image_list) > 0:
