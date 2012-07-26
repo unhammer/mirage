@@ -2929,7 +2929,7 @@ class Base:
 	def on_rename_dialog_response(self, dialog, response, data=None):
 		if response == gtk.RESPONSE_ACCEPT:
 			try:
-				new_filename = os.path.join(os.path.dirname(self.currimg.name), self.rename_txt.get_text())
+				new_filename = os.path.join(os.path.dirname(self.currimg.name), self.rename_txt.get_text().decode('utf-8'))
 				if os.path.exists(new_filename):
 					exists_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK_CANCEL, _('Overwrite existing file %s?') % new_filename)
 					exists_dialog.set_title(_("File exists"))
@@ -2948,6 +2948,7 @@ class Base:
 				self.recent_file_remove_and_refresh_name(self.currimg.name)
 				self.currimg.name = new_filename
 				self.register_file_with_recent_docs(self.currimg.name)
+				self.image_list[self.curr_img_in_list] = new_filename
 				self.update_title()
 				dialog.destroy()
 			except:
