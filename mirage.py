@@ -711,7 +711,7 @@ class Base:
 			for i in range(len(args)):
 				args[i] = urllib.url2pathname(args[i]).decode('utf-8')
 			gtk.gdk.threads_enter()
-			gobject.idle_add(self.expand_filelist_and_load_image, args)
+			self.expand_filelist_and_load_image(args)
 			gtk.gdk.threads_leave()
 		else:
 			self.set_go_sensitivities(False)
