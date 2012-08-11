@@ -9,6 +9,7 @@ v1.0 - Future
 	+ Changes: Changed how files are registered in recent docs
 	+ Changes: various code updates
 	+ Changes: Behaviour of slideshow mode modified
+	+ Changes: Open in fullscreen only if there are images passed to mirage
 	+ Features: Can now browse between subfolders
 
 v0.9.5.2 - February 13, 2011

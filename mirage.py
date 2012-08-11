@@ -681,7 +681,7 @@ class Base:
 			for o, a in opts:
 				if (o in ("-f", "--fullscreen")) or ((o in ("-s", "--slideshow")) and self.usettings['slideshow_in_fullscreen']):
 					go_into_fullscreen = True
-		if go_into_fullscreen or self.usettings['start_in_fullscreen']:
+		if (go_into_fullscreen or self.usettings['start_in_fullscreen']) and args != []:
 			self.enter_fullscreen(None)
 			self.statusbar.set_no_show_all(True)
 			self.statusbar2.set_no_show_all(True)
