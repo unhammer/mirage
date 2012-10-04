@@ -1,6 +1,7 @@
 v1.0 - Future
 	+ Added Numerical Aware Comparison (numacomp) as a sorting option.
 	+ Added Exif data reading on supported files through pyexiv2
+	+ Added Image rotation based on Exif data (Thanks to Alexandre Chataignon)
 	+ Bug: Fixing an issue where the Wrap?-dialog would hangup in slideshow mode
 		when wrap mode was set to ask
 	+ Bug: Fixed broken support for non-ASCII filenames

@@ -984,14 +984,17 @@ class Base:
 						return pix
 			# Create the 128x128 thumbnail:
 			uri = 'file://' + urllib.pathname2url(imgfile.encode('utf-8'))
-			pix = gtk.gdk.pixbuf_new_from_file(imgfile)
-			pix, image_width, image_height = self.get_pixbuf_of_size(pix, 128, gtk.gdk.INTERP_TILES)
+			#pix = gtk.gdk.pixbuf_new_from_file(imgfile)
+			pix = ImageData()
+			pix.load_pixbuf(imgfile)
+			pix, image_width, image_height = self.get_pixbuf_of_size(pix.pixbuf, 128, gtk.gdk.INTERP_TILES)
 			st = os.stat(imgfile)
 			file_mtime = str(st[stat.ST_MTIME])
 			# Save image to .thumbnails:
 			pix.save(thumb_url, "png", {'tEXt::Thumb::URI':uri, 'tEXt::Thumb::MTime':file_mtime, 'tEXt::Software':'Mirage' + __version__})
 			return pix
 		except:
+			
 			return None
 
 	def thumbpane_load_image(self, treeview, imgnum):
@@ -2549,9 +2552,9 @@ class Base:
 			if type == "rat_frac":
 				val = Fraction(str(raw))
 			elif type == "rat_float":
-				val = raw.to_float()
+				val = float(raw)
 			elif type == "rat_int":
-				val = int(raw.to_float())
+				val = int(raw)
 			elif type == "int":
 				val = int(raw)
 			else:
@@ -3396,16 +3399,14 @@ class Base:
 
 	def rotate_left_or_right(self, widget, angle):
 		if self.currimg.name != "" and widget.get_property('sensitive'):
-			self.currimg.pixbuf_original = self.image_rotate(self.currimg.pixbuf_original, angle)
+			self.currimg.rotate_pixbuf(angle)
 			if self.last_image_action_was_fit:
 				if self.last_image_action_was_smart_fit:
 					self.zoom_to_fit_or_1_to_1(None, False, False)
 				else:
 					self.zoom_to_fit_window(None, False, False)
 			else:
-				self.currimg.width, self.currimg.height = self.currimg.height, self.currimg.width
 				self.layout.set_size(self.currimg.width, self.currimg.height)
-				self.currimg.pixbuf = self.image_rotate(self.currimg.pixbuf, angle)
 				self.imageview.set_from_pixbuf(self.currimg.pixbuf)
 				self.show_scrollbars_if_needed()
 				self.center_image()
@@ -3420,8 +3421,7 @@ class Base:
 
 	def flip_image_vert_or_horiz(self, widget, vertical):
 		if self.currimg.name != "" and widget.get_property('sensitive'):
-			self.currimg.pixbuf = self.image_flip(self.currimg.pixbuf, vertical)
-			self.currimg.pixbuf_original = self.image_flip(self.currimg.pixbuf_original, vertical)
+			self.currimg.flip_pixbuf(vertical)
 			self.imageview.set_from_pixbuf(self.currimg.pixbuf)
 			self.image_modified = True
 
@@ -4655,36 +4655,6 @@ class Base:
 		else:
 			return True
 
-	def image_flip(self, old_pix, vertical):
-		width = old_pix.get_width()
-		height = old_pix.get_height()
-		d = None
-		if vertical:
-			d, w, h, rws = imgfuncs.vert(old_pix.get_pixels(), width, height, old_pix.get_rowstride(), old_pix.get_n_channels())
-		else:
-			d, w, h, rws = imgfuncs.horiz(old_pix.get_pixels(), width, height, old_pix.get_rowstride(), old_pix.get_n_channels())
-		if d:
-			new_pix = gtk.gdk.pixbuf_new_from_data(d, old_pix.get_colorspace(), old_pix.get_has_alpha(), old_pix.get_bits_per_sample(), w, h, rws)
-			return new_pix
-		return old_pix
-
-	def image_rotate(self, old_pix, full_angle):
-		width = old_pix.get_width()
-		height = old_pix.get_height()
-		angle = full_angle - (int(full_angle) / 360) * 360
-		if angle:
-			d = None
-			if angle % 270 == 0:
-				d, w, h, rws = imgfuncs.right(old_pix.get_pixels(), width, height, old_pix.get_rowstride(), old_pix.get_n_channels())
-			elif angle % 180 == 0:
-				d, w, h, rws = imgfuncs.mirror(old_pix.get_pixels(), width, height, old_pix.get_rowstride(), old_pix.get_n_channels())
-			elif angle % 90 == 0:
-				d, w, h, rws = imgfuncs.left(old_pix.get_pixels(), width, height, old_pix.get_rowstride(), old_pix.get_n_channels())
-			if d:
-				new_pix = gtk.gdk.pixbuf_new_from_data(d, old_pix.get_colorspace(), old_pix.get_has_alpha(), old_pix.get_bits_per_sample(), w, h, rws)
-				return new_pix
-		return old_pix
-
 	def toggle_slideshow(self, action):
 		if len(self.image_list) > 1:
 			if not self.slideshow_mode:
@@ -4818,6 +4788,13 @@ class Base:
 		gtk.gdk.threads_leave()
 
 class ImageData:
+	
+	# Define EXIF Orientation values
+	ORIENT_NORMAL = 1
+	ORIENT_LEFT   = 8
+	ORIENT_MIRROR = 3
+	ORIENT_RIGHT  = 6
+
 	def __init__(self, index=-1, name="", width=0, heigth=0, pixbuf=None,
 				pixbuf_original=None, pixbuf_rotated=None, zoomratio=1, animation=False):
 		self.index = index
@@ -4847,7 +4824,18 @@ class ImageData:
 		self.height = self.pixbuf.get_height()
 		self.width_orig = self.width
 		self.height_orig = self.height
-		self.pixbuf_rotated = None
+		self.orientation = ImageData.ORIENT_NORMAL
+		if HAS_EXIF :
+			exifd = pyexiv2.ImageMetadata(self.name)
+			exifd.read()
+			if "Exif.Image.Orientation" in exifd.exif_keys :
+				self.orientation = exifd["Exif.Image.Orientation"].value
+				if self.orientation == ImageData.ORIENT_LEFT :
+					self.rotate_pixbuf(90)
+				elif self.orientation == ImageData.ORIENT_MIRROR : 
+					self.rotate_pixbuf(180)
+				elif self.orientation == ImageData.ORIENT_RIGHT :
+					self.rotate_pixbuf(270)
 		self.zoomratio = 1
 
 	def unload_pixbuf(self):
@@ -4861,7 +4849,7 @@ class ImageData:
 		self.animation = False
 		self.pixbuf = None
 		self.pixbuf_original = None
-		self.pixbuf_rotated = None
+		self.orientation = None
 
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		# Always start with the original image to preserve quality!
@@ -4879,6 +4867,31 @@ class ImageData:
 			self.pixbuf = self.pixbuf_original.scale_simple(final_width, final_height, quality)
 		self.width, self.height = final_width, final_height
 		self.zoomratio = zoomratio
+
+	def transform_pixbuf(self, func) :
+		def transform(old_pix, func) :
+			width = old_pix.get_width()
+			height = old_pix.get_height()
+			d, w, h, rws = func(old_pix.get_pixels(), width, height, old_pix.get_rowstride(), old_pix.get_n_channels())
+			if d:
+				return gtk.gdk.pixbuf_new_from_data(d, old_pix.get_colorspace(), old_pix.get_has_alpha(), old_pix.get_bits_per_sample(), w, h, rws), w, h
+			return old_pix, width, height
+		self.pixbuf_original, self.width_original, self.height_original = transform(self.pixbuf_original, func)
+		self.pixbuf         , self.width         ,  self.height         = transform(self.pixbuf         , func)
+
+	def flip_pixbuf(self, vertical):
+		self.transform_pixbuf(imgfuncs.vert if vertical else imgfuncs.horiz)
+
+	def rotate_pixbuf(self, full_angle):
+		angle = full_angle - (int(full_angle) / 360) * 360
+		if angle:
+			d = None
+			if angle % 270 == 0:
+				self.transform_pixbuf(imgfuncs.right)
+			elif angle % 180 == 0:
+				self.transform_pixbuf(imgfuncs.mirror)
+			elif angle % 90 == 0:
+				self.transform_pixbuf(imgfuncs.left)
 
 if __name__ == "__main__":
 	base = Base()
