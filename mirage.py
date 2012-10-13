@@ -208,10 +208,11 @@ class Base:
 		self.usettings['recentfiles'] = ["", "", "", "", ""]
 		self.usettings['screenshot_delay'] = 2
 		self.thumbpane_bottom_coord_loaded = 0
+		self.no_sort = False
 
 		# Read any passed options/arguments:
 		try:
-			opts, args = getopt.getopt(sys.argv[1:], "hRvVsfo:", ["help", "version", "recursive", "verbose", "slideshow", "fullscreen", "onload="])
+			opts, args = getopt.getopt(sys.argv[1:], "hRvVsfno:", ["help", "version", "recursive", "verbose", "slideshow", "fullscreen", "no-sort", "onload="])
 		except getopt.GetoptError:
 			# print help information and exit:
 			self.print_usage()
@@ -232,6 +233,8 @@ class Base:
 				elif o in ("-s", "--slideshow", "-f", "--fullscreen"):
 					#This will be handled later
 					None
+				elif o in ("-n", "--no-sort"):
+					self.no_sort = True
 				elif o in ("-o", "--onload"):
 					self.onload_cmd = a
 				else:
@@ -1463,6 +1466,7 @@ class Base:
 		print "                       " + _("subdirectories of FOLDERS")
 		print "  -s, --slideshow      " + _("Start in slideshow mode")
 		print "  -f, --fullscreen     " + _("Start in fullscreen mode")
+		print "  -n, --no-sort        " + _("Do not sort input list")
 		print "  -o, --onload 'cmd'   " + _("Execute 'cmd' when an image is loaded")
 		print "                       " + _("uses same syntax as custom actions,")
 		print "                       " + _("i.e. mirage -o 'echo file is %F'")
@@ -4532,18 +4536,33 @@ class Base:
 			self.change_cursor(None)
 		self.recursive = False
 
+	def sort_list_in_place(self, list):
+		if self.no_sort:
+			return
+
+		#Sort based on a numerical aware sort or normal alphabetical sort
+		if self.usettings['use_numacomp'] and HAVE_NUMACOMP:
+			#Use case-sensitive sort?
+			if self.usettings['case_numacomp']:
+				list.sort(cmp=numacomp.numacomp)
+			else:
+				list.sort(cmp=numacomp.numacompi)
+		else:
+			list.sort(locale.strcoll)
+
+	def remove_duplicates_from_list(self, list):
+		found = set()
+		newlist = []
+		for item in list:
+			if item not in found:
+				newlist.append(item)
+			found.add(item)
+		return newlist
+
 	def add_folderlist_images(self, folderlist, go_buttons_enabled):
 		if len(folderlist) > 0:
-			#Sort based on a numerical aware sort or normal alphabetical sort
-			if self.usettings['use_numacomp'] and HAVE_NUMACOMP:
-				#Use case-sensitive sort?
-				if self.usettings['case_numacomp']:
-					folderlist.sort(cmp=numacomp.numacomp)
-				else:
-					folderlist.sort(cmp=numacomp.numacompi)
-			else:
-				folderlist.sort(locale.strcoll)
-			folderlist = list(set(folderlist))
+			folderlist = self.remove_duplicates_from_list(folderlist)
+			self.sort_list_in_place(folderlist)
 			for item in folderlist:
 				if not self.closing_app:
 					if (not self.usettings['open_hidden_files'] and os.path.basename(item)[0] != '.') or self.usettings['open_hidden_files']:
@@ -4553,16 +4572,8 @@ class Base:
 	def do_image_list_stuff(self, first_image, second_image):
 		if len(self.image_list) > 0:
 			self.set_go_navigation_sensitivities(True)
-			self.image_list = list(set(self.image_list))
-			#Sort based on a numerical aware sort or normal alphabetical sort
-			if self.usettings['use_numacomp'] and HAVE_NUMACOMP:
-				#Use case-sensitive sort?
-				if self.usettings['case_numacomp']:
-					self.image_list.sort(cmp=numacomp.numacomp)
-				else:
-					self.image_list.sort(cmp=numacomp.numacompi)
-			else:
-				self.image_list.sort(locale.strcoll)
+			self.image_list = self.remove_duplicates_from_list(self.image_list)
+			self.sort_list_in_place(self.image_list)
 
 	def expand_directory(self, item, stop_when_second_image_found, go_buttons_enabled, update_window_title, print_found_msg):
 		if not self.stop_now and not self.closing_app:
@@ -4591,15 +4602,7 @@ class Base:
 				self.update_title()
 			# Sort the filelist and folderlist alphabetically:
 			if len(filelist) > 0:
-				#Use numerical aware sort?
-				if self.usettings['use_numacomp'] and HAVE_NUMACOMP:
-					#Use case-sensitive sort?
-					if self.usettings['case_numacomp']:
-						filelist.sort(cmp=numacomp.numacomp)
-					else:
-						filelist.sort(cmp=numacomp.numacompi)
-				else:
-					filelist.sort(locale.strcoll)
+				self.sort_list_in_place(filelist)
 				for item2 in filelist:
 					if not item2 in self.image_list:
 						self.image_list.append(item2)
@@ -4610,15 +4613,7 @@ class Base:
 							go_buttons_enabled = True
 			# Recurse into the folderlist:
 			if len(folderlist) > 0:
-				#Use numerical aware sort?
-				if self.usettings['use_numacomp'] and HAVE_NUMACOMP:
-					#Use case-sensitive sort?
-					if self.usettings['case_numacomp']:
-						folderlist.sort(cmp=numacomp.numacomp)
-					else:
-						folderlist.sort(cmp=numacomp.numacompi)
-				else:
-					folderlist.sort(locale.strcoll)
+				self.sort_list_in_place(folderlist)
 				for item2 in folderlist:
 					if not self.stop_now:
 						self.expand_directory(item2, stop_when_second_image_found, go_buttons_enabled, update_window_title, print_found_msg)
