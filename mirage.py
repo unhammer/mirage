@@ -3554,12 +3554,10 @@ class Base:
 		if response == gtk.RESPONSE_ACCEPT:
 			dialog.destroy()
 			if self.rect != None:
-				temp_pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, self.currimg.pixbuf_original.get_has_alpha(), 8, self.coords[2], self.coords[3])
-				self.currimg.pixbuf_original.copy_area(self.coords[0], self.coords[1], self.coords[2], self.coords[3], temp_pixbuf, 0, 0)
-				self.currimg.pixbuf_original = temp_pixbuf
-				del temp_pixbuf
+				self.currimg.crop(self.coords)
 				gc.collect()
-				self.load_new_image2(False, True, False, False)
+				self.put_zoom_image_to_window(False)
+				# self.load_new_image2(False, True, False, False)
 				self.image_modified = True
 		else:
 			dialog.destroy()
@@ -3688,8 +3686,7 @@ class Base:
 		dialog.vbox.show_all()
 		response = dialog.run()
 		if response == gtk.RESPONSE_ACCEPT:
-			self.currimg.pixbuf_original.saturate_and_pixelate(self.currimg.pixbuf_original, scale.get_value(), False)
-			self.currimg.pixbuf.saturate_and_pixelate(self.currimg.pixbuf, scale.get_value(), False)
+			self.currimg.saturation(scale.get_value())
 			self.imageview.set_from_pixbuf(self.currimg.pixbuf)
 			self.image_modified = True
 			dialog.destroy()
@@ -3770,8 +3767,9 @@ class Base:
 			pixelheight = height.get_value_as_int()
 			pixelwidth = width.get_value_as_int()
 			dialog.destroy()
-			self.currimg.pixbuf_original = self.currimg.pixbuf_original.scale_simple(pixelwidth, pixelheight, self.zoom_quality)
-			self.load_new_image2(False, True, False, False)
+			self.currimg.resize(pixelwidth, pixelheight, self.zoom_quality)
+			self.put_zoom_image_to_window(False)
+			# self.load_new_image2(False, True, False, False)
 			self.image_modified = True
 		else:
 			dialog.destroy()
@@ -4847,6 +4845,7 @@ class ImageData:
 		self.orientation = None
 
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
+		print "In zoom_pixbuf()"
 		# Always start with the original image to preserve quality!
 		# Calculate image size:
 		if self.animation:
@@ -4864,6 +4863,7 @@ class ImageData:
 		self.zoomratio = zoomratio
 
 	def transform_pixbuf(self, func) :
+		print "In transform_pixbuf()"
 		def transform(old_pix, func) :
 			width = old_pix.get_width()
 			height = old_pix.get_height()
@@ -4887,6 +4887,19 @@ class ImageData:
 				self.transform_pixbuf(imgfuncs.mirror)
 			elif angle % 90 == 0:
 				self.transform_pixbuf(imgfuncs.left)
+
+	def resize(self, w, h, quality):
+		self.pixbuf_original = self.pixbuf_original.scale_simple(w, h, quality)
+
+	def saturation(self, satval):
+		self.pixbuf_original.saturate_and_pixelate(self.pixbuf_original, satval, False)
+		self.pixbuf.saturate_and_pixelate(self.pixbuf, satval, False)
+
+	def crop(self, coords):
+		print "crop()"
+		temp_pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, self.pixbuf_original.get_has_alpha(), 8, coords[2], coords[3])
+		self.pixbuf_original.copy_area(coords[0], coords[1], coords[2], coords[3], temp_pixbuf, 0, 0)
+		self.pixbuf_original = temp_pixbuf
 
 if __name__ == "__main__":
 	base = Base()
