@@ -193,6 +193,8 @@ class Base:
 			self.print_usage()
 			sys.exit(2)
 		# If options were passed, perform action on them.
+		go_into_fullscreen = False
+		start_slideshow = False
 		if opts != []:
 			for o, a in opts:
 				if o in ("-v", "--version"):
@@ -205,9 +207,10 @@ class Base:
 					self.recursive = True
 				elif o in ("-V", "--verbose"):
 					self.verbose = True
+				elif o in ("-f", "--fullscreen"):
+					go_into_fullscreen = True
 				elif o in ("-s", "--slideshow", "-f", "--fullscreen"):
-					#This will be handled later
-					None
+					start_slideshow = True
 				elif o in ("-n", "--no-sort"):
 					self.no_sort = True
 				elif o in ("-o", "--onload"):
@@ -654,12 +657,8 @@ class Base:
 			self.thumbscroll.set_no_show_all(True)
 		self.hscroll.set_no_show_all(True)
 		self.vscroll.set_no_show_all(True)
-		go_into_fullscreen = False
-		if opts != []:
-			for o, a in opts:
-				if (o in ("-f", "--fullscreen")) or ((o in ("-s", "--slideshow")) and self.usettings['slideshow_in_fullscreen']):
-					go_into_fullscreen = True
-		if (go_into_fullscreen or self.usettings['start_in_fullscreen']) and args != []:
+		if ((go_into_fullscreen or self.usettings['start_in_fullscreen'])
+			or (start_slideshow and self.usettings['slideshow_in_fullscreen']) and args != []):
 			self.enter_fullscreen(None)
 			self.statusbar.set_no_show_all(True)
 			self.statusbar2.set_no_show_all(True)
@@ -678,10 +677,9 @@ class Base:
 		#sets the visibility of some menu entries
 		self.set_slideshow_sensitivities()
 		self.UIManager.get_widget('/MainMenu/MiscKeysMenuHidden').set_property('visible', False)
-		if opts != []:
-			for o, a in opts:
-				if o in ("-f", "--fullscreen"):
-					self.UIManager.get_widget('/Popup/Exit Full Screen').show()
+
+		if go_into_fullscreen:
+			self.UIManager.get_widget('/Popup/Exit Full Screen').show()
 
 		# If arguments (filenames) were passed, try to open them:
 		self.image_list = []
@@ -695,10 +693,8 @@ class Base:
 			self.set_go_sensitivities(False)
 			self.set_image_sensitivities(False)
 
-		if opts != []:
-			for o, a in opts:
-				if o in ("-s", "--slideshow"):
-					self.toggle_slideshow(None)
+		if start_slideshow:
+			self.toggle_slideshow(None)
 
 	def read_config_and_set_settings(self):
 		conf = ConfigParser.ConfigParser()
