@@ -3238,7 +3238,7 @@ class Base:
 				self.zoom_to_fit_window(None, False, False)
 
 	def zoom_in(self, action):
-		if self.currimg.name != "" and self.UIManager.get_widget('/MainMenu/ViewMenu/In').get_property('sensitive'):
+		if self.currimg.isloaded and self.UIManager.get_widget('/MainMenu/ViewMenu/In').get_property('sensitive'):
 			self.image_zoomed = True
 			wanted_zoomratio = self.currimg.zoomratio * 1.25
 			self.set_zoom_sensitivities()
@@ -3247,7 +3247,7 @@ class Base:
 			self.update_statusbar()
 
 	def zoom_out(self, action):
-		if self.currimg.name != "" and self.UIManager.get_widget('/MainMenu/ViewMenu/Out').get_property('sensitive'):
+		if self.currimg.isloaded and self.UIManager.get_widget('/MainMenu/ViewMenu/Out').get_property('sensitive'):
 			if self.currimg.zoomratio == self.min_zoomratio:
 				# No point in proceeding..
 				return
@@ -3291,7 +3291,7 @@ class Base:
 					premax_ratio = prewidth_ratio
 				self.previmg.zoomratio = 1/float(max_ratio)
 		else:
-			if self.currimg.name != "" and (self.slideshow_mode or self.UIManager.get_widget('/MainMenu/ViewMenu/Fit').get_property('sensitive')):
+			if self.currimg.isloaded and (self.slideshow_mode or self.UIManager.get_widget('/MainMenu/ViewMenu/Fit').get_property('sensitive')):
 				self.image_zoomed = True
 				self.usettings['last_mode'] = self.open_mode_fit
 				self.last_image_action_was_fit = True
@@ -3344,7 +3344,7 @@ class Base:
 				if self.previmg.zoomratio > 1:
 					self.previmg.zoomratio = 1
 		else:
-			if self.currimg.name != "":
+			if self.currimg.isloaded:
 				self.image_zoomed = True
 				# Calculate zoomratio needed to fit to window:
 				win_width = self.available_image_width()
@@ -3379,7 +3379,7 @@ class Base:
 			if self.usettings['preloading_images']:
 				self.previmg.zoomratio = 1
 		else:
-			if self.currimg.name != "" and (self.slideshow_mode or self.currimg.animation or (not self.currimg.animation and self.UIManager.get_widget('/MainMenu/ViewMenu/1:1').get_property('sensitive'))):
+			if self.currimg.isloaded and (self.slideshow_mode or self.currimg.animation or (not self.currimg.animation and self.UIManager.get_widget('/MainMenu/ViewMenu/1:1').get_property('sensitive'))):
 				self.image_zoomed = True
 				self.usettings['last_mode'] = self.open_mode_1to1
 				self.last_image_action_was_fit = False
@@ -3402,7 +3402,7 @@ class Base:
 		self.rotate_left_or_right(self.UIManager.get_widget('/MainMenu/EditMenu/Rotate Right'), 270)
 
 	def rotate_left_or_right(self, widget, angle):
-		if self.currimg.name != "" and widget.get_property('sensitive'):
+		if self.currimg.isloaded and widget.get_property('sensitive'):
 			self.currimg.rotate_pixbuf(angle)
 			if self.last_image_action_was_fit:
 				if self.last_image_action_was_smart_fit:
@@ -3424,7 +3424,7 @@ class Base:
 		self.flip_image_vert_or_horiz(self.UIManager.get_widget('/MainMenu/EditMenu/Flip Horizontally'), False)
 
 	def flip_image_vert_or_horiz(self, widget, vertical):
-		if self.currimg.name != "" and widget.get_property('sensitive'):
+		if self.currimg.isloaded and widget.get_property('sensitive'):
 			self.currimg.flip_pixbuf(vertical)
 			self.imageview.set_from_pixbuf(self.currimg.pixbuf)
 			self.image_modified = True
@@ -4095,7 +4095,7 @@ class Base:
 			self.currimg.name = str(self.image_list[self.curr_img_in_list])
 		else:
 			self.currmg_name = filename
-		if self.verbose and self.currimg.name != "":
+		if self.verbose and self.currimg.isloaded:
 			print _("Loading: %s") % self.currimg.name
 		self.update_title()
 		self.put_error_image_to_window()
@@ -4361,7 +4361,7 @@ class Base:
 			inputlist = tmplist
 			if len(inputlist) == 0:
 				# All files/dirs were hidden, exit..
-				self.currimg.name = ""
+				self.currimg.unload_pixbuf()
 				self.searching_for_images = False
 				self.set_go_navigation_sensitivities(False)
 				self.set_slideshow_sensitivities()
@@ -4467,7 +4467,7 @@ class Base:
 					first_image_loaded = True
 					if self.slideshow_mode:
 						self.toggle_slideshow(None)
-					if self.verbose and self.currimg.name != "":
+					if self.verbose and self.currimg.isloaded:
 						print _("Loading: %s") % self.currimg.name
 					try:
 						self.load_new_image2(False, False, True, True)
@@ -4801,6 +4801,7 @@ class ImageData:
 		self.pixbuf_rotated = pixbuf_rotated
 		self.zoomratio = zoomratio
 		self.animation = animation
+		self.isloaded = (name != "")
 
 	def load_pixbuf(self, name, index=-2):
 		# Load the image in name into self.pixbuf_original
@@ -4830,6 +4831,7 @@ class ImageData:
 				elif self.orientation == ImageData.ORIENT_RIGHT :
 					self.rotate_pixbuf(270)
 		self.zoomratio = 1
+		self.isloaded = True
 
 	def unload_pixbuf(self):
 		self.index = -1
@@ -4843,6 +4845,7 @@ class ImageData:
 		self.pixbuf = None
 		self.pixbuf_original = None
 		self.orientation = None
+		self.isloaded = False
 
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		print "In zoom_pixbuf()"
