@@ -4820,7 +4820,7 @@ class ImageData:
 		self.isloaded = False
 		self.fileinfo = False
 	
-	self.writable_format(self):
+	def writable_format(self):
 		if not self.isloaded:
 			return False
 		self.fileinfo['is_writable']
