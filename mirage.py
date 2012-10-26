@@ -116,35 +116,10 @@ class Base:
 		# self.loaded_img_in_list will retain the current loaded image.
 		self.loaded_img_in_list = -2
 		self.currimg = ImageData(index=0)
-		#self.currimg_name = ""
-		#self.currimg_width = 0 #Changed
-		#self.currimg_height = 0 #Changed
-		#self.currimg_pixbuf = None #Changed
-		#self.currimg_pixbuf_original = None #Changed
-		#self.currimg_zoomratio = 1 #Changed
-		#self.currimg_is_animation = False #Changed
-
 		# Next preloaded image:
 		self.nextimg = ImageData(index=-1)
-		#self.preloadimg_next_in_list = -1 #Changed
-		#self.preloadimg_next_name = "" #Changed
-		#self.preloadimg_next_width = 0 #Changed
-		#self.preloadimg_next_height = 0 #Changed
-		#self.preloadimg_next_pixbuf = None #changed
-		#self.preloadimg_next_pixbuf_original = None #Changed
-		#self.preloadimg_next_zoomratio = 1 #Changed
-		#self.preloadimg_next_is_animation = False #Changed
-
 		# Previous preloaded image:
 		self.previmg = ImageData(index=-1)
-		#self.preloadimg_prev_in_list = -1
-		#self.preloadimg_prev_name = ""
-		#self.preloadimg_prev_width = 0 #Changed
-		#self.preloadimg_prev_height = 0 #Changed
-		#self.preloadimg_prev_pixbuf = None #Changed
-		#self.preloadimg_prev_pixbuf_original = None #Changed
-		#self.preloadimg_prev_zoomratio = 1 #changed
-		#self.preloadimg_prev_is_animation = False #changed
 
 		# Settings, misc:
 		self.usettings['toolbar_show'] = True
@@ -1160,7 +1135,7 @@ class Base:
 		self.change_cursor(None)
 		# Refresh the current image or any preloaded needed if they have changed:
 		if not os.path.exists(self.currimg.name):
-			self.currimg.pixbuf_original = None
+			self.currimg.unload_pixbuf()
 			self.image_load_failed(False)
 		else:
 			animtest = gtk.gdk.PixbufAnimation(self.currimg.name)
@@ -4095,7 +4070,7 @@ class Base:
 		self.update_title()
 		self.put_error_image_to_window()
 		self.image_loaded = False
-		self.currimg.pixbuf_original = None
+		self.currimg.unload_pixbuf()
 		if reset_cursor:
 			if not self.fullscreen_mode:
 				self.change_cursor(None)
