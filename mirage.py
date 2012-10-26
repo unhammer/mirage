@@ -1361,9 +1361,8 @@ class Base:
 		# Only jpeg, png, and bmp images are currently supported for saving
 		if len(self.image_list) > 0:
 			try:
-				filetype = gtk.gdk.pixbuf_get_file_info(self.currimg.name)[0]['name']
 				self.UIManager.get_widget('/MainMenu/FileMenu/Properties').set_sensitive(True)
-				if self.filetype_is_writable(filetype):
+				if self.currimg.writable_format():
 					self.UIManager.get_widget('/MainMenu/FileMenu/Save').set_sensitive(enable)
 			except:
 				self.UIManager.get_widget('/MainMenu/FileMenu/Save').set_sensitive(False)
@@ -1686,7 +1685,7 @@ class Base:
 
 	def save_image(self, action):
 		if self.UIManager.get_widget('/MainMenu/FileMenu/Save').get_property('sensitive'):
-			self.save_image_now(self.currimg.name, gtk.gdk.pixbuf_get_file_info(self.currimg.name)[0]['name'])
+			self.save_image_now(self.currimg.name)
 
 	def save_image_as(self, action):
 		dialog = gtk.FileChooserDialog(title=_("Save As"),action=gtk.FILE_CHOOSER_ACTION_SAVE,buttons=(gtk.STOCK_CANCEL,gtk.RESPONSE_CANCEL,gtk.STOCK_SAVE,gtk.RESPONSE_OK))
@@ -1704,23 +1703,28 @@ class Base:
 			fileext = os.path.splitext(os.path.basename(filename))[1].lower()
 			if len(fileext) > 0:
 				fileext = fileext[1:]
-			# Override filetype if user typed a filename with a different extension:
-			for i in gtk.gdk.pixbuf_get_formats():
-				if fileext in i['extensions']:
-					filetype = i['name']
-			self.save_image_now(filename, filetype)
+			self.save_image_now(filename, fileext)
 			self.register_file_with_recent_docs(filename)
 		else:
 			dialog.destroy()
 
-	def save_image_now(self, dest_name, filetype):
+	def save_image_now(self, dest_name, fileext=None):
 		try:
 			self.change_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
 			while gtk.events_pending():
 				gtk.main_iteration()
-			if filetype == None:
-				filetype = gtk.gdk.pixbuf_get_file_info(self.currimg.name)[0]['name']
-			if self.filetype_is_writable(filetype):
+			if fileext == None:
+				writable = self.currimg.writable_format()
+				filetype = self.currimg.fileinfo['name']
+			else:
+				writable = False
+				for i in gtk.gdk.pixbuf_get_formats():
+					if fileext in i['extensions']:
+						if i['is_writable']:
+							writable = True
+							filetype = i['name']
+							break
+			if writable:
 				self.currimg.pixbuf_original.save(dest_name, filetype, {'quality': str(self.usettings['quality_save'])})
 				self.currimg.name = dest_name
 				self.image_list[self.curr_img_in_list] = dest_name
@@ -1782,15 +1786,6 @@ class Base:
 					self.loaded_img_in_list = -1
 				else:
 					return True
-
-	def filetype_is_writable(self, filetype):
-		# Determine if filetype is a writable format
-		filetype_is_writable = True
-		for i in gtk.gdk.pixbuf_get_formats():
-			if filetype in i['extensions']:
-				if i['is_writable']:
-					return True
-		return False
 
 	def open_file(self, action):
 		self.stop_now = True
@@ -2458,7 +2453,7 @@ class Base:
 		filename2 = gtk.Label(os.path.basename(self.currimg.name))
 		filedate2 = gtk.Label(time.strftime('%Y/%m/%d  %H:%M', time.localtime(filestat[stat.ST_MTIME])))
 		imagesize2 = gtk.Label(str(self.currimg.pixbuf_original.get_width()) + "x" + str(self.currimg.pixbuf_original.get_height()))
-		filetype2 = gtk.Label(gtk.gdk.pixbuf_get_file_info(self.currimg.name)[0]['mime_types'][0])
+		filetype2 = gtk.Label(self.currimg.fileinfo['mime_types'][0])
 		filesize2 = gtk.Label(str(filestat[stat.ST_SIZE]/1000) + "KB")
 		if not self.currimg.animation and pixbuf.get_has_alpha():
 			transparency2 = gtk.Label(_("Yes"))
@@ -4802,6 +4797,7 @@ class ImageData:
 		self.zoomratio = zoomratio
 		self.animation = animation
 		self.isloaded = (name != "")
+		self.fileinfo = None
 
 	def load_pixbuf(self, name, index=-2):
 		# Load the image in name into self.pixbuf_original
@@ -4832,6 +4828,7 @@ class ImageData:
 					self.rotate_pixbuf(270)
 		self.zoomratio = 1
 		self.isloaded = True
+		self.fileinfo = gtk.gdk.pixbuf_get_file_info(self.name)[0]
 
 	def unload_pixbuf(self):
 		self.index = -1
@@ -4846,6 +4843,12 @@ class ImageData:
 		self.pixbuf_original = None
 		self.orientation = None
 		self.isloaded = False
+		self.fileinfo = False
+	
+	self.writable_format(self):
+		if not self.isloaded:
+			return False
+		self.fileinfo['is_writable']
 
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		print "In zoom_pixbuf()"
