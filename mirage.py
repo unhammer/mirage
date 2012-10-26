@@ -3818,11 +3818,7 @@ class Base:
 					self.reinitialize_randomlist()
 				else:
 					# check if we have seen every image; if so, reinitialize array and repeat:
-					all_items_are_true = True
-					for item in self.randomlist:
-						if not item:
-							all_items_are_true = False
-					if all_items_are_true:
+					if all(self.randomlist):
 						check_wrap = True
 			elif location == "LAST":
 				self.curr_img_in_list = len(self.image_list)-1
