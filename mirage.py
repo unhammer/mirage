@@ -1758,12 +1758,6 @@ class Base:
 				else:
 					return True
 
-	def open_file(self, action):
-		self.stop_now = True
-		while gtk.events_pending():
-			gtk.main_iteration()
-		self.open_file_or_folder(action, True)
-
 	def open_file_remote(self, action):
 		# Prompt user for the url:
 		dialog = gtk.Dialog(_("Open Remote"), self.window, gtk.DIALOG_MODAL, buttons=(gtk.STOCK_CANCEL,gtk.RESPONSE_CANCEL,gtk.STOCK_OPEN,gtk.RESPONSE_OK))
@@ -1790,13 +1784,16 @@ class Base:
 		else:
 			dialog.destroy()
 
+	def open_file(self, action):
+		self.open_file_or_folder(action, True)
+
 	def open_folder(self, action):
-		self.stop_now = True
-		while gtk.events_pending():
-			gtk.main_iteration()
 		self.open_file_or_folder(action, False)
 
 	def open_file_or_folder(self, action, isfile):
+		self.stop_now = True
+		while gtk.events_pending():
+			gtk.main_iteration()
 		self.thumbpane_create_dir()
 		cancel = self.autosave_image()
 		if cancel:
