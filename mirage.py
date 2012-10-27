@@ -3226,33 +3226,27 @@ class Base:
 	def zoom_to_fit_window_action(self, action):
 		self.zoom_to_fit_window(action, False, False)
 
+	def calc_ratio(self, img, ):
+		"""Calculate the ratio needed to fit the image in the view window"""
+		win_width = self.available_image_width()
+		win_height = self.available_image_height()
+		preimg_width = img.width_original
+		preimg_height = img.height_original
+		prewidth_ratio = float(preimg_width)/win_width
+		preheight_ratio = float(preimg_height)/win_height
+		if prewidth_ratio < preheight_ratio:
+			premax_ratio = preheight_ratio
+		else:
+			premax_ratio = prewidth_ratio
+		return 1/float(premax_ratio)
+
 	def zoom_to_fit_window(self, action, is_preloadimg_next, is_preloadimg_prev):
 		if is_preloadimg_next:
 			if self.usettings['preloading_images'] and self.nextimg.index != -1:
-				win_width = self.available_image_width()
-				win_height = self.available_image_height()
-				preimg_width = self.nextimg.pixbuf_original.get_width()
-				preimg_height = self.nextimg.pixbuf_original.get_height()
-				prewidth_ratio = float(preimg_width)/win_width
-				preheight_ratio = float(preimg_height)/win_height
-				if prewidth_ratio < preheight_ratio:
-					premax_ratio = preheight_ratio
-				else:
-					premax_ratio = prewidth_ratio
-				self.nextimg.zoomratio = 1/float(max_ratio)
+				self.nextimg.zoomratio = self.calc_ratio(self.nextimg)
 		elif is_preloadimg_prev:
 			if self.usettings['preloading_images'] and self.previmg.index != -1:
-				win_width = self.available_image_width()
-				win_height = self.available_image_height()
-				preimg_width = self.previmg.pixbuf_original.get_width()
-				preimg_height = self.previmg.pixbuf_original.get_height()
-				prewidth_ratio = float(preimg_width)/win_width
-				preheight_ratio = float(preimg_height)/win_height
-				if prewidth_ratio < preheight_ratio:
-					premax_ratio = preheight_ratio
-				else:
-					premax_ratio = prewidth_ratio
-				self.previmg.zoomratio = 1/float(max_ratio)
+				self.previmg.zoomratio = self.calc_ratio(self.previmg)
 		else:
 			if self.currimg.isloaded and (self.slideshow_mode or self.UIManager.get_widget('/MainMenu/ViewMenu/Fit').get_property('sensitive')):
 				self.image_zoomed = True
@@ -3260,17 +3254,7 @@ class Base:
 				self.last_image_action_was_fit = True
 				self.last_image_action_was_smart_fit = False
 				# Calculate zoomratio needed to fit to window:
-				win_width = self.available_image_width()
-				win_height = self.available_image_height()
-				img_width = self.currimg.pixbuf_original.get_width()
-				img_height = self.currimg.pixbuf_original.get_height()
-				width_ratio = float(img_width)/win_width
-				height_ratio = float(img_height)/win_height
-				if width_ratio < height_ratio:
-					max_ratio = height_ratio
-				else:
-					max_ratio = width_ratio
-				wanted_zoomratio = 1/float(max_ratio)
+				wanted_zoomratio = self.calc_ratio(self.currimg)
 				self.set_zoom_sensitivities()
 				self.put_zoom_image_to_window(False, wanted_zoomratio)
 				self.update_statusbar()
@@ -3278,49 +3262,19 @@ class Base:
 	def zoom_to_fit_or_1_to_1(self, action, is_preloadimg_next, is_preloadimg_prev):
 		if is_preloadimg_next:
 			if self.usettings['preloading_images'] and self.nextimg.index != -1:
-				win_width = self.available_image_width()
-				win_height = self.available_image_height()
-				preimg_width = self.nextimg.pixbuf_original.get_width()
-				preimg_height = self.nextimg.pixbuf_original.get_height()
-				prewidth_ratio = float(preimg_width)/win_width
-				preheight_ratio = float(preimg_height)/win_height
-				if prewidth_ratio < preheight_ratio:
-					premax_ratio = preheight_ratio
-				else:
-					premax_ratio = prewidth_ratio
-				self.nextimg.zoomratio = 1/float(premax_ratio)
+				self.nextimg.zoomratio = self.calc_ratio(self.nextimg)
 				if self.nextimg.zoomratio > 1:
 					self.nextimg.zoomratio = 1
 		elif is_preloadimg_prev:
 			if self.usettings['preloading_images'] and self.previmg.index != -1:
-				win_width = self.available_image_width()
-				win_height = self.available_image_height()
-				preimg_width = self.previmg.pixbuf_original.get_width()
-				preimg_height = self.previmg.pixbuf_original.get_height()
-				prewidth_ratio = float(preimg_width)/win_width
-				preheight_ratio = float(preimg_height)/win_height
-				if prewidth_ratio < preheight_ratio:
-					premax_ratio = preheight_ratio
-				else:
-					premax_ratio = prewidth_ratio
-				self.previmg.zoomratio = 1/float(premax_ratio)
+				self.previmg.zoomratio = self.calc_ratio(self.previmg)
 				if self.previmg.zoomratio > 1:
 					self.previmg.zoomratio = 1
 		else:
 			if self.currimg.isloaded:
 				self.image_zoomed = True
 				# Calculate zoomratio needed to fit to window:
-				win_width = self.available_image_width()
-				win_height = self.available_image_height()
-				img_width = self.currimg.pixbuf_original.get_width()
-				img_height = self.currimg.pixbuf_original.get_height()
-				width_ratio = float(img_width)/win_width
-				height_ratio = float(img_height)/win_height
-				if width_ratio < height_ratio:
-					max_ratio = height_ratio
-				else:
-					max_ratio = width_ratio
-				wanted_zoomratio = 1/float(max_ratio)
+				wanted_zoomratio = self.calc_ratio(self.currimg)
 				self.set_zoom_sensitivities()
 				if wanted_zoomratio > 1:
 					# Revert to 1:1 zoom
@@ -4752,8 +4706,8 @@ class ImageData:
 				pixbuf_original=None, pixbuf_rotated=None, zoomratio=1, animation=False):
 		self.index = index
 		self.name = name
-		self.width_orig = width
-		self.height_orig = heigth
+		self.width_original = width
+		self.height_original = heigth
 		self.width = width
 		self.height = heigth
 		self.pixbuf = pixbuf
@@ -4777,8 +4731,8 @@ class ImageData:
 		self.pixbuf = self.pixbuf_original
 		self.width = self.pixbuf.get_width()
 		self.height = self.pixbuf.get_height()
-		self.width_orig = self.width
-		self.height_orig = self.height
+		self.width_original = self.width
+		self.height_original = self.height
 		self.orientation = ImageData.ORIENT_NORMAL
 		if HAS_EXIF :
 			exifd = pyexiv2.ImageMetadata(self.name)
@@ -4859,6 +4813,7 @@ class ImageData:
 
 	def resize(self, w, h, quality):
 		self.pixbuf_original = self.pixbuf_original.scale_simple(w, h, quality)
+		self.reset_wh()
 
 	def saturation(self, satval):
 		self.pixbuf_original.saturate_and_pixelate(self.pixbuf_original, satval, False)
@@ -4868,6 +4823,11 @@ class ImageData:
 		temp_pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, self.pixbuf_original.get_has_alpha(), 8, coords[2], coords[3])
 		self.pixbuf_original.copy_area(coords[0], coords[1], coords[2], coords[3], temp_pixbuf, 0, 0)
 		self.pixbuf_original = temp_pixbuf
+		self.reset_wh()
+
+	def reset_wh(self):
+		self.width_original = self.pixbuf_original.get_width()
+		self.height_original = self.pixbuf_original.get_height()
 
 if __name__ == "__main__":
 	base = Base()
