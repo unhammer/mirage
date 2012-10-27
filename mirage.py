@@ -3362,13 +3362,13 @@ class Base:
 			self.zoom_1_to_1(action, is_preloadimg_next, is_preloadimg_prev)
 
 	def rotate_left(self, action):
-		self.rotate_left_or_right(self.UIManager.get_widget('/MainMenu/EditMenu/Rotate Left'), 90)
+		self.rotate_left_or_right('/MainMenu/EditMenu/Rotate Left', 90)
 
 	def rotate_right(self, action):
-		self.rotate_left_or_right(self.UIManager.get_widget('/MainMenu/EditMenu/Rotate Right'), 270)
+		self.rotate_left_or_right('/MainMenu/EditMenu/Rotate Right', 270)
 
-	def rotate_left_or_right(self, widget, angle):
-		if self.currimg.isloaded and widget.get_property('sensitive'):
+	def rotate_left_or_right(self, widgetname, angle):
+		if self.currimg.isloaded and self.UIManager.get_widget(widgetname).get_property('sensitive'):
 			self.currimg.rotate_pixbuf(angle)
 			if self.last_image_action_was_fit:
 				if self.last_image_action_was_smart_fit:
@@ -3384,13 +3384,13 @@ class Base:
 			self.image_modified = True
 
 	def flip_image_vert(self, action):
-		self.flip_image_vert_or_horiz(self.UIManager.get_widget('/MainMenu/EditMenu/Flip Vertically'), True)
+		self.flip_image_vert_or_horiz(('/MainMenu/EditMenu/Flip Vertically'), True)
 
 	def flip_image_horiz(self, action):
-		self.flip_image_vert_or_horiz(self.UIManager.get_widget('/MainMenu/EditMenu/Flip Horizontally'), False)
+		self.flip_image_vert_or_horiz('/MainMenu/EditMenu/Flip Horizontally', False)
 
-	def flip_image_vert_or_horiz(self, widget, vertical):
-		if self.currimg.isloaded and widget.get_property('sensitive'):
+	def flip_image_vert_or_horiz(self, widgetname, vertical):
+		if self.currimg.isloaded and self.UIManager.get_widget(widgetname).get_property('sensitive'):
 			self.currimg.flip_pixbuf(vertical)
 			self.imageview.set_from_pixbuf(self.currimg.pixbuf)
 			self.image_modified = True
