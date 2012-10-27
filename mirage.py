@@ -4819,7 +4819,6 @@ class ImageData:
 		self.fileinfo['is_writable']
 
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
-		print "In zoom_pixbuf()"
 		# Always start with the original image to preserve quality!
 		# Calculate image size:
 		if self.animation:
@@ -4837,7 +4836,6 @@ class ImageData:
 		self.zoomratio = zoomratio
 
 	def transform_pixbuf(self, func) :
-		print "In transform_pixbuf()"
 		def transform(old_pix, func) :
 			width = old_pix.get_width()
 			height = old_pix.get_height()
@@ -4870,7 +4868,6 @@ class ImageData:
 		self.pixbuf.saturate_and_pixelate(self.pixbuf, satval, False)
 
 	def crop(self, coords):
-		print "crop()"
 		temp_pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, self.pixbuf_original.get_has_alpha(), 8, coords[2], coords[3])
 		self.pixbuf_original.copy_area(coords[0], coords[1], coords[2], coords[3], temp_pixbuf, 0, 0)
 		self.pixbuf_original = temp_pixbuf
