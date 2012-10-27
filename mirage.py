@@ -2855,10 +2855,10 @@ class Base:
 			if self.slideshow_mode:
 				self.toggle_slideshow(None)
 			rename_dialog = gtk.Dialog(_('Rename Image'), self.window, gtk.DIALOG_MODAL)
-			self.rename_txt = gtk.Entry()
+			rename_txt = gtk.Entry()
 			filename = os.path.basename(self.currimg.name)
-			self.rename_txt.set_text(filename)
-			self.rename_txt.set_activates_default(True)
+			rename_txt.set_text(filename)
+			rename_txt.set_activates_default(True)
 			cancelbutton = rename_dialog.add_button(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
 			renamebutton = rename_dialog.add_button(_("_Rename"), gtk.RESPONSE_ACCEPT)
 			renameimage = gtk.Image()
@@ -2878,7 +2878,7 @@ class Base:
 			vbox_stuff.pack_start(gtk.Label(), False, False, 0)
 			vbox_stuff.pack_start(instructions, False, False, 0)
 			vbox_stuff.pack_start(gtk.Label(), False, False, 0)
-			vbox_stuff.pack_start(self.rename_txt, True, True, 0)
+			vbox_stuff.pack_start(rename_txt, True, True, 0)
 			vbox_stuff.pack_start(gtk.Label(), False, False, 0)
 			hbox.pack_start(vbox_stuff, True, True, 10)
 			rename_dialog.vbox.pack_start(hbox, False, False, 0)
@@ -2886,22 +2886,22 @@ class Base:
 			rename_dialog.set_default_response(gtk.RESPONSE_ACCEPT)
 			rename_dialog.set_size_request(300, -1)
 			rename_dialog.vbox.show_all()
-			rename_dialog.connect('show', self.select_rename_text)
-			rename_dialog.connect('response', self.on_rename_dialog_response)
+			rename_dialog.connect('show', self.select_rename_text, rename_txt)
+			rename_dialog.connect('response', self.on_rename_dialog_response,rename_txt)
 			response = rename_dialog.run()
 			rename_dialog.destroy()
 			if temp_slideshow_mode:
 				self.toggle_slideshow(None)
 
-	def select_rename_text(self, widget):
+	def select_rename_text(self, widget,rename_entry):
 		filename = os.path.basename(self.currimg.name)
 		fileext = os.path.splitext(os.path.basename(self.currimg.name))[1]
-		self.rename_txt.select_region(0, len(filename) - len(fileext))
+		rename_entry.select_region(0, len(filename) - len(fileext))
 		
-	def on_rename_dialog_response(self, dialog, response, data=None):
+	def on_rename_dialog_response(self, dialog, response, rename_entry):
 		if response == gtk.RESPONSE_ACCEPT:
 			try:
-				new_filename = os.path.join(os.path.dirname(self.currimg.name), self.rename_txt.get_text().decode('utf-8'))
+				new_filename = os.path.join(os.path.dirname(self.currimg.name), rename_entry.get_text().decode('utf-8'))
 				if os.path.exists(new_filename):
 					exists_dialog = gtk.MessageDialog(self.window, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK_CANCEL, _('Overwrite existing file %s?') % new_filename)
 					exists_dialog.set_title(_("File exists"))
