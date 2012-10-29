@@ -2974,7 +2974,7 @@ class Base:
 					
 					#Decrease the subfolder indexes of folders after the current folder
 					myidx = self.get_firstimgindex_curr_next_prev_subfolder(self.curr_img_in_list)[0]
-					if myidx < self.firstimgindex_subfolders_list[-1]:
+					if myidx >= 0 and myidx < self.firstimgindex_subfolders_list[-1]:
 						for idx in xrange(1+self.firstimgindex_subfolders_list.index(myidx),
 								len(self.firstimgindex_subfolders_list)):
 							#Decrease the idxes in the list
@@ -4008,7 +4008,7 @@ class Base:
 		if len(filename) == 0:
 			self.currimg.name = str(self.image_list[self.curr_img_in_list])
 		else:
-			self.currmg_name = filename
+			self.currimg_name = filename
 		if self.verbose and self.currimg.isloaded:
 			print _("Loading: %s") % self.currimg.name
 		self.update_title()
@@ -4116,7 +4116,10 @@ class Base:
 			# Need to load the current image
 			self.currimg.unload_pixbuf()
 			if image_name == "":
-				image_name = str(self.image_list[self.curr_img_in_list])
+				if len(self.image_list) == 1:
+					image_name = str(self.image_list[0])
+				else:
+					image_name = str(self.image_list[self.curr_img_in_list])
 			if self.verbose and image_name != "":
 				print _("Loading(not preloaded): %s") % image_name
 			if self.curr_img_in_list:
@@ -4211,7 +4214,6 @@ class Base:
 		# Takes the current list (i.e. ["pic.jpg", "pic2.gif", "../images"]) and
 		# expands it into a list of all pictures found
 		self.thumblist.clear()
-		first_image_loaded_successfully = False
 		self.images_found = 0
 		self.stop_now = True # Make sure that any previous search process is stopped
 		self.change_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
@@ -4383,23 +4385,20 @@ class Base:
 						self.toggle_slideshow(None)
 					if self.verbose and self.currimg.isloaded:
 						print _("Loading: %s") % self.currimg.name
-					try:
-						self.load_new_image2(False, False, True, True)
-						# Calling load_new_image2 will reset the following two vars
-						# to 0, so ensure they are -1 again (no images preloaded)
-						self.previmg.unload_pixbuf()
-						self.nextimg.unload_pixbuf()
-						if not self.currimg.animation:
-							self.previmg_width = self.currimg.width
-						else:
-							self.previmg_width = self.currimg.width
-						self.image_loaded = True
-						first_image_loaded_successfully = True
-						if not self.closing_app:
-							while gtk.events_pending():
-								gtk.main_iteration(True)
-					except:
-						pass
+					self.load_new_image2(False, False, True, True)
+					# Calling load_new_image2 will reset the following two vars
+					# to 0, so ensure they are -1 again (no images preloaded)
+					self.previmg.unload_pixbuf()
+					self.nextimg.unload_pixbuf()
+					if not self.currimg.animation:
+						self.previmg_width = self.currimg.width
+					else:
+						self.previmg_width = self.currimg.width
+					self.image_loaded = True
+					first_image_loaded_successfully = True
+					if not self.closing_app:
+						while gtk.events_pending():
+							gtk.main_iteration(True)
 					if first_image_came_from_dir:
 						self.image_list = []
 				# Pre-load second image:
@@ -4428,7 +4427,6 @@ class Base:
 					self.firstimgindex_subfolders_list.append(i)
 				prev_image = image
 
-			self.update_title()
 			if not self.closing_app:
 				while gtk.events_pending():
 					gtk.main_iteration(True)
@@ -4437,7 +4435,8 @@ class Base:
 		else:
 			if self.verbose:
 				print "name:" + self.currimg.name
-			self.curr_img_in_list =  self.image_list.index(self.currimg.name)
+			self.curr_img_in_list = self.image_list.index(self.currimg.name)
+			self.update_title()
 		self.searching_for_images = False
 		self.update_statusbar()
 		self.register_file_with_recent_docs(self.currimg.name)
