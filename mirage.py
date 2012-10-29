@@ -4390,10 +4390,7 @@ class Base:
 					# to 0, so ensure they are -1 again (no images preloaded)
 					self.previmg.unload_pixbuf()
 					self.nextimg.unload_pixbuf()
-					if not self.currimg.animation:
-						self.previmg_width = self.currimg.width
-					else:
-						self.previmg_width = self.currimg.width
+					self.previmg_width = self.currimg.width
 					self.image_loaded = True
 					first_image_loaded_successfully = True
 					if not self.closing_app:
