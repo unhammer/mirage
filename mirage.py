@@ -4412,9 +4412,9 @@ class Base:
 			# Sort the filelist and folderlist alphabetically, and recurse into folderlist:
 			if first_image_came_from_dir:
 				self.add_folderlist_images(folderlist, go_buttons_enabled)
-				self.do_image_list_stuff(first_image, second_image)
+				self.do_image_list_stuff()
 			else:
-				self.do_image_list_stuff(first_image, second_image)
+				self.do_image_list_stuff()
 				self.add_folderlist_images(folderlist, go_buttons_enabled)
 
 			prev_image = ''
@@ -4477,7 +4477,7 @@ class Base:
 						self.stop_now = False
 						self.expand_directory(item, False, go_buttons_enabled, True, True)
 
-	def do_image_list_stuff(self, first_image, second_image):
+	def do_image_list_stuff(self):
 		if len(self.image_list) > 0:
 			self.set_go_navigation_sensitivities(True)
 			self.image_list = self.remove_duplicates_from_list(self.image_list)
