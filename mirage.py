@@ -3887,6 +3887,9 @@ class Base:
 			if location == "RANDOM":
 				# Find random image that hasn't already been chosen:
 				j = random.randint(0, len(self.image_list)-1)
+				difflength = len(self.randomlist - len(self.image_list)
+				if difflength > 0:
+					self.randomlist.extend([False]*difflength)
 				if self.randomlist[j]:
 					not_viewed = [idx for idx,val in enumerate(self.randomlist) if not val]
 					j = random.choice(not_viewed)
