@@ -3181,8 +3181,13 @@ class Base:
 			# Double-click switch fullscreen:
 			if event.button == 1 and event.type == gtk.gdk._2BUTTON_PRESS:
 				self.enter_fullscreen(None)
+			elif event.button == 2:
+				if self.last_image_action_was_fit:
+					self.zoom_1_to_1(None,False,False)
+				else:
+					self.zoom_to_fit_window(None, False, False)
 			# Changes the cursor to the 'resize' cursor, like GIMP, on a middle click:
-			elif (event.button == 2 or event.button == 1) and (self.hscroll.get_property('visible')==True or self.vscroll.get_property('visible')==True):
+			elif event.button == 1 and (self.hscroll.get_property('visible')==True or self.vscroll.get_property('visible')==True):
 				self.change_cursor(gtk.gdk.Cursor(gtk.gdk.FLEUR))
 				self.prevmousex = event.x_root
 				self.prevmousey = event.y_root

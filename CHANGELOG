@@ -16,6 +16,7 @@ v1.0 - Future
 	+ Changes: Open in fullscreen only if there are images passed to mirage
 	+ Changes: Should work correctly on vertical dual monitor setups. Patch by
 		"dorian"
+	+ Changes: middle-mouse click now toggles zoom between 1:1 and fit to window.
 	+ Features: Can now browse between subfolders
 	+ Features: Double-click to enter leave fullscreen
 
