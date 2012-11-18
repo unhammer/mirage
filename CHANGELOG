@@ -19,6 +19,7 @@ v1.0 - Future
 	+ Changes: middle-mouse click now toggles zoom between 1:1 and fit to window.
 	+ Features: Can now browse between subfolders
 	+ Features: Double-click to enter leave fullscreen
+	+ Features: Copy image to clipboard
 
 v0.9.5.2 - February 13, 2011
 	+ Added ukrainian translation

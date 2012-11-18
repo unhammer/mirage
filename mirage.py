@@ -271,6 +271,7 @@ class Base:
 			('Open Folder', gtk.STOCK_DIRECTORY, _('Open _Folder...'), '<Ctrl>F', _('Open Folder'), self.open_folder),
 			('Save', gtk.STOCK_SAVE, _('_Save Image'), None, None, self.save_image),
 			('Save As', gtk.STOCK_SAVE_AS, _('Save Image _As...'), '<Ctrl><Shift>S', None, self.save_image_as),
+			('Copy', gtk.STOCK_COPY, _('Copy to Clipboard...'), '<Ctrl>C', None, self.copy_to_clipboard),
 			('Crop', None, _('C_rop...'), None, _('Crop Image'), self.crop_image),
 			('Resize', None, _('R_esize...'), '<Ctrl>R', _('Resize Image'), self.resize_image),
 			('Saturation', None, _('_Saturation...'), None, _('Modify saturation'), self.saturation),
@@ -385,6 +386,7 @@ class Base:
 						<menuitem action="Flip Vertically"/>
 						<menuitem action="Flip Horizontally"/>
 						<separator name="FM1"/>
+						<menuitem action="Copy"/>
 						<menuitem action="Crop"/>
 						<menuitem action="Resize"/>
 						<menuitem action="Saturation"/>
@@ -1319,6 +1321,7 @@ class Base:
 		self.UIManager.get_widget('/MainMenu/ViewMenu/Fit').set_sensitive(enable)
 		self.UIManager.get_widget('/MainMenu/EditMenu/Delete Image').set_sensitive(enable)
 		self.UIManager.get_widget('/MainMenu/EditMenu/Rename Image').set_sensitive(enable)
+		self.UIManager.get_widget('/MainMenu/EditMenu/Copy').set_sensitive(enable)
 		self.UIManager.get_widget('/MainMenu/EditMenu/Crop').set_sensitive(enable)
 		self.UIManager.get_widget('/MainMenu/EditMenu/Resize').set_sensitive(enable)
 		self.UIManager.get_widget('/MainMenu/EditMenu/Saturation').set_sensitive(enable)
@@ -3354,6 +3357,11 @@ class Base:
 			self.currimg.flip_pixbuf(vertical)
 			self.imageview.set_from_pixbuf(self.currimg.pixbuf)
 			self.image_modified = True
+
+	def copy_to_clipboard(self, action):
+		"""Copies the currently viewed image to the clipboard"""
+		clipboard = gtk.Clipboard()
+		clipboard.set_image(self.currimg.pixbuf)
 
 	def get_pixbuf_of_size(self, pixbuf, size, zoom_quality):
 		# Creates a pixbuf that fits in the specified square of sizexsize
