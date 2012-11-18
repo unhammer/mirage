@@ -3169,7 +3169,8 @@ class Base:
 					while gtk.events_pending():
 						gtk.main_iteration()
 				self.timer_id = gobject.timeout_add(2000, self.hide_cursor)
-			if y > 0.9*self.available_image_height():
+			(xpos, ypos) = self.window.get_position()
+			if y - ypos > 0.9*self.available_image_height():
 				self.slideshow_controls_show()
 			else:
 				self.slideshow_controls_hide()
@@ -4656,8 +4657,8 @@ class Base:
 			y = -3.0
 			self.controls_moving = True
 			while y < ss_winheight:
-				self.slideshow_window.move(2+xpos, int(winheight-y-2))
-				self.slideshow_window2.move(winwidth-ss_win2width-2+xpos, int(winheight-y-2))
+				self.slideshow_window.move(2+xpos, int(winheight-y-2)+ypos)
+				self.slideshow_window2.move(winwidth-ss_win2width-2+xpos, int(winheight-y-2)+ypos)
 				y += 0.05
 				if not self.closing_app:
 					while gtk.events_pending():
@@ -4677,8 +4678,8 @@ class Base:
 			y = float(self.slideshow_window.allocation.height*1.0)
 			self.controls_moving = True
 			while y > -3:
-				self.slideshow_window.move(2+xpos, int(winheight-y-2))
-				self.slideshow_window2.move(winwidth-ss_win2width-2+xpos, int(winheight-y-2))
+				self.slideshow_window.move(2+xpos, int(winheight-y-2)+ypos)
+				self.slideshow_window2.move(winwidth-ss_win2width-2+xpos, int(winheight-y-2)+ypos)
 				y -= 0.05
 				if not self.closing_app:
 					while gtk.events_pending():
