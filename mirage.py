@@ -523,11 +523,12 @@ class Base:
 		self.table.attach(self.vscroll, 2, 3, 0, 1, gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
 		vbox.pack_start(self.table, True, True, 0)
 		if not self.usettings['bgcolor']:
-			self.usettings['bgcolor'] = gtk.gdk.Color(0, 0, 0) # Default to black
+			self.bgcolor = gtk.gdk.Color(0, 0, 0) # Default to black
+			self.usettings['bgcolor'] = [0,0,0]
 		if self.usettings['simple_bgcolor']:
 			self.layout.modify_bg(gtk.STATE_NORMAL, None)
 		else:
-			self.layout.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
+			self.layout.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
 		self.imageview = gtk.Image()
 		self.layout.add(self.imageview)
 
@@ -571,7 +572,7 @@ class Base:
 		if self.usettings['simple_bgcolor']:
 			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, None)
 		else:
-			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
+			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
 		self.slideshow_window2 = gtk.Window(gtk.WINDOW_POPUP)
 		self.slideshow_controls2 = gtk.HBox()
 		try:
@@ -605,7 +606,7 @@ class Base:
 		if self.usettings['simple_bgcolor']:
 			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, None)
 		else:
-			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
+			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
 
 		# Connect signals
 		self.window.connect("delete_event", self.delete_event)
@@ -718,7 +719,8 @@ class Base:
 				bgr = conf.getint('prefs', 'bgcolor-red')
 				bgg = conf.getint('prefs', 'bgcolor-green')
 				bgb = conf.getint('prefs', 'bgcolor-blue')
-				self.usettings['bgcolor'] = gtk.gdk.Color(red=bgr, green=bgg, blue=bgb)
+				self.usettings['bgcolor'] = {'r': bgr, 'g': bgg, 'b': bgb}
+				self.bgcolor = gtk.gdk.Color(red=bgr, green=bgg, blue=bgb)
 			if conf.has_option('prefs', 'use_last_dir'):
 				self.usettings['use_last_dir'] = conf.getboolean('prefs', 'use_last_dir')
 			if conf.has_option('prefs', 'last_dir'):
@@ -1529,9 +1531,9 @@ class Base:
 		conf.set('window', 'thumbpane', self.usettings['thumbpane_show'])
 		conf.add_section('prefs')
 		conf.set('prefs', 'simple-bgcolor', self.usettings['simple_bgcolor'])
-		conf.set('prefs', 'bgcolor-red', self.usettings['bgcolor'].red)
-		conf.set('prefs', 'bgcolor-green', self.usettings['bgcolor'].green)
-		conf.set('prefs', 'bgcolor-blue', self.usettings['bgcolor'].blue)
+		conf.set('prefs', 'bgcolor-red', self.usettings['bgcolor']['r'])
+		conf.set('prefs', 'bgcolor-green', self.usettings['bgcolor']['g'])
+		conf.set('prefs', 'bgcolor-blue', self.usettings['bgcolor']['b'])
 		conf.set('prefs', 'open_all', self.usettings['open_all_images'])
 		conf.set('prefs', 'hidden', self.usettings['open_hidden_files'])
 		conf.set('prefs', 'use_numacomp', self.usettings['use_numacomp'])
@@ -1891,7 +1893,7 @@ class Base:
 			self.timer_id = gobject.timeout_add(2000, self.hide_cursor)
 			self.set_slideshow_sensitivities()
 			if self.usettings['simple_bgcolor']:
-				self.layout.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
+				self.layout.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
 		else:
 			if self.usettings['simple_bgcolor']:
 				self.layout.modify_bg(gtk.STATE_NORMAL, None)
@@ -2547,7 +2549,7 @@ class Base:
 		bglabel.set_alignment(0, 1)
 		color_hbox = gtk.HBox(False, 0)
 		colortext = gtk.Label(_('Background color:'))
-		self.colorbutton = gtk.ColorButton(self.usettings['bgcolor'])
+		self.colorbutton = gtk.ColorButton(self.bgcolor)
 		self.colorbutton.connect('color-set', self.bgcolor_selected)
 		self.colorbutton.set_size_request(150, -1)
 		self.colorbutton.set_tooltip_text(_("Sets the background color for the application."))
@@ -3045,11 +3047,13 @@ class Base:
 	def bgcolor_selected(self, widget):
 		# When the user selects a color, store this color in self.bgcolor (which will
 		# later be saved to .miragerc) and set this background color:
-		self.usettings['bgcolor'] = widget.get_property('color')
+		z = widget.get_property('color')
+		self.bgcolor = z
+		self.usettings['bgcolor'] = {'r': z.red, 'g': z.green, 'b': z.blue}
 		if not self.usettings['simple_bgcolor']:
-			self.layout.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
-			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
-			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, self.usettings['bgcolor'])
+			self.layout.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
+			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
+			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
 
 	def simple_bgcolor_selected(self, widget):
 		if widget.get_active():
