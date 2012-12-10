@@ -525,7 +525,7 @@ class Base:
 		vbox.pack_start(self.table, True, True, 0)
 		if not self.usettings['bgcolor']:
 			self.bgcolor = gtk.gdk.Color(0, 0, 0) # Default to black
-			self.usettings['bgcolor'] = [0,0,0]
+			self.usettings['bgcolor'] = {'r': 0, 'g':0, 'b': 0}
 		if self.usettings['simple_bgcolor']:
 			self.layout.modify_bg(gtk.STATE_NORMAL, None)
 		else:
