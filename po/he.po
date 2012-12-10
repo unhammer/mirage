@@ -1,0 +1,1277 @@
+# Hebrew translation for mirageiv.
+# Copyright 2006-2011 Scott Horowitz <stonecrest@gmail.com>
+# This file is distributed under the same license as the mirageiv package.
+# Isratine Citizen <genghiskhan@gmx.ca>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mirage 0.9.5.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-10 11:38+0100\n"
+"PO-Revision-Date: 2012-09-02 21:44+0200\n"
+"Last-Translator: Isratine Citizen <genghiskhan@gmx.ca>\n"
+"Language-Team: Rahut <genghiskhan@gmx.ca>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: mirage.py:45
+msgid "mirage_numacomp.so not found, unable to do numerical aware sorting."
+msgstr ""
+
+#: mirage.py:58
+msgid ""
+"imgfuncs.so module not found, rotating/flipping images will be disabled."
+msgstr ""
+
+#: mirage.py:64
+msgid ""
+"xmouse.so module not found, some screenshot capabilities will be disabled."
+msgstr ""
+
+#: mirage.py:71
+msgid "pyexiv2 module not found, exifdata reading/writing are disabled"
+msgstr ""
+
+#: mirage.py:79
+#, python-format
+msgid "Mirage requires GTK+ %s or newer..\n"
+msgstr ""
+
+#: mirage.py:82
+#, python-format
+msgid "Mirage requires PyGTK %s or newer.\n"
+msgstr ""
+
+#: mirage.py:160
+msgid "Open in GIMP"
+msgstr ""
+
+#: mirage.py:160
+msgid "Create Thumbnail"
+msgstr ""
+
+#: mirage.py:160
+#, fuzzy
+msgid "Create Thumbnails"
+msgstr "לוח תמונות־ציפורן"
+
+#: mirage.py:160
+msgid "Move to Favorites"
+msgstr ""
+
+#: mirage.py:264
+msgid "_File"
+msgstr "_קובץ"
+
+#: mirage.py:265
+msgid "_Edit"
+msgstr "ע_ריכה"
+
+#: mirage.py:266
+msgid "_View"
+msgstr "_תצוגה"
+
+#: mirage.py:267
+msgid "_Go"
+msgstr "_מעבר"
+
+#: mirage.py:268
+msgid "_Help"
+msgstr "_עזרה"
+
+#: mirage.py:269
+msgid "Custom _Actions"
+msgstr "_פעולות מותאמות"
+
+#: mirage.py:270
+msgid "_Open Image..."
+msgstr "_פתיחת תמונה..."
+
+#: mirage.py:270
+msgid "Open Image"
+msgstr "פתיחת תמונה"
+
+#: mirage.py:271
+msgid "Open _Remote image..."
+msgstr "פתיחת תמונה מ_רוחקת..."
+
+#: mirage.py:271
+msgid "Open Remote Image"
+msgstr "פתיחת תמונה מרוחקת"
+
+#: mirage.py:272
+msgid "Open _Folder..."
+msgstr "פתיחת _תיקיה..."
+
+#: mirage.py:272
+msgid "Open Folder"
+msgstr "פתיחת תיקיה"
+
+#: mirage.py:273
+msgid "_Save Image"
+msgstr "_שמירת תמונה"
+
+#: mirage.py:274
+msgid "Save Image _As..."
+msgstr "שמירת תמונה _בשם..."
+
+#: mirage.py:275
+msgid "Copy to Clipboard..."
+msgstr ""
+
+#: mirage.py:276
+#, fuzzy
+msgid "C_rop..."
+msgstr "_גזיזה..."
+
+#: mirage.py:276 mirage.py:3281
+msgid "Crop Image"
+msgstr "גזיזת תמונה"
+
+#: mirage.py:277
+msgid "R_esize..."
+msgstr "_שינוי גודל..."
+
+#: mirage.py:277 mirage.py:3523
+msgid "Resize Image"
+msgstr "שינוי גודל תמונה"
+
+#: mirage.py:278
+msgid "_Saturation..."
+msgstr "_רוויה..."
+
+#: mirage.py:278
+msgid "Modify saturation"
+msgstr "התאמת רוויה"
+
+#: mirage.py:280
+msgid "_Previous Image"
+msgstr "התמונה ה_קודמת"
+
+#: mirage.py:280 mirage.py:322 mirage.py:324 mirage.py:326
+msgid "Previous Image"
+msgstr "התמונה הקודמת"
+
+#: mirage.py:281
+#, fuzzy
+msgid "Pre_vious Subfolder"
+msgstr "התמונה הקודמת"
+
+#: mirage.py:281 mirage.py:327 mirage.py:329
+#, fuzzy
+msgid "Previous Subfolder"
+msgstr "התמונה הקודמת"
+
+#: mirage.py:282
+msgid "_Next Image"
+msgstr "התמונה ה_באה"
+
+#: mirage.py:282 mirage.py:314 mirage.py:323 mirage.py:325
+msgid "Next Image"
+msgstr "התמונה הבאה"
+
+#: mirage.py:283
+msgid "Ne_xt Subfolder"
+msgstr ""
+
+#: mirage.py:283 mirage.py:328 mirage.py:330
+msgid "Next Subfolder"
+msgstr ""
+
+#: mirage.py:284
+msgid "_Previous"
+msgstr "ה_קודם"
+
+#: mirage.py:284
+msgid "Previous"
+msgstr "הקודם"
+
+#: mirage.py:285
+msgid "_Next"
+msgstr "ה_בא"
+
+#: mirage.py:285
+msgid "Next"
+msgstr "הבא"
+
+#: mirage.py:286
+msgid "_Random Image"
+msgstr "תמונה _אקראית"
+
+#: mirage.py:286
+msgid "Random Image"
+msgstr "תמונה אקראית"
+
+#: mirage.py:287
+msgid "_First Image"
+msgstr "תמונה _ראשונה"
+
+#: mirage.py:287
+msgid "First Image"
+msgstr "תמונה ראשונה"
+
+#: mirage.py:288
+msgid "_Last Image"
+msgstr "תמונה _אחרונה"
+
+#: mirage.py:288
+msgid "Last Image"
+msgstr "תמונה אחרונה"
+
+#: mirage.py:289
+msgid "Zoom _In"
+msgstr "זום _פנימה"
+
+# הקרבה
+#: mirage.py:289 mirage.py:312 mirage.py:313 mirage.py:318 mirage.py:332
+msgid "Zoom In"
+msgstr "זום פנימה"
+
+#: mirage.py:290
+msgid "Zoom _Out"
+msgstr "זום ה_חוצה"
+
+# הרחקה
+#: mirage.py:290 mirage.py:311 mirage.py:317 mirage.py:333
+msgid "Zoom Out"
+msgstr "זום החוצה"
+
+#: mirage.py:291
+msgid "Zoom To _Fit"
+msgstr "ה_תאמת התמונה לחלון"
+
+#: mirage.py:291 mirage.py:315 mirage.py:319
+msgid "Fit"
+msgstr "התאמה"
+
+#: mirage.py:292
+msgid "_1:1"
+msgstr "_1:1"
+
+#: mirage.py:292 mirage.py:316 mirage.py:320 mirage.py:331
+msgid "1:1"
+msgstr "1:1"
+
+#: mirage.py:293
+msgid "Rotate _Left"
+msgstr "סיבוב ל_שמאל"
+
+#: mirage.py:293
+msgid "Rotate Left"
+msgstr "סיבוב לשמאל"
+
+#: mirage.py:294
+msgid "Rotate _Right"
+msgstr "סיבוב לי_מין"
+
+#: mirage.py:294
+msgid "Rotate Right"
+msgstr "סיבוב לימין"
+
+#: mirage.py:295
+msgid "Flip _Vertically"
+msgstr "היפוך _אנכי"
+
+#: mirage.py:295
+msgid "Flip Vertically"
+msgstr "היפוך אנכי"
+
+#: mirage.py:296
+msgid "Flip _Horizontally"
+msgstr "היפוך או_פקי"
+
+#: mirage.py:296
+msgid "Flip Horizontally"
+msgstr "היפוך אופקי"
+
+#: mirage.py:298
+msgid "_Contents"
+msgstr "_תכנים"
+
+#: mirage.py:298
+msgid "Contents"
+msgstr "תכנים"
+
+#: mirage.py:299
+#, fuzzy
+msgid "Pr_eferences..."
+msgstr "_העדפות..."
+
+#: mirage.py:299
+msgid "Preferences"
+msgstr "העדפות"
+
+#: mirage.py:301
+msgid "E_xit Full Screen"
+msgstr "י_ציאה ממסך־מלא"
+
+#: mirage.py:301 mirage.py:310
+msgid "Exit Full Screen"
+msgstr "יציאה ממסך־מלא"
+
+#: mirage.py:302
+msgid "_Start Slideshow"
+msgstr "התחלת _מצגת"
+
+#: mirage.py:302
+msgid "Start Slideshow"
+msgstr "התחלת מצגת"
+
+#: mirage.py:303
+msgid "_Stop Slideshow"
+msgstr "_הפסקת מצגת"
+
+#: mirage.py:303
+msgid "Stop Slideshow"
+msgstr "הפסקת מצגת"
+
+#: mirage.py:304
+msgid "_Delete..."
+msgstr "_מחיקה"
+
+#: mirage.py:304 mirage.py:2817
+msgid "Delete Image"
+msgstr "מחיקת תמונה"
+
+#: mirage.py:305
+msgid "Re_name..."
+msgstr "_שינוי שם..."
+
+#: mirage.py:305 mirage.py:2736
+msgid "Rename Image"
+msgstr "שינוי שם תמונה"
+
+#: mirage.py:306
+msgid "_Take Screenshot..."
+msgstr "_לקיחת תמונת מסך..."
+
+#: mirage.py:306
+msgid "Take Screenshot"
+msgstr "לקיחת תמונת מסך"
+
+#: mirage.py:307
+msgid "_Properties..."
+msgstr "_מאפיינים..."
+
+#: mirage.py:307 mirage.py:2255
+msgid "Properties"
+msgstr "מאפיינים"
+
+#: mirage.py:308
+msgid "_Configure..."
+msgstr "_הגדרה..."
+
+#: mirage.py:308
+msgid "Custom Actions"
+msgstr "פעולות מותאמות"
+
+#: mirage.py:336
+msgid "_Status Bar"
+msgstr "_שורת מצב"
+
+#: mirage.py:336
+msgid "Status Bar"
+msgstr "שורת מצב"
+
+#: mirage.py:337
+msgid "_Toolbar"
+msgstr "סרגל _כלים"
+
+#: mirage.py:337
+msgid "Toolbar"
+msgstr "סרגל כלים"
+
+#: mirage.py:338
+msgid "Thumbnails _Pane"
+msgstr "לוח _תמונות־ציפורן"
+
+#: mirage.py:338
+msgid "Thumbnails Pane"
+msgstr "לוח תמונות־ציפורן"
+
+#: mirage.py:339
+#, fuzzy
+msgid "_Randomize list"
+msgstr "ערבול סדר תמונות"
+
+#: mirage.py:339
+#, fuzzy
+msgid "Randomize list"
+msgstr "ערבול סדר תמונות"
+
+#: mirage.py:989
+#, python-format
+msgid "Couldn't find the image %s. Please check your installation."
+msgstr "לא ניתן היה למצוא את התמונה %s. נא לבדוק את ההתקנה שלך."
+
+#: mirage.py:1206
+#, python-format
+msgid "Action: %s"
+msgstr "פעולה: %s"
+
+#: mirage.py:1209
+#, python-format
+msgid "Action return code: %s"
+msgstr "פעולה בחזירה קוד: %s"
+
+#: mirage.py:1211
+#, python-format
+msgid ""
+"Unable to launch \"%s\". Please specify a valid command from Edit > Custom "
+"Actions."
+msgstr "לא ניתן לשגר את \"%s\". נא לציין פקודה תקפה מן עריכה > פעולות מותאמות."
+
+#: mirage.py:1213 mirage.py:1998 mirage.py:2033
+msgid "Invalid Custom Action"
+msgstr "פקודה מותאמת שגויה"
+
+#: mirage.py:1346
+#, fuzzy, python-format
+msgid "Version: %s"
+msgstr "CLI"
+
+#: mirage.py:1347
+#, fuzzy
+msgid "Website: http://mirageiv.berlios.de"
+msgstr "CLI"
+
+#: mirage.py:1352
+#, fuzzy
+msgid "Usage: mirage [OPTION]... FILES|FOLDERS..."
+msgstr "CLI"
+
+#: mirage.py:1354
+#, fuzzy
+msgid "Options"
+msgstr "CLI"
+
+#: mirage.py:1355
+#, fuzzy
+msgid "Show this help and exit"
+msgstr "CLI"
+
+#: mirage.py:1356
+#, fuzzy
+msgid "Show version information and exit"
+msgstr "CLI"
+
+#: mirage.py:1357
+#, fuzzy
+msgid "Show more detailed information"
+msgstr "CLI"
+
+#: mirage.py:1358
+#, fuzzy
+msgid "Recursively include all images found in"
+msgstr "CLI"
+
+#: mirage.py:1359
+#, fuzzy
+msgid "subdirectories of FOLDERS"
+msgstr "CLI"
+
+#: mirage.py:1360
+#, fuzzy
+msgid "Start in slideshow mode"
+msgstr "CLI"
+
+#: mirage.py:1361
+#, fuzzy
+msgid "Start in fullscreen mode"
+msgstr "CLI"
+
+#: mirage.py:1362
+msgid "Do not sort input list"
+msgstr ""
+
+#: mirage.py:1363
+#, fuzzy
+msgid "Execute 'cmd' when an image is loaded"
+msgstr "CLI"
+
+#: mirage.py:1364
+#, fuzzy
+msgid "uses same syntax as custom actions,"
+msgstr "CLI"
+
+#: mirage.py:1365
+#, fuzzy
+msgid "i.e. mirage -o 'echo file is %F'"
+msgstr "CLI"
+
+#: mirage.py:1541
+msgid "Save As"
+msgstr "שמירה בשם"
+
+#: mirage.py:1587
+#, python-format
+msgid ""
+"The %s format is not supported for saving. Do you wish to save the file in a "
+"different format?"
+msgstr ""
+"אין תמיכה בשמירת תמונות בתסדיר %s. האם ברצונך לשמור את הקובץ בתסדיר אחר?"
+
+#: mirage.py:1588 mirage.py:1599
+msgid "Save"
+msgstr "שמירה"
+
+#: mirage.py:1598
+#, python-format
+msgid "Unable to save %s"
+msgstr "לא ניתן לשמור את %s"
+
+#: mirage.py:1615
+msgid "The current image has been modified. Save changes?"
+msgstr "התמונה הנוכחית שונתה. לשמור שינויים?"
+
+# האם לשמור?
+#: mirage.py:1619
+msgid "Save?"
+msgstr "שמירה?"
+
+#: mirage.py:1642
+msgid "Open Remote"
+msgstr "פתיחה מרוחקת"
+
+#: mirage.py:1647
+msgid "Image Location (URL):"
+msgstr "מיקום תמונה (URL):"
+
+#: mirage.py:1681
+msgid "Open"
+msgstr "פתיחה"
+
+#: mirage.py:1684
+msgid "Images"
+msgstr "תמונות"
+
+#: mirage.py:1688
+msgid "All files"
+msgstr "כל הקבצים"
+
+#: mirage.py:1698
+msgid "Include images in subdirectories"
+msgstr "הכללת תמונות במדורי משנה"
+
+#: mirage.py:1841
+msgid "Cannot load image."
+msgstr "לא ניתן להטעין תמונה."
+
+#: mirage.py:1845
+#, python-format
+msgid "Custom actions: %(current)i of  %(total)i"
+msgstr "פעולות מותאמות: %(current)i מתוך  %(total)i"
+
+#: mirage.py:1847
+msgid "Scanning..."
+msgstr "סורק כעת..."
+
+#: mirage.py:1851
+msgid "Configure Custom Actions"
+msgstr "הגדרת פעולות מותאמות"
+
+#: mirage.py:1869
+msgid "Batch"
+msgstr "אצווה"
+
+#: mirage.py:1870
+msgid "Action"
+msgstr "פעולה"
+
+#: mirage.py:1871
+msgid "Shortcut"
+msgstr "קיצור־דרך"
+
+#: mirage.py:1883
+msgid "Add action"
+msgstr "הוספת פעולה"
+
+#: mirage.py:1887
+msgid "Edit selected action."
+msgstr "עריכת הפעולה הנבחרת."
+
+#: mirage.py:1891
+msgid "Remove selected action."
+msgstr "הסרת הפעולה הנבחרת."
+
+#: mirage.py:1895
+msgid "Move selected action up."
+msgstr "הזזת הפעולה הנבחרת מעלה."
+
+#: mirage.py:1899
+msgid "Move selected action down."
+msgstr "הזזת הפעולה הנבחרת מטה."
+
+#: mirage.py:1902
+msgid "Parameters"
+msgstr "פרמטרים"
+
+#: mirage.py:1902
+msgid "File path, name, and extension"
+msgstr "נתיב קובץ, שם, וסיומת"
+
+#: mirage.py:1902
+msgid "File path"
+msgstr "נתיב קובץ"
+
+#: mirage.py:1902
+msgid "File name without file extension"
+msgstr "שם קובץ ללא סיומת קובץ"
+
+#: mirage.py:1902
+msgid "File extension (i.e. \".png\")"
+msgstr "סיומת קובץ (דהיינו \".png\")"
+
+#: mirage.py:1902
+msgid "List of files, space-separated"
+msgstr "רשימה של קבצים, רווח-מפריד"
+
+#: mirage.py:1905
+msgid "Operations"
+msgstr "מבצעים"
+
+#: mirage.py:1905
+msgid "Go to next image"
+msgstr "מעבר אל תמונה באה"
+
+#: mirage.py:1905
+msgid "Go to previous image"
+msgstr "מעבר אל תמונה קודמת"
+
+#: mirage.py:1924
+msgid ""
+"Here you can define custom actions with shortcuts. Actions use the built-in "
+"parameters and operations listed below and can have multiple statements "
+"separated by a semicolon. Batch actions apply to all images in the list."
+msgstr ""
+"ביכולתך להגדיר כאן פעולות מותאמות עם קיצורי דרך. פעולות עושות שימוש בפרמטרים "
+"ובמבצעים האינטגרלים מנויות להלן ויכולים להכיל הצהרות מרובות מופרדות על ידי "
+"נקודה ופסיק. פעולות אצווה (אשכול) המוחלות לכל התמונות מנויות ברשימה."
+
+#: mirage.py:1960
+msgid "Add Custom Action"
+msgstr "הוספת פעולה מותאמת"
+
+#: mirage.py:1962
+msgid "Edit Custom Action"
+msgstr "עריכת פעולה מותאמת"
+
+#: mirage.py:1965
+msgid "Action Name:"
+msgstr "שם פעולה:"
+
+#: mirage.py:1967
+msgid "Command:"
+msgstr "פקודה:"
+
+#: mirage.py:1969
+msgid "Shortcut:"
+msgstr "קיצור־דרך:"
+
+#: mirage.py:1983
+msgid "Perform action on all images (Batch)"
+msgstr "ביצוע פעולה על כל התמונות (אצווה)"
+
+#: mirage.py:1997
+msgid "[PREV] and [NEXT] are only valid alone or at the end of the command"
+msgstr "הן [PREV] והן [NEXT] תקיפות לבד או בסוף של הפקודה"
+
+#: mirage.py:2032
+msgid "Incomplete custom action specified."
+msgstr "צוינה פקודה מותאמת לא מלאה."
+
+#: mirage.py:2110
+msgid "Action Shortcut"
+msgstr "קיצור־דרך פעולה"
+
+#: mirage.py:2111
+msgid "Press the desired shortcut for the action."
+msgstr "נא ללחוץ את הקיצור־דרך הרצוי עבור הפעולה."
+
+#: mirage.py:2128 mirage.py:2135
+#, python-format
+msgid "The shortcut '%(shortcut)s' is already used for '%(key)s'."
+msgstr "הקיצור־דרך '%(shortcut)s' כבר בשימוש עבור '%(key)s'."
+
+#: mirage.py:2129 mirage.py:2136
+msgid "Invalid Shortcut"
+msgstr "קיצור־דרך שגוי"
+
+# לכידת מסך
+#: mirage.py:2178
+msgid "Screenshot"
+msgstr "תמונת מסך"
+
+#: mirage.py:2179
+msgid "_Snap"
+msgstr "_צילום"
+
+#: mirage.py:2184
+msgid "Location"
+msgstr "מיקום"
+
+#: mirage.py:2187
+msgid "Entire screen"
+msgstr "כל המסך"
+
+# מצביע
+# סמן העכבר
+#: mirage.py:2188
+msgid "Window under pointer"
+msgstr "חלון המצוי תחת הסמן"
+
+#: mirage.py:2193
+msgid "Delay"
+msgstr "שיהוי"
+
+#: mirage.py:2201
+msgid " seconds"
+msgstr " שניות"
+
+#: mirage.py:2268
+msgid "Generic:"
+msgstr ""
+
+#: mirage.py:2270
+msgid "File name:"
+msgstr "שם קובץ:"
+
+# שונה לאחרונה
+#: mirage.py:2272
+msgid "File modified:"
+msgstr "קובץ שונה:"
+
+#: mirage.py:2274
+msgid "Dimensions:"
+msgstr "ממדים:"
+
+#: mirage.py:2276
+msgid "File size:"
+msgstr "גודל קובץ:"
+
+#: mirage.py:2278
+msgid "File type:"
+msgstr "סוג קובץ:"
+
+#: mirage.py:2280
+msgid "Transparency:"
+msgstr "שקיפות:"
+
+# אנימציה:
+#: mirage.py:2282
+msgid "Animation:"
+msgstr "הנפשה:"
+
+#: mirage.py:2284
+msgid "Bits per sample:"
+msgstr "סיביות לכל דוגמית:"
+
+#: mirage.py:2286
+msgid "Channels:"
+msgstr "ערוצים:"
+
+#: mirage.py:2306 mirage.py:2310 mirage.py:2552
+msgid "Yes"
+msgstr "כן"
+
+#: mirage.py:2308 mirage.py:2312 mirage.py:2551
+msgid "No"
+msgstr "לא"
+
+#: mirage.py:2346
+msgid "Exifdata"
+msgstr ""
+
+#: mirage.py:2352
+msgid "Exposure time:"
+msgstr ""
+
+#: mirage.py:2352
+#, python-format
+msgid "%s sec"
+msgstr ""
+
+#: mirage.py:2353
+msgid "Aperture:"
+msgstr ""
+
+#: mirage.py:2353 mirage.py:2355 mirage.py:2356 mirage.py:2357 mirage.py:2358
+#, python-format
+msgid "%s"
+msgstr ""
+
+#: mirage.py:2354
+msgid "Focal length:"
+msgstr ""
+
+#: mirage.py:2354
+#, python-format
+msgid "%s mm"
+msgstr ""
+
+#: mirage.py:2355
+msgid "Time taken:"
+msgstr ""
+
+#: mirage.py:2356
+msgid "ISO Speed:"
+msgstr ""
+
+#: mirage.py:2357
+msgid "Exposure bias:"
+msgstr ""
+
+#: mirage.py:2358
+msgid "Camera:"
+msgstr ""
+
+#: mirage.py:2416
+#, fuzzy, python-format
+msgid "%s Preferences"
+msgstr "העדפות"
+
+#: mirage.py:2422 mirage.py:2656
+msgid "Interface"
+msgstr "ממשק"
+
+#: mirage.py:2425
+msgid "Background color:"
+msgstr "צבע רקע: "
+
+#: mirage.py:2429
+msgid "Sets the background color for the application."
+msgstr "הגדרת צבע הרקע עבור היישום."
+
+#: mirage.py:2435
+msgid "Simple background color:"
+msgstr "צבע רקע פשוט:"
+
+#: mirage.py:2444
+msgid "Open Mirage in fullscreen mode"
+msgstr "פתיחת Mirage במצב של מסך־מלא"
+
+#: mirage.py:2447
+msgid "Thumbnail size:"
+msgstr "גודל תמונת־ציפורן:"
+
+# התנהגות פתיחה
+#: mirage.py:2474
+msgid "Open Behavior"
+msgstr "אופן הפעלה"
+
+#: mirage.py:2477
+msgid "Open new image in:"
+msgstr "פתיחת תמונה חדשה במצב:"
+
+# אוחד עם: Open new image in
+#: mirage.py:2479
+msgid "Smart Mode"
+msgstr "חכם"
+
+# אוחד עם: Open new image in
+#: mirage.py:2480
+msgid "Zoom To Fit Mode"
+msgstr "התאמת התמונה לחלון"
+
+# אוחד עם: Open new image in
+#: mirage.py:2481
+msgid "1:1 Mode"
+msgstr "1:1"
+
+# אוחד עם: Open new image in
+#: mirage.py:2482
+msgid "Last Active Mode"
+msgstr "האחרון שהיה בשימוש"
+
+#: mirage.py:2485
+msgid "Load all images in current directory"
+msgstr "טעינת כל התמונות במדור הנוכחי"
+
+#: mirage.py:2487
+msgid ""
+"If enabled, opening an image in Mirage will automatically load all images "
+"found in that image's directory."
+msgstr ""
+"במידה ואפשרות זו מופעלת, פתיחת תמונות בתוך Mirage תטעין אוטומטית את כל "
+"התמונות שנמצאו במדור של אותה תמונה."
+
+#: mirage.py:2488
+msgid "Allow loading hidden files"
+msgstr "אפשור טעינה של קבצים נסתרים"
+
+# ignored changed to considered, regarded
+#: mirage.py:2490
+msgid ""
+"If checked, Mirage will open hidden files. Otherwise, hidden files will be "
+"ignored."
+msgstr ""
+"במידה ואפשרות זו מסומנת, Mirage יפתח קבצים נסתרים. אחרת, קבצים נסתרים לא "
+"יחושבו."
+
+#: mirage.py:2492
+msgid "Use Numerical aware sort"
+msgstr ""
+
+# ignored changed to considered, regarded
+#: mirage.py:2494
+#, fuzzy
+msgid ""
+"If checked, Mirage will sort the images based on a numerical aware sort."
+msgstr ""
+"במידה ואפשרות זו מסומנת, Mirage יפתח קבצים נסתרים. אחרת, קבצים נסתרים לא "
+"יחושבו."
+
+#: mirage.py:2496
+msgid "Casesensitive sort"
+msgstr ""
+
+#: mirage.py:2498
+msgid "If checked, a case-sensitive sort will be used"
+msgstr ""
+
+#: mirage.py:2503
+msgid "Use last chosen directory"
+msgstr "שימוש במדור האחרון שנבחר"
+
+#: mirage.py:2504
+msgid "The default 'Open' directory will be the last directory used."
+msgstr "המדור 'פתיחה' המשתמט יהיה המדור האחרון שהיה בשימוש."
+
+# שימוש במדור מקובע זה:
+#: mirage.py:2505
+msgid "Use this fixed directory:"
+msgstr "שימוש במדור מקובע:"
+
+#: mirage.py:2507
+msgid "The default 'Open' directory will be this specified directory."
+msgstr "המדור 'פתיחה' המשתמט יהיה מדור מציון זה."
+
+#: mirage.py:2543 mirage.py:2655
+msgid "Navigation"
+msgstr "ניווט"
+
+#: mirage.py:2545
+msgid "Preload images for faster navigation"
+msgstr "טעינה מוקדמת של תמונות לניווט מהיר יותר"
+
+# מוטב
+#: mirage.py:2547
+msgid ""
+"If enabled, the next and previous images in the list will be preloaded "
+"during idle time. Note that the speed increase comes at the expense of "
+"memory usage, so it is recommended to disable this option on machines with "
+"limited ram."
+msgstr ""
+"במידה ואפשרות זו מופעלת, התמונות הבאות והקודמות ברשימה יוטענו באופן מוקדם "
+"בעת חוסר פעילות. לצומת לבך, הגידול במהירות באה במחיר של שימוש בזיכרון, אי "
+"לכן מומלץ לנטרל את אפשרות זו על מכונות עם זיכרון גישה אקראית (RAM) מוגבל."
+
+# כריכת רשימת תמונה
+#: mirage.py:2549
+msgid "Wrap around imagelist:"
+msgstr "כריכה סביב רשימת תמונות:"
+
+# שאל את המשתמש
+#: mirage.py:2553
+msgid "Prompt User"
+msgstr "שאל אותי"
+
+#: mirage.py:2572 mirage.py:4516
+msgid "Slideshow Mode"
+msgstr "מצב מצגת"
+
+#: mirage.py:2575
+msgid "Delay between images in seconds:"
+msgstr "שיהוי בין תמונות (בשניות):"
+
+#: mirage.py:2580
+msgid "Randomize order of images"
+msgstr "ערבול סדר תמונות"
+
+#: mirage.py:2582
+msgid ""
+"If enabled, a random image will be chosen during slideshow mode (without "
+"loading any image twice)."
+msgstr ""
+"במידה ואפשרות זו מופעלת, תמונה אקראית תיבחר בעת מצב מצגת (ללא טעינת איזושהי "
+"תמונה פעמיים)."
+
+#: mirage.py:2583
+msgid "Disable screensaver in slideshow mode"
+msgstr "נטרול שומך מסך במצב מצגת"
+
+#: mirage.py:2585
+msgid ""
+"If enabled, xscreensaver will be temporarily disabled during slideshow mode."
+msgstr "במידה ואפשרות זו מופעלת, xscreensaver ינוטרל זמנית למשך מצב מצגת."
+
+#: mirage.py:2586
+msgid "Always start in fullscreen mode"
+msgstr "תמיד להפעיל במצב של מסך־מלא"
+
+#: mirage.py:2587
+msgid ""
+"If enabled, starting a slideshow will put the application in fullscreen mode."
+msgstr "במידה ואפשרות זו מופעלת, התחלת מצגת תחיל את היישום במצב של מסך־מלא."
+
+#: mirage.py:2605
+msgid "Image Editing"
+msgstr "עריכת תמונה"
+
+#: mirage.py:2607
+msgid "Confirm image delete"
+msgstr "וידוא מחיקת תמונה"
+
+#: mirage.py:2611
+msgid "Scaling quality:"
+msgstr "איכות סילומיות: "
+
+#: mirage.py:2613
+msgid "Nearest (Fastest)"
+msgstr "סמוך (המהיר ביותר)"
+
+# מרצפות
+#: mirage.py:2614
+msgid "Tiles"
+msgstr "רעפים"
+
+#: mirage.py:2615
+msgid "Bilinear"
+msgstr "דו־קווי"
+
+#: mirage.py:2616
+msgid "Hyper (Best)"
+msgstr "היפרבולי (הטוב ביותר)"
+
+#: mirage.py:2622
+msgid "Modified images:"
+msgstr "תמונות שעברו שינוי:"
+
+#: mirage.py:2624
+msgid "Ignore Changes"
+msgstr "התעלמות מן שינויים"
+
+#: mirage.py:2625
+msgid "Auto-Save"
+msgstr "שמירה-אוטומטית"
+
+#: mirage.py:2626
+msgid "Prompt For Action"
+msgstr "שאל עבור פעולה"
+
+#: mirage.py:2632
+msgid "Quality to save in:"
+msgstr "איכות שמירה ב:"
+
+#: mirage.py:2654
+msgid "Behavior"
+msgstr "התנהגות"
+
+#: mirage.py:2657
+msgid "Slideshow"
+msgstr "מצגת"
+
+#: mirage.py:2658
+msgid "Image"
+msgstr "תמונה"
+
+#: mirage.py:2742
+msgid "_Rename"
+msgstr "_שינוי שם"
+
+#: mirage.py:2752
+msgid "Enter the new name:"
+msgstr "נא להזין את השם החדש:"
+
+#: mirage.py:2785
+#, python-format
+msgid "Overwrite existing file %s?"
+msgstr ""
+
+#: mirage.py:2786
+#, fuzzy
+msgid "File exists"
+msgstr "נתיב קובץ"
+
+#: mirage.py:2806
+#, python-format
+msgid "Unable to rename %s"
+msgstr "לא ניתן לשנות שם עבור %s"
+
+#: mirage.py:2807
+msgid "Unable to rename"
+msgstr "לא ניתן לשנות שם "
+
+#: mirage.py:2819
+#, python-format
+msgid "Are you sure you wish to permanently delete %s?"
+msgstr "האם ברצונך למחוק לצמיתות את %s?"
+
+#: mirage.py:2891
+#, python-format
+msgid "Unable to delete %s"
+msgstr "לא ניתן למחוק את %s"
+
+#: mirage.py:2892
+msgid "Unable to delete"
+msgstr "לא ניתן למחוק "
+
+#: mirage.py:2900
+msgid "Choose directory"
+msgstr "בחירת מדור"
+
+#: mirage.py:2950
+msgid "A fast GTK+ Image Viewer."
+msgstr "מציג תמונות מהיר מבוסס ‭GTK+‬."
+
+#: mirage.py:2995
+msgid "Unable to launch a suitable browser."
+msgstr "לא ניתן לשגר דפדפן מתאים."
+
+#: mirage.py:3282
+msgid "C_rop"
+msgstr "_גזיזה"
+
+#: mirage.py:3324 mirage.py:3534
+msgid "Width:"
+msgstr "רוחב:"
+
+#: mirage.py:3331 mirage.py:3545
+msgid "Height:"
+msgstr "גובה:"
+
+#: mirage.py:3475
+msgid "Saturation"
+msgstr "רוויה"
+
+#: mirage.py:3476
+msgid "_Saturate"
+msgstr "_לרוות"
+
+# דרגת
+#: mirage.py:3487
+msgid "Saturation level:"
+msgstr "רמת רוויה:"
+
+#: mirage.py:3524
+msgid "_Resize"
+msgstr "_שינוי גודל"
+
+# גרצגים
+#: mirage.py:3538 mirage.py:3550
+msgid "pixels"
+msgstr "פיקסלים"
+
+#: mirage.py:3552
+msgid "Preserve aspect ratio"
+msgstr "שמירה על יחס רוחב־גובה"
+
+#: mirage.py:3728
+msgid ""
+"You are viewing the first image in the list. Wrap around to the last image?"
+msgstr "הינך צופה בתמונה הראשונה שברשימה. האם ברצונך לכרוך אל התמונה האחרונה?"
+
+#: mirage.py:3730
+msgid ""
+"You are viewing the last image in the list. Wrap around to the first image?"
+msgstr "הינך צופה בתמונה האחרונה שברשימה. האם ברצונך לכרוך אל התמונה הראשונה?"
+
+#: mirage.py:3732
+#, fuzzy
+msgid ""
+"You are viewing the first folder in the list. Wrap around to the first image "
+"of the last folder?"
+msgstr "הינך צופה בתמונה הראשונה שברשימה. האם ברצונך לכרוך אל התמונה האחרונה?"
+
+#: mirage.py:3734
+#, fuzzy
+msgid ""
+"You are viewing the last folder in the list. Wrap around to the first image "
+"of the first folder?"
+msgstr "הינך צופה בתמונה האחרונה שברשימה. האם ברצונך לכרוך אל התמונה הראשונה?"
+
+#: mirage.py:3736
+msgid ""
+"All images have been viewed. Would you like to cycle through the images "
+"again?"
+msgstr "כל התמונות נצפו. האם ברצונך לעבור בין התמונות פעם נוספת?"
+
+# לגלוש/לכרוך/לעטוף
+#: mirage.py:3737
+msgid "Wrap?"
+msgstr "לכרוך?"
+
+#: mirage.py:3911 mirage.py:4285
+#, python-format
+msgid "Loading: %s"
+msgstr "מטעין כעת: %s"
+
+#: mirage.py:3998
+#, fuzzy, python-format
+msgid "Loading(preloaded): %s"
+msgstr "מטעין כעת: %s"
+
+#: mirage.py:4022
+#, python-format
+msgid "Loading(not preloaded): %s"
+msgstr ""
+
+#: mirage.py:4071 mirage.py:4100
+#, python-format
+msgid "Preloading: %s"
+msgstr "מטעין מקדמית כעת: %s"
+
+#: mirage.py:4174 mirage.py:4406
+#, python-format
+msgid "Skipping: %s"
+msgstr "מדלג כעת: %s"
+
+#: mirage.py:4252
+#, python-format
+msgid "Found: %(item)s [%(number)i]"
+msgstr "נמצאו: ‫%(item)s ‫[%(number)i]"
+
+#: mirage.py:4402
+#, python-format
+msgid "Found: %(fullpath)s [%(number)i]"
+msgstr "נמצאו: ‫%(fullpath)s ‫[%(number)i]"
+
+#: mirage.py:4512
+#, fuzzy, python-format
+msgid "%(current)i of %(total)i"
+msgstr "‫[%(current)i מתוך %(total)i]"
+
+#: mirage.py:4513
+#, python-format
+msgid "[%(current)i of %(total)i]"
+msgstr "‫[%(current)i מתוך %(total)i]"
+
+#~ msgid "Save Image"
+#~ msgstr "שמירת תמונה"
+
+#~ msgid "Save Image As"
+#~ msgstr "שמירת תמונה בשם"
+
+#~ msgid "_Quit"
+#~ msgstr "י_ציאה"
+
+#~ msgid "Quit"
+#~ msgstr "יציאה"
+
+#~ msgid "_About"
+#~ msgstr "_אודות"
+
+#~ msgid "About"
+#~ msgstr "אודות"
+
+#~ msgid "_Full Screen"
+#~ msgstr "_מסך־מלא"
+
+#~ msgid "Full Screen"
+#~ msgstr "מסך־מלא"
+
+#~ msgid "Mirage Preferences"
+#~ msgstr "העדפות Mirage"
