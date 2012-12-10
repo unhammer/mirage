@@ -28,11 +28,12 @@ import traceback
 import pygtk
 pygtk.require('2.0')
 import gtk
-import os, sys, getopt, ConfigParser, string, gc
+import os, sys, getopt, string, gc
 import random, urllib, gobject, gettext, locale
 import stat, time, subprocess, shutil, filecmp
 import tempfile, socket, threading, copy
 from fractions import Fraction
+import json
 
 gettext.install("mirage", unicode=1)
 
@@ -700,104 +701,21 @@ class Base:
 			self.toggle_slideshow(None)
 
 	def read_config_and_set_settings(self):
-		conf = ConfigParser.ConfigParser()
-		if os.path.isfile(self.config_dir + '/miragerc'):
-			conf.read(self.config_dir + '/miragerc')
-			if conf.has_option('window', 'w'):
-				self.usettings['window_width'] = conf.getint('window', 'w')
-			if conf.has_option('window', 'h'):
-				self.usettings['window_height'] = conf.getint('window', 'h')
-			if conf.has_option('window', 'toolbar'):
-				self.usettings['toolbar_show'] = conf.getboolean('window', 'toolbar')
-			if conf.has_option('window', 'statusbar'):
-				self.usettings['statusbar_show'] = conf.getboolean('window', 'statusbar')
-			if conf.has_option('window', 'thumbpane'):
-				self.usettings['thumbpane_show'] = conf.getboolean('window', 'thumbpane')
-			if conf.has_option('prefs', 'simple-bgcolor'):
-				self.usettings['simple_bgcolor'] = conf.getboolean('prefs', 'simple-bgcolor')
-			if conf.has_option('prefs', 'bgcolor-red'):
-				bgr = conf.getint('prefs', 'bgcolor-red')
-				bgg = conf.getint('prefs', 'bgcolor-green')
-				bgb = conf.getint('prefs', 'bgcolor-blue')
-				self.usettings['bgcolor'] = {'r': bgr, 'g': bgg, 'b': bgb}
-				self.bgcolor = gtk.gdk.Color(red=bgr, green=bgg, blue=bgb)
-			if conf.has_option('prefs', 'use_last_dir'):
-				self.usettings['use_last_dir'] = conf.getboolean('prefs', 'use_last_dir')
-			if conf.has_option('prefs', 'last_dir'):
-				self.usettings['last_dir'] = conf.get('prefs', 'last_dir')
-			if conf.has_option('prefs', 'fixed_dir'):
-				self.usettings['fixed_dir'] = conf.get('prefs', 'fixed_dir')
-			if conf.has_option('prefs', 'open_all'):
-				self.usettings['open_all_images'] = conf.getboolean('prefs', 'open_all')
-			if conf.has_option('prefs', 'hidden'):
-				self.usettings['open_hidden_files'] = conf.getboolean('prefs', 'hidden')
-			if conf.has_option('prefs', 'use_numacomp'):
-				if HAVE_NUMACOMP:
-					self.usettings['use_numacomp'] = conf.getboolean('prefs', 'use_numacomp')
-				else:
-					self.usettings['usenumacomp'] = False
-			if conf.has_option('prefs', 'casesensitive_numacomp'):
-				self.usettings['case_numacomp'] = conf.getboolean('prefs', 'casesensitive_numacomp')
-			if conf.has_option('prefs', 'open_mode'):
-				self.usettings['open_mode'] = conf.getint('prefs', 'open_mode')
-			if conf.has_option('prefs', 'last_mode'):
-				self.usettings['last_mode'] = conf.getint('prefs', 'last_mode')
-			if conf.has_option('prefs', 'listwrap_mode'):
-				self.usettings['listwrap_mode'] = conf.getint('prefs', 'listwrap_mode')
-			if conf.has_option('prefs', 'slideshow_delay'):
-				self.usettings['slideshow_delay'] = conf.getint('prefs', 'slideshow_delay')
-			if conf.has_option('prefs', 'slideshow_random'):
-				self.usettings['slideshow_random'] = conf.getboolean('prefs', 'slideshow_random')
-			if conf.has_option('prefs', 'zoomquality'):
-				self.usettings['zoomvalue'] = conf.getint('prefs', 'zoomquality')
-				if int(round(self.usettings['zoomvalue'], 0)) == 0:
-					self.zoom_quality = gtk.gdk.INTERP_NEAREST
-				elif int(round(self.usettings['zoomvalue'], 0)) == 1:
-					self.zoom_quality = gtk.gdk.INTERP_TILES
-				elif int(round(self.usettings['zoomvalue'], 0)) == 2:
-					self.zoom_quality = gtk.gdk.INTERP_BILINEAR
-				elif int(round(self.usettings['zoomvalue'], 0)) == 3:
-					self.zoom_quality = gtk.gdk.INTERP_HYPER
-			if conf.has_option('prefs', 'quality_save'):
-				self.usettings['quality_save'] = conf.getint('prefs', 'quality_save')
-			if conf.has_option('prefs', 'disable_screensaver'):
-				self.usettings['disable_screensaver'] = conf.getboolean('prefs', 'disable_screensaver')
-			if conf.has_option('prefs', 'slideshow_in_fullscreen'):
-				self.usettings['slideshow_in_fullscreen'] = conf.getboolean('prefs', 'slideshow_in_fullscreen')
-			if conf.has_option('prefs', 'preloading_images'):
-				self.usettings['preloading_images'] = conf.getboolean('prefs', 'preloading_images')
-			if conf.has_option('prefs', 'thumbsize'):
-				self.usettings['thumbnail_size'] = conf.getint('prefs', 'thumbsize')
-			if conf.has_option('prefs', 'screenshot_delay'):
-				self.usettings['screenshot_delay'] = conf.getint('prefs', 'screenshot_delay')
-			if conf.has_option('actions', 'num_actions'):
-				num_actions = conf.getint('actions', 'num_actions')
-				self.usettings['action_names'] = []
-				self.usettings['action_commands'] = []
-				self.usettings['action_shortcuts'] = []
-				self.usettings['action_batch'] = []
-				for i in range(num_actions):
-					if conf.has_option('actions', 'names[' + str(i) + ']') and conf.has_option('actions', 'commands[' + str(i) + ']') and conf.has_option('actions', 'shortcuts[' + str(i) + ']') and conf.has_option('actions', 'batch[' + str(i) + ']'):
-						self.usettings['action_names'].append(conf.get('actions', 'names[' + str(i) + ']'))
-						self.usettings['action_commands'].append(conf.get('actions', 'commands[' + str(i) + ']'))
-						self.usettings['action_shortcuts'].append(conf.get('actions', 'shortcuts[' + str(i) + ']'))
-						self.usettings['action_batch'].append(conf.getboolean('actions', 'batch[' + str(i) + ']'))
-			if conf.has_option('prefs', 'savemode'):
-				self.usettings['savemode'] = conf.getint('prefs', 'savemode')
-			if conf.has_option('prefs', 'start_in_fullscreen'):
-				self.usettings['start_in_fullscreen'] = conf.getboolean('prefs', 'start_in_fullscreen')
-			if conf.has_option('prefs', 'confirm_delete'):
-				self.usettings['confirm_delete'] = conf.getboolean('prefs', 'confirm_delete')
-			self.usettings['recentfiles'] = []
-			if conf.has_option('recent', 'num_recent'):
-				num_recent = conf.getint('recent', 'num_recent')
-				for i in range(num_recent):
-					self.usettings['recentfiles'].append('')
-					if conf.has_option('recent', 'urls[' + str(i) + ',0]'):
-						self.usettings['recentfiles'][i] = conf.get('recent', 'urls[' + str(i) + ',0]')
-			# Read accel_map file, if it exists
-			if os.path.isfile(self.config_dir + '/accel_map'):
-				gtk.accel_map_load(self.config_dir + '/accel_map')
+		config = os.path.join(self.config_dir, 'mirage1.conf')
+		if os.path.isfile(config):
+			# Add each entry one by one in case of missing entries in the config
+			cf = open(config)
+			confdict = json.load(cf)
+			for k,v in confdict.items():
+				self.usettings[k] = v
+			# Additional work needed
+			bg = self.usettings['bgcolor']
+			cf.close()
+			self.bgcolor = gtk.gdk.Color(red=bg['r'], green=bg['g'], blue=bg['b'])
+		# Read accel_map file, if it exists
+		accel = os.path.join(self.config_dir, 'accel_map')
+		if os.path.isfile(accel):
+			gtk.accel_map_load(accel)
 
 	def refresh_recent_files_menu(self):
 		if self.merge_id_recent:
@@ -1522,60 +1440,16 @@ class Base:
 		return
 
 	def save_settings(self):
-		conf = ConfigParser.ConfigParser()
-		conf.add_section('window')
-		conf.set('window', 'w', self.window.get_allocation().width)
-		conf.set('window', 'h', self.window.get_allocation().height)
-		conf.set('window', 'toolbar', self.usettings['toolbar_show'])
-		conf.set('window', 'statusbar', self.usettings['statusbar_show'])
-		conf.set('window', 'thumbpane', self.usettings['thumbpane_show'])
-		conf.add_section('prefs')
-		conf.set('prefs', 'simple-bgcolor', self.usettings['simple_bgcolor'])
-		conf.set('prefs', 'bgcolor-red', self.usettings['bgcolor']['r'])
-		conf.set('prefs', 'bgcolor-green', self.usettings['bgcolor']['g'])
-		conf.set('prefs', 'bgcolor-blue', self.usettings['bgcolor']['b'])
-		conf.set('prefs', 'open_all', self.usettings['open_all_images'])
-		conf.set('prefs', 'hidden', self.usettings['open_hidden_files'])
-		conf.set('prefs', 'use_numacomp', self.usettings['use_numacomp'])
-		conf.set('prefs', 'casesensitive_numacomp', self.usettings['case_numacomp'])
-		conf.set('prefs', 'use_last_dir', self.usettings['use_last_dir'])
-		conf.set('prefs', 'last_dir', self.usettings['last_dir'])
-		conf.set('prefs', 'fixed_dir', self.usettings['fixed_dir'])
-		conf.set('prefs', 'open_mode', self.usettings['open_mode'])
-		conf.set('prefs', 'last_mode', self.usettings['last_mode'])
-		conf.set('prefs', 'listwrap_mode', self.usettings['listwrap_mode'])
-		conf.set('prefs', 'slideshow_delay', int(self.usettings['slideshow_delay']))
-		conf.set('prefs', 'slideshow_random', self.usettings['slideshow_random'])
-		conf.set('prefs', 'zoomquality', self.usettings['zoomvalue'])
-		conf.set('prefs', 'quality_save', int(self.usettings['quality_save']))
-		conf.set('prefs', 'disable_screensaver', self.usettings['disable_screensaver'])
-		conf.set('prefs', 'slideshow_in_fullscreen', self.usettings['slideshow_in_fullscreen'])
-		conf.set('prefs', 'confirm_delete', self.usettings['confirm_delete'])
-		conf.set('prefs', 'preloading_images', self.usettings['preloading_images'])
-		conf.set('prefs', 'savemode', self.usettings['savemode'])
-		conf.set('prefs', 'start_in_fullscreen', self.usettings['start_in_fullscreen'])
-		conf.set('prefs', 'thumbsize', self.usettings['thumbnail_size'])
-		conf.set('prefs', 'screenshot_delay', self.usettings['screenshot_delay'])
-		conf.add_section('actions')
-		conf.set('actions', 'num_actions', len(self.usettings['action_names']))
-		for i in range(len(self.usettings['action_names'])):
-			conf.set('actions', 'names[' + str(i) + ']', self.usettings['action_names'][i])
-			conf.set('actions', 'commands[' + str(i) + ']', self.usettings['action_commands'][i])
-			conf.set('actions', 'shortcuts[' + str(i) + ']', self.usettings['action_shortcuts'][i])
-			conf.set('actions', 'batch[' + str(i) + ']', self.usettings['action_batch'][i])
-		conf.add_section('recent')
-		conf.set('recent', 'num_recent', len(self.usettings['recentfiles']))
-		for i in range(len(self.usettings['recentfiles'])):
-			conf.set('recent', 'num[' + str(i) + ']', len(self.usettings['recentfiles'][i]))
-			conf.set('recent', 'urls[' + str(i) + ',0]', self.usettings['recentfiles'][i])
+		# Save the config as json
 		if not os.path.exists(self.config_dir):
 			os.makedirs(self.config_dir)
-		conf.write(file(self.config_dir + '/miragerc', 'w'))
+		conffile = os.path.join(self.config_dir, 'mirage1.conf')
+		cf = open(conffile, 'w')
+		json.dump(self.usettings, cf, indent=4)
+		cf.close()
 
 		# Also, save accel_map:
 		gtk.accel_map_save(self.config_dir + '/accel_map')
-
-		return
 
 	def delete_event(self, widget, event, data=None):
 		cancel = self.autosave_image()
