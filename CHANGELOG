@@ -1,4 +1,4 @@
-v1.0 - Future
+v1.0_pre1 - December 10, 2012
 	+ Added Numerical Aware Comparison (numacomp) as a sorting option.
 	+ Added Exif data reading on supported files through pyexiv2
 	+ Added Image rotation based on Exif data (Thanks to Alexandre Chataignon
