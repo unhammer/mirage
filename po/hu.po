@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-16 13:12+0200\n"
+"POT-Creation-Date: 2012-12-10 11:38+0100\n"
 "PO-Revision-Date: 2008-02-28 19:58+0100\n"
 "Last-Translator: Lisovszki  <lisovszki@gmail.com>\n"
 "Language-Team: hungarian <hu@li.org>\n"
@@ -49,380 +49,384 @@ msgstr ""
 msgid "Mirage requires PyGTK %s or newer.\n"
 msgstr ""
 
-#: mirage.py:185
+#: mirage.py:160
 msgid "Open in GIMP"
 msgstr ""
 
-#: mirage.py:185
+#: mirage.py:160
 msgid "Create Thumbnail"
 msgstr ""
 
-#: mirage.py:185
+#: mirage.py:160
 #, fuzzy
 msgid "Create Thumbnails"
 msgstr "Gyorsnézeti képek"
 
-#: mirage.py:185
+#: mirage.py:160
 msgid "Move to Favorites"
 msgstr ""
 
 # livágás
-#: mirage.py:283
+#: mirage.py:264
 msgid "_File"
 msgstr "_Fájl"
 
-#: mirage.py:284
+#: mirage.py:265
 msgid "_Edit"
 msgstr "_Szerkesztés"
 
-#: mirage.py:285
+#: mirage.py:266
 msgid "_View"
 msgstr "_Nézet"
 
-#: mirage.py:286
+#: mirage.py:267
 msgid "_Go"
 msgstr "_Ugrás"
 
-#: mirage.py:287
+#: mirage.py:268
 msgid "_Help"
 msgstr "_Súgó"
 
-#: mirage.py:288
+#: mirage.py:269
 #, fuzzy
 msgid "Custom _Actions"
 msgstr "Egyéni műveletek"
 
-#: mirage.py:289
+#: mirage.py:270
 msgid "_Open Image..."
 msgstr "_Kép megnyitása..."
 
-#: mirage.py:289
+#: mirage.py:270
 msgid "Open Image"
 msgstr "Kép megnyitása"
 
-#: mirage.py:290
+#: mirage.py:271
 #, fuzzy
 msgid "Open _Remote image..."
 msgstr "_Távoli kép megnyitása"
 
-#: mirage.py:290
+#: mirage.py:271
 msgid "Open Remote Image"
 msgstr "Távoli kép megnyitása"
 
-#: mirage.py:291
+#: mirage.py:272
 msgid "Open _Folder..."
 msgstr "_Mappa megnyitása..."
 
-#: mirage.py:291
+#: mirage.py:272
 msgid "Open Folder"
 msgstr "Mappa megnyitása"
 
-#: mirage.py:292
+#: mirage.py:273
 msgid "_Save Image"
 msgstr "_Kép mentése"
 
-#: mirage.py:293
+#: mirage.py:274
 msgid "Save Image _As..."
 msgstr "Kép mentése _mint..."
 
-#: mirage.py:294
+#: mirage.py:275
+msgid "Copy to Clipboard..."
+msgstr ""
+
+#: mirage.py:276
 #, fuzzy
 msgid "C_rop..."
 msgstr "_Levágás..."
 
-#: mirage.py:294 mirage.py:3438
+#: mirage.py:276 mirage.py:3281
 msgid "Crop Image"
 msgstr "Kép levágása"
 
-#: mirage.py:295
+#: mirage.py:277
 #, fuzzy
 msgid "R_esize..."
 msgstr "Át_méretezés..."
 
-#: mirage.py:295 mirage.py:3683
+#: mirage.py:277 mirage.py:3523
 msgid "Resize Image"
 msgstr "Kép átméretezése"
 
-#: mirage.py:296
+#: mirage.py:278
 #, fuzzy
 msgid "_Saturation..."
 msgstr "Telítettség..."
 
-#: mirage.py:296
+#: mirage.py:278
 msgid "Modify saturation"
 msgstr "Telítettség módosítása"
 
-#: mirage.py:298
+#: mirage.py:280
 msgid "_Previous Image"
 msgstr "_Előző kép"
 
-#: mirage.py:298 mirage.py:340 mirage.py:342 mirage.py:344
+#: mirage.py:280 mirage.py:322 mirage.py:324 mirage.py:326
 msgid "Previous Image"
 msgstr "Előző kép"
 
-#: mirage.py:299
+#: mirage.py:281
 #, fuzzy
 msgid "Pre_vious Subfolder"
 msgstr "Előző kép"
 
-#: mirage.py:299 mirage.py:345 mirage.py:347
+#: mirage.py:281 mirage.py:327 mirage.py:329
 #, fuzzy
 msgid "Previous Subfolder"
 msgstr "Előző kép"
 
-#: mirage.py:300
+#: mirage.py:282
 msgid "_Next Image"
 msgstr "_Következő kép"
 
-#: mirage.py:300 mirage.py:332 mirage.py:341 mirage.py:343
+#: mirage.py:282 mirage.py:314 mirage.py:323 mirage.py:325
 msgid "Next Image"
 msgstr "Következő kép"
 
-#: mirage.py:301
+#: mirage.py:283
 msgid "Ne_xt Subfolder"
 msgstr ""
 
-#: mirage.py:301 mirage.py:346 mirage.py:348
+#: mirage.py:283 mirage.py:328 mirage.py:330
 msgid "Next Subfolder"
 msgstr ""
 
-#: mirage.py:302
+#: mirage.py:284
 msgid "_Previous"
 msgstr "_Előző"
 
-#: mirage.py:302
+#: mirage.py:284
 msgid "Previous"
 msgstr "Előző"
 
-#: mirage.py:303
+#: mirage.py:285
 msgid "_Next"
 msgstr "_Következő"
 
-#: mirage.py:303
+#: mirage.py:285
 msgid "Next"
 msgstr "Következő"
 
-#: mirage.py:304
+#: mirage.py:286
 msgid "_Random Image"
 msgstr "_Véletlenszerű kép"
 
-#: mirage.py:304
+#: mirage.py:286
 msgid "Random Image"
 msgstr "Véletlen kép"
 
-#: mirage.py:305
+#: mirage.py:287
 msgid "_First Image"
 msgstr "_Első kép"
 
-#: mirage.py:305
+#: mirage.py:287
 msgid "First Image"
 msgstr "Első kép"
 
-#: mirage.py:306
+#: mirage.py:288
 msgid "_Last Image"
 msgstr "_Utolsó kép"
 
-#: mirage.py:306
+#: mirage.py:288
 msgid "Last Image"
 msgstr "Utolső kép"
 
-#: mirage.py:307
+#: mirage.py:289
 msgid "Zoom _In"
 msgstr "_Nagyítás"
 
-#: mirage.py:307 mirage.py:330 mirage.py:331 mirage.py:336 mirage.py:350
+#: mirage.py:289 mirage.py:312 mirage.py:313 mirage.py:318 mirage.py:332
 msgid "Zoom In"
 msgstr "Nagyítás"
 
-#: mirage.py:308
+#: mirage.py:290
 msgid "Zoom _Out"
 msgstr "_Kicsinyítés"
 
-#: mirage.py:308 mirage.py:329 mirage.py:335 mirage.py:351
+#: mirage.py:290 mirage.py:311 mirage.py:317 mirage.py:333
 msgid "Zoom Out"
 msgstr "Kicsinyítés"
 
-#: mirage.py:309
+#: mirage.py:291
 msgid "Zoom To _Fit"
 msgstr "Nagyítás _igazítás"
 
-#: mirage.py:309 mirage.py:333 mirage.py:337
+#: mirage.py:291 mirage.py:315 mirage.py:319
 msgid "Fit"
 msgstr "Igazítás"
 
-#: mirage.py:310
+#: mirage.py:292
 msgid "_1:1"
 msgstr "_1:1"
 
-#: mirage.py:310 mirage.py:334 mirage.py:338 mirage.py:349
+#: mirage.py:292 mirage.py:316 mirage.py:320 mirage.py:331
 msgid "1:1"
 msgstr "1:1"
 
-#: mirage.py:311
+#: mirage.py:293
 msgid "Rotate _Left"
 msgstr "Forgatás _balra"
 
-#: mirage.py:311
+#: mirage.py:293
 msgid "Rotate Left"
 msgstr "Forgatás balra"
 
-#: mirage.py:312
+#: mirage.py:294
 msgid "Rotate _Right"
 msgstr "Forgatás _jobbra"
 
-#: mirage.py:312
+#: mirage.py:294
 msgid "Rotate Right"
 msgstr "Forgatás jobbra"
 
-#: mirage.py:313
+#: mirage.py:295
 msgid "Flip _Vertically"
 msgstr "_Függőleges tükrözés"
 
-#: mirage.py:313
+#: mirage.py:295
 msgid "Flip Vertically"
 msgstr "Tükrözés függőlegesen"
 
-#: mirage.py:314
+#: mirage.py:296
 msgid "Flip _Horizontally"
 msgstr "_Vízszintes tükrözés"
 
-#: mirage.py:314
+#: mirage.py:296
 msgid "Flip Horizontally"
 msgstr "Tükrözés vízszintesen"
 
-#: mirage.py:316
+#: mirage.py:298
 msgid "_Contents"
 msgstr "_Tartalom"
 
-#: mirage.py:316
+#: mirage.py:298
 msgid "Contents"
 msgstr "Tartalom"
 
-#: mirage.py:317
+#: mirage.py:299
 #, fuzzy
 msgid "Pr_eferences..."
 msgstr "_Beállítások..."
 
-#: mirage.py:317
+#: mirage.py:299
 msgid "Preferences"
 msgstr "Beállítások"
 
-#: mirage.py:319
+#: mirage.py:301
 msgid "E_xit Full Screen"
 msgstr "N_ormál képernyő"
 
-#: mirage.py:319 mirage.py:328
+#: mirage.py:301 mirage.py:310
 msgid "Exit Full Screen"
 msgstr "Normál képernyő"
 
-#: mirage.py:320
+#: mirage.py:302
 msgid "_Start Slideshow"
 msgstr "_Diavetítés"
 
-#: mirage.py:320
+#: mirage.py:302
 msgid "Start Slideshow"
 msgstr "Diavetítés"
 
-#: mirage.py:321
+#: mirage.py:303
 msgid "_Stop Slideshow"
 msgstr "_Diavetítés leállítása"
 
-#: mirage.py:321
+#: mirage.py:303
 msgid "Stop Slideshow"
 msgstr "Diavetítés leálítása"
 
-#: mirage.py:322
+#: mirage.py:304
 msgid "_Delete..."
 msgstr "_Törlés..."
 
-#: mirage.py:322 mirage.py:2952
+#: mirage.py:304 mirage.py:2817
 msgid "Delete Image"
 msgstr "Kép törlése"
 
-#: mirage.py:323
+#: mirage.py:305
 msgid "Re_name..."
 msgstr "Át_nevezés..."
 
-#: mirage.py:323 mirage.py:2886
+#: mirage.py:305 mirage.py:2736
 msgid "Rename Image"
 msgstr "Kép átnevezése"
 
-#: mirage.py:324
+#: mirage.py:306
 #, fuzzy
 msgid "_Take Screenshot..."
 msgstr "_Képernyőkép készítése..."
 
-#: mirage.py:324
+#: mirage.py:306
 msgid "Take Screenshot"
 msgstr "Képernyőkép készítése"
 
-#: mirage.py:325
+#: mirage.py:307
 msgid "_Properties..."
 msgstr "_Tulajdonságok..."
 
-#: mirage.py:325 mirage.py:2405
+#: mirage.py:307 mirage.py:2255
 msgid "Properties"
 msgstr "Tulajdonságok"
 
-#: mirage.py:326
+#: mirage.py:308
 msgid "_Configure..."
 msgstr "_Beállítás..."
 
-#: mirage.py:326
+#: mirage.py:308
 msgid "Custom Actions"
 msgstr "Egyéni műveletek"
 
-#: mirage.py:354
+#: mirage.py:336
 msgid "_Status Bar"
 msgstr "_Állapotsor"
 
-#: mirage.py:354
+#: mirage.py:336
 msgid "Status Bar"
 msgstr "Állapotsor"
 
-#: mirage.py:355
+#: mirage.py:337
 msgid "_Toolbar"
 msgstr "_Eszköztár"
 
-#: mirage.py:355
+#: mirage.py:337
 msgid "Toolbar"
 msgstr "Eszköztár"
 
-#: mirage.py:356
+#: mirage.py:338
 #, fuzzy
 msgid "Thumbnails _Pane"
 msgstr "Gyorsnézeti képek"
 
-#: mirage.py:356
+#: mirage.py:338
 msgid "Thumbnails Pane"
 msgstr "Gyorsnézeti képek"
 
-#: mirage.py:357
+#: mirage.py:339
 #, fuzzy
 msgid "_Randomize list"
 msgstr "Véletlenszerű képsorrend"
 
-#: mirage.py:357
+#: mirage.py:339
 #, fuzzy
 msgid "Randomize list"
 msgstr "Véletlenszerű képsorrend"
 
-#: mirage.py:1089
+#: mirage.py:989
 #, python-format
 msgid "Couldn't find the image %s. Please check your installation."
 msgstr ""
 
-#: mirage.py:1306
+#: mirage.py:1206
 #, fuzzy, python-format
 msgid "Action: %s"
 msgstr "Művelet"
 
-#: mirage.py:1309
+#: mirage.py:1209
 #, python-format
 msgid "Action return code: %s"
 msgstr "Műveleti visszatérés kód: %s"
 
-#: mirage.py:1311
+#: mirage.py:1211
 #, fuzzy, python-format
 msgid ""
 "Unable to launch \"%s\". Please specify a valid command from Edit > Custom "
@@ -430,209 +434,213 @@ msgid ""
 msgstr ""
 "Kérlek adj meg egy érvényes parancsot a Szerkesztés > Egyéni műveleteknél."
 
-#: mirage.py:1313 mirage.py:2148 mirage.py:2183
+#: mirage.py:1213 mirage.py:1998 mirage.py:2033
 msgid "Invalid Custom Action"
 msgstr "Érvénytelen egyéni művelet"
 
-#: mirage.py:1446
+#: mirage.py:1346
 #, fuzzy, python-format
 msgid "Version: %s"
 msgstr "Verzió: Mirage"
 
-#: mirage.py:1447
+#: mirage.py:1347
 msgid "Website: http://mirageiv.berlios.de"
 msgstr "Weboldal: http://mirageiv.berlios.de"
 
-#: mirage.py:1452
+#: mirage.py:1352
 msgid "Usage: mirage [OPTION]... FILES|FOLDERS..."
 msgstr "Használat: mirage [OPCIÓ]... FÁJLOK|MAPPÁK..."
 
-#: mirage.py:1454
+#: mirage.py:1354
 msgid "Options"
 msgstr "Beállítások"
 
-#: mirage.py:1455
+#: mirage.py:1355
 msgid "Show this help and exit"
 msgstr "Súgó megjelenítése és kilépés"
 
-#: mirage.py:1456
+#: mirage.py:1356
 msgid "Show version information and exit"
 msgstr "Verzió információ megjelenítése és kilépés"
 
-#: mirage.py:1457
+#: mirage.py:1357
 msgid "Show more detailed information"
 msgstr "További információk megjelenítése"
 
-#: mirage.py:1458
+#: mirage.py:1358
 msgid "Recursively include all images found in"
 msgstr "Minden megtalált képet tartalmazzon"
 
-#: mirage.py:1459
+#: mirage.py:1359
 msgid "subdirectories of FOLDERS"
 msgstr "MAPPÁK alkönyvtárjai"
 
-#: mirage.py:1460
+#: mirage.py:1360
 msgid "Start in slideshow mode"
 msgstr "Indítás diavetítés módban"
 
-#: mirage.py:1461
+#: mirage.py:1361
 msgid "Start in fullscreen mode"
 msgstr "Indítás teljes képernyős módban"
 
-#: mirage.py:1462
+#: mirage.py:1362
+msgid "Do not sort input list"
+msgstr ""
+
+#: mirage.py:1363
 msgid "Execute 'cmd' when an image is loaded"
 msgstr "'cmd' végrehajtása, ha egy kép betöltődik"
 
-#: mirage.py:1463
+#: mirage.py:1364
 #, fuzzy
 msgid "uses same syntax as custom actions,"
 msgstr "(ugyanazon szintaktika használata az egyéni műveleteknél,"
 
-#: mirage.py:1464
+#: mirage.py:1365
 #, fuzzy
 msgid "i.e. mirage -o 'echo file is %F'"
 msgstr "pl. mirage -o echo fájl %F )"
 
-#: mirage.py:1684
+#: mirage.py:1541
 msgid "Save As"
 msgstr "Mentés másként"
 
-#: mirage.py:1725
+#: mirage.py:1587
 #, python-format
 msgid ""
 "The %s format is not supported for saving. Do you wish to save the file in a "
 "different format?"
 msgstr ""
 
-#: mirage.py:1726 mirage.py:1737
+#: mirage.py:1588 mirage.py:1599
 msgid "Save"
 msgstr "Mentés"
 
-#: mirage.py:1736
+#: mirage.py:1598
 #, fuzzy, python-format
 msgid "Unable to save %s"
 msgstr "Nem tudom menteni"
 
-#: mirage.py:1753
+#: mirage.py:1615
 msgid "The current image has been modified. Save changes?"
 msgstr "A jelenlegi kép megváltozott. Mented a módosításokat?"
 
-#: mirage.py:1757
+#: mirage.py:1619
 msgid "Save?"
 msgstr "Mentés?"
 
-#: mirage.py:1795
+#: mirage.py:1642
 msgid "Open Remote"
 msgstr "Távoli megnyitása"
 
-#: mirage.py:1800
+#: mirage.py:1647
 #, fuzzy
 msgid "Image Location (URL):"
 msgstr "Kép helye (URL)"
 
-#: mirage.py:1831
+#: mirage.py:1681
 msgid "Open"
 msgstr "Megnyitás"
 
-#: mirage.py:1834
+#: mirage.py:1684
 msgid "Images"
 msgstr "Képek"
 
-#: mirage.py:1838
+#: mirage.py:1688
 msgid "All files"
 msgstr "Minden fájl"
 
-#: mirage.py:1848
+#: mirage.py:1698
 msgid "Include images in subdirectories"
 msgstr "Az alkönyvtárakból is"
 
-#: mirage.py:1991
+#: mirage.py:1841
 msgid "Cannot load image."
 msgstr "Nem tudom betölteni a képet "
 
-#: mirage.py:1995
+#: mirage.py:1845
 #, python-format
 msgid "Custom actions: %(current)i of  %(total)i"
 msgstr ""
 
-#: mirage.py:1997
+#: mirage.py:1847
 #, fuzzy
 msgid "Scanning..."
 msgstr "Keresés"
 
-#: mirage.py:2001
+#: mirage.py:1851
 msgid "Configure Custom Actions"
 msgstr "Egyéni műveletek beállítása"
 
-#: mirage.py:2019
+#: mirage.py:1869
 msgid "Batch"
 msgstr "Sarzs"
 
-#: mirage.py:2020
+#: mirage.py:1870
 msgid "Action"
 msgstr "Művelet"
 
-#: mirage.py:2021
+#: mirage.py:1871
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
-#: mirage.py:2033
+#: mirage.py:1883
 msgid "Add action"
 msgstr "Folyamat hozzáadása"
 
-#: mirage.py:2037
+#: mirage.py:1887
 msgid "Edit selected action."
 msgstr "Kijelölt folyamat szerkesztése"
 
-#: mirage.py:2041
+#: mirage.py:1891
 msgid "Remove selected action."
 msgstr "Kijelölt folyamat eltávolítása."
 
-#: mirage.py:2045
+#: mirage.py:1895
 msgid "Move selected action up."
 msgstr "Kijelölt folyamat mozgatása fel."
 
-#: mirage.py:2049
+#: mirage.py:1899
 msgid "Move selected action down."
 msgstr "Kijelölt folyamat mozgatása le."
 
-#: mirage.py:2052
+#: mirage.py:1902
 msgid "Parameters"
 msgstr "Paraméterek"
 
-#: mirage.py:2052
+#: mirage.py:1902
 msgid "File path, name, and extension"
 msgstr "Fájl útvonal, név és kiterjesztés"
 
-#: mirage.py:2052
+#: mirage.py:1902
 msgid "File path"
 msgstr "Fájl útvonal"
 
-#: mirage.py:2052
+#: mirage.py:1902
 msgid "File name without file extension"
 msgstr "Fájlnév, fájl kiterjesztés nélkül"
 
-#: mirage.py:2052
+#: mirage.py:1902
 msgid "File extension (i.e. \".png\")"
 msgstr "Fájl kiterjesztés (pl. \".png\")"
 
-#: mirage.py:2052
+#: mirage.py:1902
 msgid "List of files, space-separated"
 msgstr "Fájl lista, hely szükséges"
 
-#: mirage.py:2055
+#: mirage.py:1905
 msgid "Operations"
 msgstr "Műveletek"
 
-#: mirage.py:2055
+#: mirage.py:1905
 msgid "Go to next image"
 msgstr "Következő kép"
 
-#: mirage.py:2055
+#: mirage.py:1905
 msgid "Go to previous image"
 msgstr "Előző kép"
 
-#: mirage.py:2074
+#: mirage.py:1924
 msgid ""
 "Here you can define custom actions with shortcuts. Actions use the built-in "
 "parameters and operations listed below and can have multiple statements "
@@ -641,254 +649,254 @@ msgstr ""
 "Itt meghatározhatsz egyéni műveleteket, gyorsbillentyűkkel együtt. A "
 "folyamat minden,  a listában szereplő képre érvényes lesz."
 
-#: mirage.py:2110
+#: mirage.py:1960
 msgid "Add Custom Action"
 msgstr "Egyéni művelet hozzáadása"
 
-#: mirage.py:2112
+#: mirage.py:1962
 msgid "Edit Custom Action"
 msgstr "Egyéni művelet szerkesztése"
 
-#: mirage.py:2115
+#: mirage.py:1965
 #, fuzzy
 msgid "Action Name:"
 msgstr "Művelet név"
 
-#: mirage.py:2117
+#: mirage.py:1967
 #, fuzzy
 msgid "Command:"
 msgstr "Parancs"
 
-#: mirage.py:2119
+#: mirage.py:1969
 #, fuzzy
 msgid "Shortcut:"
 msgstr "Gyorsbillentyű"
 
-#: mirage.py:2133
+#: mirage.py:1983
 msgid "Perform action on all images (Batch)"
 msgstr "Folyamat végrehajtása minden képen (Sarzs)"
 
-#: mirage.py:2147
+#: mirage.py:1997
 msgid "[PREV] and [NEXT] are only valid alone or at the end of the command"
 msgstr ""
 
-#: mirage.py:2182
+#: mirage.py:2032
 msgid "Incomplete custom action specified."
 msgstr "Teljesítetlen egyéni művelet meghatározva."
 
-#: mirage.py:2260
+#: mirage.py:2110
 msgid "Action Shortcut"
 msgstr "Művelet gyorsbillentyű"
 
-#: mirage.py:2261
+#: mirage.py:2111
 msgid "Press the desired shortcut for the action."
 msgstr "Nyomd le a kivánt gyorsbillentyűt a folyamathoz."
 
-#: mirage.py:2278 mirage.py:2285
+#: mirage.py:2128 mirage.py:2135
 #, python-format
 msgid "The shortcut '%(shortcut)s' is already used for '%(key)s'."
 msgstr ""
 
-#: mirage.py:2279 mirage.py:2286
+#: mirage.py:2129 mirage.py:2136
 msgid "Invalid Shortcut"
 msgstr "Érvénytelen gyorsbillentyű"
 
-#: mirage.py:2328
+#: mirage.py:2178
 msgid "Screenshot"
 msgstr "Képernyőkép"
 
-#: mirage.py:2329
+#: mirage.py:2179
 #, fuzzy
 msgid "_Snap"
 msgstr "Elkap"
 
-#: mirage.py:2334
+#: mirage.py:2184
 msgid "Location"
 msgstr "Hely"
 
-#: mirage.py:2337
+#: mirage.py:2187
 msgid "Entire screen"
 msgstr "Egész képernyő"
 
-#: mirage.py:2338
+#: mirage.py:2188
 #, fuzzy
 msgid "Window under pointer"
 msgstr "Ablak az egér mutató alatt"
 
-#: mirage.py:2343
+#: mirage.py:2193
 msgid "Delay"
 msgstr "Késleltetés"
 
-#: mirage.py:2351
+#: mirage.py:2201
 msgid " seconds"
 msgstr " másodperc"
 
-#: mirage.py:2418
+#: mirage.py:2268
 msgid "Generic:"
 msgstr ""
 
-#: mirage.py:2420
+#: mirage.py:2270
 #, fuzzy
 msgid "File name:"
 msgstr "Fájlnév"
 
-#: mirage.py:2422
+#: mirage.py:2272
 #, fuzzy
 msgid "File modified:"
 msgstr "Fájlnév"
 
-#: mirage.py:2424
+#: mirage.py:2274
 #, fuzzy
 msgid "Dimensions:"
 msgstr "Méretek"
 
-#: mirage.py:2426
+#: mirage.py:2276
 #, fuzzy
 msgid "File size:"
 msgstr "Fájlméret"
 
-#: mirage.py:2428
+#: mirage.py:2278
 #, fuzzy
 msgid "File type:"
 msgstr "Fájltípus"
 
-#: mirage.py:2430
+#: mirage.py:2280
 #, fuzzy
 msgid "Transparency:"
 msgstr "Átlátszóság"
 
-#: mirage.py:2432
+#: mirage.py:2282
 #, fuzzy
 msgid "Animation:"
 msgstr "Animáció"
 
-#: mirage.py:2434
+#: mirage.py:2284
 #, fuzzy
 msgid "Bits per sample:"
 msgstr "Bitszám"
 
-#: mirage.py:2436
+#: mirage.py:2286
 #, fuzzy
 msgid "Channels:"
 msgstr "Csatornák"
 
-#: mirage.py:2456 mirage.py:2460 mirage.py:2702
+#: mirage.py:2306 mirage.py:2310 mirage.py:2552
 msgid "Yes"
 msgstr "Igen"
 
-#: mirage.py:2458 mirage.py:2462 mirage.py:2701
+#: mirage.py:2308 mirage.py:2312 mirage.py:2551
 msgid "No"
 msgstr "Nem"
 
-#: mirage.py:2496
+#: mirage.py:2346
 msgid "Exifdata"
 msgstr ""
 
-#: mirage.py:2502
+#: mirage.py:2352
 msgid "Exposure time:"
 msgstr ""
 
-#: mirage.py:2502
+#: mirage.py:2352
 #, python-format
 msgid "%s sec"
 msgstr ""
 
-#: mirage.py:2503
+#: mirage.py:2353
 msgid "Aperture:"
 msgstr ""
 
-#: mirage.py:2503 mirage.py:2505 mirage.py:2506 mirage.py:2507 mirage.py:2508
+#: mirage.py:2353 mirage.py:2355 mirage.py:2356 mirage.py:2357 mirage.py:2358
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: mirage.py:2504
+#: mirage.py:2354
 msgid "Focal length:"
 msgstr ""
 
-#: mirage.py:2504
+#: mirage.py:2354
 #, python-format
 msgid "%s mm"
 msgstr ""
 
-#: mirage.py:2505
+#: mirage.py:2355
 msgid "Time taken:"
 msgstr ""
 
-#: mirage.py:2506
+#: mirage.py:2356
 msgid "ISO Speed:"
 msgstr ""
 
-#: mirage.py:2507
+#: mirage.py:2357
 msgid "Exposure bias:"
 msgstr ""
 
-#: mirage.py:2508
+#: mirage.py:2358
 msgid "Camera:"
 msgstr ""
 
-#: mirage.py:2566
+#: mirage.py:2416
 #, fuzzy, python-format
 msgid "%s Preferences"
 msgstr "Beállítások"
 
-#: mirage.py:2572 mirage.py:2806
+#: mirage.py:2422 mirage.py:2656
 msgid "Interface"
 msgstr "Felület"
 
-#: mirage.py:2575
+#: mirage.py:2425
 #, fuzzy
 msgid "Background color:"
 msgstr "Háttérszín"
 
-#: mirage.py:2579
+#: mirage.py:2429
 msgid "Sets the background color for the application."
 msgstr "Állítsd be az alkalmazás hátterének a színét."
 
-#: mirage.py:2585
+#: mirage.py:2435
 #, fuzzy
 msgid "Simple background color:"
 msgstr "Háttérszín"
 
-#: mirage.py:2594
+#: mirage.py:2444
 msgid "Open Mirage in fullscreen mode"
 msgstr "Program megnyitása teljes képernyős módban"
 
-#: mirage.py:2597
+#: mirage.py:2447
 #, fuzzy
 msgid "Thumbnail size:"
 msgstr "Előnézeti kép méret"
 
-#: mirage.py:2624
+#: mirage.py:2474
 msgid "Open Behavior"
 msgstr "Viselkedés megnyitása"
 
-#: mirage.py:2627
+#: mirage.py:2477
 #, fuzzy
 msgid "Open new image in:"
 msgstr "Új kép megnyitása itt"
 
-#: mirage.py:2629
+#: mirage.py:2479
 msgid "Smart Mode"
 msgstr "intelligens mód"
 
-#: mirage.py:2630
+#: mirage.py:2480
 msgid "Zoom To Fit Mode"
 msgstr "Nagyítás az igazításhoz"
 
-#: mirage.py:2631
+#: mirage.py:2481
 msgid "1:1 Mode"
 msgstr "1:1 Mód"
 
-#: mirage.py:2632
+#: mirage.py:2482
 msgid "Last Active Mode"
 msgstr "Utolsó aktív mód"
 
-#: mirage.py:2635
+#: mirage.py:2485
 msgid "Load all images in current directory"
 msgstr "Mindne kép betöltése az aktuális könyvtárból"
 
-#: mirage.py:2637
+#: mirage.py:2487
 msgid ""
 "If enabled, opening an image in Mirage will automatically load all images "
 "found in that image's directory."
@@ -896,11 +904,11 @@ msgstr ""
 "Ha engedélyezed, akkor a program, minden a kiválasztott könyvtárban szereplő "
 "képet automatikusan betölt."
 
-#: mirage.py:2638
+#: mirage.py:2488
 msgid "Allow loading hidden files"
 msgstr "Rejtett fájlok betöltése"
 
-#: mirage.py:2640
+#: mirage.py:2490
 #, fuzzy
 msgid ""
 "If checked, Mirage will open hidden files. Otherwise, hidden files will be "
@@ -909,11 +917,11 @@ msgstr ""
 "Ha kijelölöd, akkor a program a rejtett fájlokat is betölti, minden más "
 "esetben láthatatlanok lesznek."
 
-#: mirage.py:2642
+#: mirage.py:2492
 msgid "Use Numerical aware sort"
 msgstr ""
 
-#: mirage.py:2644
+#: mirage.py:2494
 #, fuzzy
 msgid ""
 "If checked, Mirage will sort the images based on a numerical aware sort."
@@ -921,41 +929,41 @@ msgstr ""
 "Ha kijelölöd, akkor a program a rejtett fájlokat is betölti, minden más "
 "esetben láthatatlanok lesznek."
 
-#: mirage.py:2646
+#: mirage.py:2496
 msgid "Casesensitive sort"
 msgstr ""
 
-#: mirage.py:2648
+#: mirage.py:2498
 msgid "If checked, a case-sensitive sort will be used"
 msgstr ""
 
-#: mirage.py:2653
+#: mirage.py:2503
 msgid "Use last chosen directory"
 msgstr "Utolsó kiválasztott könyvtár használata"
 
-#: mirage.py:2654
+#: mirage.py:2504
 msgid "The default 'Open' directory will be the last directory used."
 msgstr ""
 "Az alapértelmezett 'Megnyitott' könyvtár lesz az utolsó használt könyvtár."
 
-#: mirage.py:2655
+#: mirage.py:2505
 #, fuzzy
 msgid "Use this fixed directory:"
 msgstr "Használd ezt a könyvtárt"
 
-#: mirage.py:2657
+#: mirage.py:2507
 msgid "The default 'Open' directory will be this specified directory."
 msgstr "Az alapértelmezett megnyitott könyvtár lesz a kiválasztott könyvtár."
 
-#: mirage.py:2693 mirage.py:2805
+#: mirage.py:2543 mirage.py:2655
 msgid "Navigation"
 msgstr "Navigáció"
 
-#: mirage.py:2695
+#: mirage.py:2545
 msgid "Preload images for faster navigation"
 msgstr "Képek újratöltése a gyorsabb navigáláshoz"
 
-#: mirage.py:2697
+#: mirage.py:2547
 msgid ""
 "If enabled, the next and previous images in the list will be preloaded "
 "during idle time. Note that the speed increase comes at the expense of "
@@ -966,29 +974,29 @@ msgstr ""
 "idle idő alatt. Ez a művelet sebességcsökkenést okozhat, mivel nagy a "
 "memória igénye, ezért nem ajánlott a használata kis teljesítményű gépeken."
 
-#: mirage.py:2699
+#: mirage.py:2549
 #, fuzzy
 msgid "Wrap around imagelist:"
 msgstr "Képlist körbe forgatása"
 
-#: mirage.py:2703
+#: mirage.py:2553
 msgid "Prompt User"
 msgstr "Rákérdezés"
 
-#: mirage.py:2722 mirage.py:4715
+#: mirage.py:2572 mirage.py:4516
 msgid "Slideshow Mode"
 msgstr "Diavetítés mód"
 
-#: mirage.py:2725
+#: mirage.py:2575
 #, fuzzy
 msgid "Delay between images in seconds:"
 msgstr "Késleltetés képek között"
 
-#: mirage.py:2730
+#: mirage.py:2580
 msgid "Randomize order of images"
 msgstr "Véletlenszerű képsorrend"
 
-#: mirage.py:2732
+#: mirage.py:2582
 msgid ""
 "If enabled, a random image will be chosen during slideshow mode (without "
 "loading any image twice)."
@@ -996,251 +1004,261 @@ msgstr ""
 "Ha engedélyezed, akkor a képek véletlenszerűen lesznek kiválasztva a "
 "diavetítés alatt."
 
-#: mirage.py:2733
+#: mirage.py:2583
 msgid "Disable screensaver in slideshow mode"
 msgstr "Képernyővédő tiltása a diavetítés alatt"
 
-#: mirage.py:2735
+#: mirage.py:2585
 msgid ""
 "If enabled, xscreensaver will be temporarily disabled during slideshow mode."
 msgstr ""
 "Ha engedélyezed, akkor az xképernyővédő tiltva lesz a diavetítés ideje alatt."
 
-#: mirage.py:2736
+#: mirage.py:2586
 msgid "Always start in fullscreen mode"
 msgstr "Mindig teljes képernyős módban induljon"
 
-#: mirage.py:2737
+#: mirage.py:2587
 msgid ""
 "If enabled, starting a slideshow will put the application in fullscreen mode."
 msgstr ""
 "Ha engedélyezed, akkor a diavetítés mindig teljes képernyős módban fog "
 "elindulni."
 
-#: mirage.py:2755
+#: mirage.py:2605
 msgid "Image Editing"
 msgstr "Kép szerkesztés"
 
-#: mirage.py:2757
+#: mirage.py:2607
 msgid "Confirm image delete"
 msgstr "Kép törlés megerősítése"
 
-#: mirage.py:2761
+#: mirage.py:2611
 #, fuzzy
 msgid "Scaling quality:"
 msgstr "Méretezés minősége"
 
-#: mirage.py:2763
+#: mirage.py:2613
 msgid "Nearest (Fastest)"
 msgstr "Legközelebbi (gyorsabb)"
 
-#: mirage.py:2764
+#: mirage.py:2614
 msgid "Tiles"
 msgstr "Elemek"
 
-#: mirage.py:2765
+#: mirage.py:2615
 msgid "Bilinear"
 msgstr "Bilineáris"
 
-#: mirage.py:2766
+#: mirage.py:2616
 msgid "Hyper (Best)"
 msgstr "Hyper (Legjobb)"
 
-#: mirage.py:2772
+#: mirage.py:2622
 #, fuzzy
 msgid "Modified images:"
 msgstr "Módosított képek"
 
-#: mirage.py:2774
+#: mirage.py:2624
 msgid "Ignore Changes"
 msgstr "Módosítások elvetése"
 
-#: mirage.py:2775
+#: mirage.py:2625
 msgid "Auto-Save"
 msgstr "Automatikus mentés"
 
-#: mirage.py:2776
+#: mirage.py:2626
 msgid "Prompt For Action"
 msgstr "Rákérdezés a műveletre"
 
-#: mirage.py:2782
+#: mirage.py:2632
 #, fuzzy
 msgid "Quality to save in:"
 msgstr "Nem tudom menteni"
 
-#: mirage.py:2804
+#: mirage.py:2654
 msgid "Behavior"
 msgstr "Viselkedés"
 
-#: mirage.py:2807
+#: mirage.py:2657
 msgid "Slideshow"
 msgstr "Diavetítés"
 
-#: mirage.py:2808
+#: mirage.py:2658
 msgid "Image"
 msgstr "Kép"
 
-#: mirage.py:2892
+#: mirage.py:2742
 #, fuzzy
 msgid "_Rename"
 msgstr "Átnevezés"
 
-#: mirage.py:2902
+#: mirage.py:2752
 #, fuzzy
 msgid "Enter the new name:"
 msgstr "Add meg az új nevet"
 
-#: mirage.py:2934
+#: mirage.py:2785
+#, python-format
+msgid "Overwrite existing file %s?"
+msgstr ""
+
+#: mirage.py:2786
+#, fuzzy
+msgid "File exists"
+msgstr "Fájl útvonal"
+
+#: mirage.py:2806
 #, fuzzy, python-format
 msgid "Unable to rename %s"
 msgstr "Nem tudom átnevezni"
 
-#: mirage.py:2935
+#: mirage.py:2807
 msgid "Unable to rename"
 msgstr "Nem tudom átnevezni"
 
-#: mirage.py:2954
+#: mirage.py:2819
 #, fuzzy, python-format
 msgid "Are you sure you wish to permanently delete %s?"
 msgstr "Biztosan törölni szeretnéd?"
 
-#: mirage.py:3015
+#: mirage.py:2891
 #, fuzzy, python-format
 msgid "Unable to delete %s"
 msgstr "Nem tudom törölni"
 
-#: mirage.py:3016
+#: mirage.py:2892
 msgid "Unable to delete"
 msgstr "Nem tudom törölni"
 
-#: mirage.py:3024
+#: mirage.py:2900
 msgid "Choose directory"
 msgstr "Könyvtár választása"
 
-#: mirage.py:3072
+#: mirage.py:2950
 msgid "A fast GTK+ Image Viewer."
 msgstr "Egy gyors GTK+-os képnézegető"
 
-#: mirage.py:3117
+#: mirage.py:2995
 msgid "Unable to launch a suitable browser."
 msgstr "Nem tudom megnyitni a böngészőt."
 
-#: mirage.py:3439
+#: mirage.py:3282
 #, fuzzy
 msgid "C_rop"
 msgstr "Kivágás"
 
-#: mirage.py:3481 mirage.py:3694
+#: mirage.py:3324 mirage.py:3534
 #, fuzzy
 msgid "Width:"
 msgstr "Szélesség"
 
-#: mirage.py:3488 mirage.py:3705
+#: mirage.py:3331 mirage.py:3545
 #, fuzzy
 msgid "Height:"
 msgstr "Magasság"
 
-#: mirage.py:3634
+#: mirage.py:3475
 msgid "Saturation"
 msgstr "Telítettség"
 
-#: mirage.py:3635
+#: mirage.py:3476
 #, fuzzy
 msgid "_Saturate"
 msgstr "Telít"
 
-#: mirage.py:3646
+#: mirage.py:3487
 msgid "Saturation level:"
 msgstr "Telítettség szint:"
 
-#: mirage.py:3684
+#: mirage.py:3524
 #, fuzzy
 msgid "_Resize"
 msgstr "Átméretezés"
 
-#: mirage.py:3698 mirage.py:3710
+#: mirage.py:3538 mirage.py:3550
 msgid "pixels"
 msgstr "képpont"
 
-#: mirage.py:3712
+#: mirage.py:3552
 msgid "Preserve aspect ratio"
 msgstr "Arány"
 
-#: mirage.py:3891
+#: mirage.py:3728
 msgid ""
 "You are viewing the first image in the list. Wrap around to the last image?"
 msgstr "Az első képet nézed a listában. Menjünk körbe az utolsó képhez?"
 
-#: mirage.py:3893
+#: mirage.py:3730
 msgid ""
 "You are viewing the last image in the list. Wrap around to the first image?"
 msgstr "Az utolsó képet nézed a listában. Menjünk körbe az első képhez?"
 
-#: mirage.py:3895
+#: mirage.py:3732
 #, fuzzy
 msgid ""
 "You are viewing the first folder in the list. Wrap around to the first image "
 "of the last folder?"
 msgstr "Az első képet nézed a listában. Menjünk körbe az utolsó képhez?"
 
-#: mirage.py:3897
+#: mirage.py:3734
 #, fuzzy
 msgid ""
 "You are viewing the last folder in the list. Wrap around to the first image "
 "of the first folder?"
 msgstr "Az utolsó képet nézed a listában. Menjünk körbe az első képhez?"
 
-#: mirage.py:3899
+#: mirage.py:3736
 msgid ""
 "All images have been viewed. Would you like to cycle through the images "
 "again?"
 msgstr "Minden képet megnéztél. Szeretnéd még egyszer megtekinteni őket?"
 
-#: mirage.py:3900
+#: mirage.py:3737
 msgid "Wrap?"
 msgstr "Körbe?"
 
-#: mirage.py:4070 mirage.py:4442
+#: mirage.py:3911 mirage.py:4285
 #, fuzzy, python-format
 msgid "Loading: %s"
 msgstr "Betöltés"
 
-#: mirage.py:4157
+#: mirage.py:3998
 #, fuzzy, python-format
 msgid "Loading(preloaded): %s"
 msgstr "Betöltés"
 
-#: mirage.py:4178
+#: mirage.py:4022
 #, python-format
 msgid "Loading(not preloaded): %s"
 msgstr ""
 
-#: mirage.py:4227 mirage.py:4256
+#: mirage.py:4071 mirage.py:4100
 #, fuzzy, python-format
 msgid "Preloading: %s"
 msgstr "Előre betöltés"
 
-#: mirage.py:4331 mirage.py:4559
+#: mirage.py:4174 mirage.py:4406
 #, fuzzy, python-format
 msgid "Skipping: %s"
 msgstr "Átugrás"
 
-#: mirage.py:4409
+#: mirage.py:4252
 #, python-format
 msgid "Found: %(item)s [%(number)i]"
 msgstr ""
 
-#: mirage.py:4555
+#: mirage.py:4402
 #, python-format
 msgid "Found: %(fullpath)s [%(number)i]"
 msgstr ""
 
-#: mirage.py:4711
+#: mirage.py:4512
 #, python-format
 msgid "%(current)i of %(total)i"
 msgstr ""
 
-#: mirage.py:4712
+#: mirage.py:4513
 #, python-format
 msgid "[%(current)i of %(total)i]"
 msgstr ""

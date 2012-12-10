@@ -1,5 +1,5 @@
 #!/bin/sh
-xgettext mirage.py
+#xgettext mirage.py
 mv -f messages.po po/
 (cd po
  for i in *.po
