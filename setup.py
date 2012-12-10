@@ -53,5 +53,6 @@ setup(name='Mirage',
 			('share/locale/pt_BR/LC_MESSAGES', ['mo/pt_BR/mirage.mo']),
 			('share/locale/zh_CN/LC_MESSAGES', ['mo/zh_CN/mirage.mo']),
 			('share/locale/it/LC_MESSAGES', ['mo/it/mirage.mo']),
+			('share/locale/he/LC_MESSAGES', ['mo/he/mirage.mo']),
 			('share/locale/uk/LC_MESSAGES', ['mo/uk/mirage.mo'])],
 		)
