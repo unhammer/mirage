@@ -5,6 +5,7 @@ v1.0_pre1 - December 10, 2012
 		for the patch)
 	+ Added command line option to not sort images (Thanks to Paulo Benedict Ang
 		for the patch)
+	+ Added hebrew translation
 	+ Bug: Fixing an issue where the Wrap?-dialog would hangup in slideshow mode
 		when wrap mode was set to ask
 	+ Bug: Fixed broken support for non-ASCII filenames
