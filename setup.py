@@ -10,7 +10,7 @@ from distutils.core import setup, Extension
 # Create mo files:
 if not os.path.exists("mo/"):
 	os.mkdir("mo/")
-for lang in ('it', 'de', 'pl', 'es', 'fr', 'ru', 'hu', 'cs', 'pt_BR', 'zh_CN', 'nl', 'uk'):
+for lang in ('it', 'de', 'pl', 'es', 'fr', 'ru', 'hu', 'cs', 'pt_BR', 'zh_CN', 'nl', 'uk', 'he'):
 	pofile = "po/" + lang + ".po"
 	mofile = "mo/" + lang + "/mirage.mo"
 	if not os.path.exists("mo/" + lang + "/"):
