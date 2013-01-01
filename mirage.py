@@ -169,6 +169,9 @@ class Base:
 		self.config_dir = (os.getenv('XDG_CONFIG_HOME') or os.path.expanduser('~/.config')) + '/mirage'
 		# Load config from disk:
 		self.read_config_and_set_settings()
+		# Set the bg color variable
+		bgc = self.usettings['bgcolor']
+		self.bgcolor = gtk.gdk.Color(red=bgc['r'], green=bgc['g'], blue=bgc['b'])
 		
 		self.going_random = False
 		self.fullscreen_mode = False
@@ -252,19 +255,12 @@ class Base:
 		self.blank_image = gtk.gdk.pixbuf_new_from_file(self.find_path("mirage_blank.png"))
 
 		# Define the main menubar and toolbar:
-		factory = gtk.IconFactory()
-		iconname = 'stock_leave-fullscreen.png'
-		iconname2 = 'stock_fullscreen.png'
-		leave_fullscreen_icon_path = self.find_path(iconname)
-		pixbuf = gtk.gdk.pixbuf_new_from_file(leave_fullscreen_icon_path)
-		iconset = gtk.IconSet(pixbuf)
-		factory.add('leave-fullscreen', iconset)
-		factory.add_default()
-		fullscreen_icon_path = self.find_path(iconname2)
-		pixbuf = gtk.gdk.pixbuf_new_from_file(fullscreen_icon_path)
-		iconset = gtk.IconSet(pixbuf)
-		factory.add('fullscreen', iconset)
-		factory.add_default()
+		self.iconfactory = gtk.IconFactory()
+		icon = gtk.gdk.pixbuf_new_from_file(self.find_path('stock_leave-fullscreen.png'))
+		self.iconfactory.add('leave-fullscreen', gtk.IconSet(icon))
+		icon = gtk.gdk.pixbuf_new_from_file(self.find_path('stock_fullscreen.png'))
+		self.iconfactory.add('fullscreen', gtk.IconSet(icon))
+		self.iconfactory.add_default()
 		try:
 			test = gtk.Button("", gtk.STOCK_LEAVE_FULLSCREEN)
 			leave_fullscreen_icon = gtk.STOCK_LEAVE_FULLSCREEN
@@ -490,9 +486,8 @@ class Base:
 		# Create interface
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
 		self.update_title()
-		icon_path = self.find_path('mirage.png')
 		try:
-			gtk.window_set_default_icon_from_file(icon_path)
+			gtk.window_set_default_icon_from_file(self.find_path('mirage.png'))
 		except:
 			pass
 		vbox = gtk.VBox(False, 0)
@@ -537,9 +532,7 @@ class Base:
 		self.table.attach(self.hscroll, 1, 2, 1, 2, gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
 		self.table.attach(self.vscroll, 2, 3, 0, 1, gtk.FILL|gtk.SHRINK, gtk.FILL|gtk.SHRINK, 0, 0)
 		vbox.pack_start(self.table, True, True, 0)
-		if not self.usettings['bgcolor']:
-			self.bgcolor = gtk.gdk.Color(0, 0, 0) # Default to black
-			self.usettings['bgcolor'] = {'r': 0, 'g':0, 'b': 0}
+		
 		if self.usettings['simple_bgcolor']:
 			self.layout.modify_bg(gtk.STATE_NORMAL, None)
 		else:
@@ -559,69 +552,9 @@ class Base:
 		self.window.add(vbox)
 		self.window.set_property('allow-shrink', False)
 		self.window.set_default_size(self.usettings['window_width'],self.usettings['window_height'])
-
-		# Slideshow control:
-		self.slideshow_window = gtk.Window(gtk.WINDOW_POPUP)
-		self.slideshow_controls = gtk.HBox()
-		self.ss_back = gtk.Button()
-		self.ss_back.add(gtk.image_new_from_stock(gtk.STOCK_GO_BACK, gtk.ICON_SIZE_BUTTON))
-		self.ss_back.set_property('can-focus', False)
-		self.ss_back.connect('clicked', self.goto_prev_image)
-		self.ss_start = gtk.Button("", gtk.STOCK_MEDIA_PLAY)
-		self.ss_start.get_child().get_child().get_children()[1].set_text('')
-		self.ss_start.set_property('can-focus', False)
-		self.ss_start.connect('clicked', self.toggle_slideshow)
-		self.ss_stop = gtk.Button("", gtk.STOCK_MEDIA_STOP)
-		self.ss_stop.get_child().get_child().get_children()[1].set_text('')
-		self.ss_stop.set_property('can-focus', False)
-		self.ss_stop.connect('clicked', self.toggle_slideshow)
-		self.ss_forward = gtk.Button("", gtk.STOCK_GO_FORWARD)
-		self.ss_forward.get_child().get_child().get_children()[1].set_text('')
-		self.ss_forward.set_property('can-focus', False)
-		self.ss_forward.connect('clicked', self.goto_next_image)
-		self.slideshow_controls.pack_start(self.ss_back, False, False, 0)
-		self.slideshow_controls.pack_start(self.ss_start, False, False, 0)
-		self.slideshow_controls.pack_start(self.ss_stop, False, False, 0)
-		self.slideshow_controls.pack_start(self.ss_forward, False, False, 0)
-		self.slideshow_window.add(self.slideshow_controls)
-		if self.usettings['simple_bgcolor']:
-			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, None)
-		else:
-			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
-		self.slideshow_window2 = gtk.Window(gtk.WINDOW_POPUP)
-		self.slideshow_controls2 = gtk.HBox()
-		try:
-			self.ss_exit = gtk.Button("", gtk.STOCK_LEAVE_FULLSCREEN)
-			self.ss_exit.get_child().get_child().get_children()[1].set_text('')
-		except:
-			self.ss_exit = gtk.Button()
-			self.ss_exit.set_image(gtk.image_new_from_stock('leave-fullscreen', gtk.ICON_SIZE_MENU))
-		self.ss_exit.set_property('can-focus', False)
-		self.ss_exit.connect('clicked', self.leave_fullscreen)
-		self.ss_randomize = gtk.ToggleButton()
-		icon_path = self.find_path('stock_shuffle.png')
-		try:
-			pixbuf = gtk.gdk.pixbuf_new_from_file(icon_path)
-			iconset = gtk.IconSet(pixbuf)
-			factory.add('stock-shuffle', iconset)
-			factory.add_default()
-			self.ss_randomize.set_image(gtk.image_new_from_stock('stock-shuffle', gtk.ICON_SIZE_MENU))
-		except:
-			self.ss_randomize.set_label("Rand")
-		self.ss_randomize.connect('toggled', self.random_changed)
-
-		spin_adj = gtk.Adjustment(self.usettings['slideshow_delay'], 0, 50000, 1,100, 0)
-		self.ss_delayspin = gtk.SpinButton(spin_adj, 1.0, 0)
-		self.ss_delayspin.set_numeric(True)
-		self.ss_delayspin.connect('changed', self.delay_changed)
-		self.slideshow_controls2.pack_start(self.ss_randomize, False, False, 0)
-		self.slideshow_controls2.pack_start(self.ss_delayspin, False, False, 0)
-		self.slideshow_controls2.pack_start(self.ss_exit, False, False, 0)
-		self.slideshow_window2.add(self.slideshow_controls2)
-		if self.usettings['simple_bgcolor']:
-			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, None)
-		else:
-			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
+		
+		# Create slideshow window:
+		self.slideshow_setup()
 
 		# Connect signals
 		self.window.connect("delete_event", self.delete_event)
@@ -723,13 +656,73 @@ class Base:
 			for k,v in confdict.items():
 				self.usettings[k] = v
 			# Additional work needed
-			bg = self.usettings['bgcolor']
 			cf.close()
-			self.bgcolor = gtk.gdk.Color(red=bg['r'], green=bg['g'], blue=bg['b'])
 		# Read accel_map file, if it exists
 		accel = os.path.join(self.config_dir, 'accel_map')
 		if os.path.isfile(accel):
 			gtk.accel_map_load(accel)
+
+	def slideshow_setup(self):
+		self.slideshow_window = gtk.Window(gtk.WINDOW_POPUP)
+		self.slideshow_controls = gtk.HBox()
+		self.ss_back = gtk.Button()
+		self.ss_back.add(gtk.image_new_from_stock(gtk.STOCK_GO_BACK, gtk.ICON_SIZE_BUTTON))
+		self.ss_back.set_property('can-focus', False)
+		self.ss_back.connect('clicked', self.goto_prev_image)
+		self.ss_start = gtk.Button("", gtk.STOCK_MEDIA_PLAY)
+		self.ss_start.get_child().get_child().get_children()[1].set_text('')
+		self.ss_start.set_property('can-focus', False)
+		self.ss_start.connect('clicked', self.toggle_slideshow)
+		self.ss_stop = gtk.Button("", gtk.STOCK_MEDIA_STOP)
+		self.ss_stop.get_child().get_child().get_children()[1].set_text('')
+		self.ss_stop.set_property('can-focus', False)
+		self.ss_stop.connect('clicked', self.toggle_slideshow)
+		self.ss_forward = gtk.Button("", gtk.STOCK_GO_FORWARD)
+		self.ss_forward.get_child().get_child().get_children()[1].set_text('')
+		self.ss_forward.set_property('can-focus', False)
+		self.ss_forward.connect('clicked', self.goto_next_image)
+		self.slideshow_controls.pack_start(self.ss_back, False, False, 0)
+		self.slideshow_controls.pack_start(self.ss_start, False, False, 0)
+		self.slideshow_controls.pack_start(self.ss_stop, False, False, 0)
+		self.slideshow_controls.pack_start(self.ss_forward, False, False, 0)
+		self.slideshow_window.add(self.slideshow_controls)
+		if self.usettings['simple_bgcolor']:
+			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, None)
+		else:
+			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
+		self.slideshow_window2 = gtk.Window(gtk.WINDOW_POPUP)
+		self.slideshow_controls2 = gtk.HBox()
+		try:
+			self.ss_exit = gtk.Button("", gtk.STOCK_LEAVE_FULLSCREEN)
+			self.ss_exit.get_child().get_child().get_children()[1].set_text('')
+		except:
+			self.ss_exit = gtk.Button()
+			self.ss_exit.set_image(gtk.image_new_from_stock('leave-fullscreen', gtk.ICON_SIZE_MENU))
+		self.ss_exit.set_property('can-focus', False)
+		self.ss_exit.connect('clicked', self.leave_fullscreen)
+		self.ss_randomize = gtk.ToggleButton()
+		icon_path = self.find_path('stock_shuffle.png')
+		try:
+			pixbuf = gtk.gdk.pixbuf_new_from_file(icon_path)
+			iconset = gtk.IconSet(pixbuf)
+			self.iconfactory.add('stock-shuffle', iconset)
+			self.ss_randomize.set_image(gtk.image_new_from_stock('stock-shuffle', gtk.ICON_SIZE_MENU))
+		except:
+			self.ss_randomize.set_label("Rand")
+		self.ss_randomize.connect('toggled', self.random_changed)
+
+		spin_adj = gtk.Adjustment(self.usettings['slideshow_delay'], 0, 50000, 1,100, 0)
+		self.ss_delayspin = gtk.SpinButton(spin_adj, 1.0, 0)
+		self.ss_delayspin.set_numeric(True)
+		self.ss_delayspin.connect('changed', self.delay_changed)
+		self.slideshow_controls2.pack_start(self.ss_randomize, False, False, 0)
+		self.slideshow_controls2.pack_start(self.ss_delayspin, False, False, 0)
+		self.slideshow_controls2.pack_start(self.ss_exit, False, False, 0)
+		self.slideshow_window2.add(self.slideshow_controls2)
+		if self.usettings['simple_bgcolor']:
+			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, None)
+		else:
+			self.slideshow_window2.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
 
 	def refresh_recent_files_menu(self):
 		if self.merge_id_recent:
