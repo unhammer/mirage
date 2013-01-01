@@ -101,13 +101,6 @@ class Base:
 		self.open_mode_last = 3
 		self.min_zoomratio = 0.02
 
-		# Create a dictionary with all settings the users can do in the interface
-		self.usettings = {}
-		# Initialize vars:
-		self.usettings['window_width'] = 600
-		self.usettings['window_height'] = 400
-		self.usettings['simple_bgcolor'] = False
-
 		# Current image:
 		self.curr_img_in_list = 0
 		# This is the actual pixbuf that is loaded in Mirage. This will
@@ -122,10 +115,61 @@ class Base:
 		# Previous preloaded image:
 		self.previmg = ImageData(index=-1)
 
-		# Settings, misc:
+		# Create a dictionary with all settings the users can do in the interface
+		self.usettings = {}
+
+		# Window settings
+		self.usettings['window_width'] = 600
+		self.usettings['window_height'] = 400
 		self.usettings['toolbar_show'] = True
 		self.usettings['thumbpane_show'] = True
 		self.usettings['statusbar_show'] = True
+
+		# Settings, Behavior
+		self.usettings['open_mode'] = self.open_mode_smart
+		self.usettings['last_mode'] = self.open_mode_smart
+		self.usettings['open_all_images'] = True # open all images in the directory(ies)
+		self.usettings['open_hidden_files'] = False
+		self.usettings['use_numacomp'] = False
+		self.usettings['case_numacomp'] = False
+		self.usettings['use_last_dir'] = True
+		self.usettings['last_dir'] = os.path.expanduser("~")
+		self.usettings['fixed_dir'] = os.path.expanduser("~")
+
+		# Settings, Navigation
+		self.usettings['listwrap_mode'] = 0	# 0=no, 1=yes, 2=ask
+		self.usettings['preloading_images'] = True
+
+		# Settings, Interface
+		self.usettings['simple_bgcolor'] = False
+		self.usettings['bgcolor'] = False
+		self.usettings['thumbnail_size'] = 128	# Default to 128 x 128
+		self.usettings['start_in_fullscreen'] = False
+
+		# Settings, Slideshow
+		self.usettings['slideshow_delay'] = 1	# seconds
+		self.usettings['disable_screensaver'] = False
+		self.usettings['slideshow_in_fullscreen'] = False
+		self.usettings['slideshow_random'] = False
+
+		# Settings, Editing:
+		self.usettings['zoomvalue'] = 2
+		self.usettings['savemode'] = 2
+		self.usettings['quality_save'] = 90
+		self.usettings['confirm_delete'] = True
+
+		# Action settings
+		self.usettings['action_names'] = [_("Open in GIMP"), _("Create Thumbnail"), _("Create Thumbnails"), _("Move to Favorites")]
+		self.usettings['action_shortcuts'] = ["<Control>e", "<Alt>t", "<Control><Alt>t", "<Control><Alt>f"]
+		self.usettings['action_commands'] = ["gimp %F", "convert %F -thumbnail 150x150 %Pt_%N.jpg", "convert %F -thumbnail 150x150 %Pt_%N.jpg", "mkdir -p ~/mirage-favs; mv %F ~/mirage-favs; [NEXT]"]
+		self.usettings['action_batch'] = [False, False, True, False]
+
+		# Determine config dir, first try the environment variable XDG_CONFIG_HOME
+		# according to XDG specification and as a fallback use ~/.config/mirage
+		self.config_dir = (os.getenv('XDG_CONFIG_HOME') or os.path.expanduser('~/.config')) + '/mirage'
+		# Load config from disk:
+		self.read_config_and_set_settings()
+		
 		self.going_random = False
 		self.fullscreen_mode = False
 		self.opendialogpath = ""
@@ -133,52 +177,28 @@ class Base:
 		self.recursive = False
 		self.verbose = False
 		self.image_loaded = False
-		self.usettings['open_all_images'] = True # open all images in the directory(ies)
-		self.usettings['use_last_dir'] = True
-		self.usettings['last_dir'] = os.path.expanduser("~")
-		self.usettings['fixed_dir'] = os.path.expanduser("~")
 		self.image_list = []
 		self.firstimgindex_subfolders_list = []
-		self.usettings['open_mode'] = self.open_mode_smart
-		self.usettings['last_mode'] = self.open_mode_smart
-		self.usettings['listwrap_mode'] = 0	# 0=no, 1=yes, 2=ask
 		self.user_prompt_visible = False	# the "wrap?" prompt
-		self.usettings['slideshow_delay'] = 1	# seconds
 		self.slideshow_mode = False
-		self.usettings['slideshow_random'] = False
 		self.slideshow_controls_visible = False	# fullscreen slideshow controls
 		self.controls_moving = False
-		self.usettings['zoomvalue'] = 2
-		self.usettings['quality_save'] = 90
-		self.usettings['bgcolor'] = False
 		self.updating_adjustments = False
-		self.usettings['disable_screensaver'] = False
-		self.usettings['slideshow_in_fullscreen'] = False
 		self.closing_app = False
-		self.usettings['confirm_delete'] = True
-		self.usettings['preloading_images'] = True
-		self.usettings['action_names'] = [_("Open in GIMP"), _("Create Thumbnail"), _("Create Thumbnails"), _("Move to Favorites")]
-		self.usettings['action_shortcuts'] = ["<Control>e", "<Alt>t", "<Control><Alt>t", "<Control><Alt>f"]
-		self.usettings['action_commands'] = ["gimp %F", "convert %F -thumbnail 150x150 %Pt_%N.jpg", "convert %F -thumbnail 150x150 %Pt_%N.jpg", "mkdir -p ~/mirage-favs; mv %F ~/mirage-favs; [NEXT]"]
-		self.usettings['action_batch'] = [False, False, True, False]
 		self.onload_cmd = None
 		self.searching_for_images = False
 		self.preserve_aspect = True
 		self.ignore_preserve_aspect_callback = False
-		self.usettings['savemode'] = 2
 		self.image_modified = False
 		self.image_zoomed = False
-		self.usettings['start_in_fullscreen'] = False
 		self.running_custom_actions = False
 		self.merge_id = None
 		self.actionGroupCustom = None
 		self.merge_id_recent = None
 		self.actionGroupRecent = None
-		self.usettings['open_hidden_files'] = False
-		self.usettings['use_numacomp'] = False
-		self.usettings['case_numacomp'] = False
+		
 		self.thumbnail_sizes = ["128", "96", "72", "64", "48", "32"]
-		self.usettings['thumbnail_size'] = 128	# Default to 128 x 128
+		
 		self.thumbnail_loaded = []
 		self.thumbpane_updating = False
 		self.usettings['recentfiles'] = ["", "", "", "", ""]
@@ -219,12 +239,6 @@ class Base:
 				else:
 					self.print_usage()
 					sys.exit(2)
-
-		# Determine config dir, first try the environment variable XDG_CONFIG_HOME
-		# according to XDG specification and as a fallback use ~/.config/mirage
-		self.config_dir = (os.getenv('XDG_CONFIG_HOME') or os.path.expanduser('~/.config')) + '/mirage'
-		# Load config from disk:
-		self.read_config_and_set_settings()
 
 		# slideshow_delay is the user's preference, whereas curr_slideshow_delay is
 		# the current delay (which can be changed without affecting the 'default')
