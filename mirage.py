@@ -617,8 +617,8 @@ class Base:
 			self.menubar.set_no_show_all(True)
 			self.thumbscroll.set_no_show_all(True)
 		self.window.show_all()
-		self.ss_exit.set_size_request(self.ss_start.size_request()[0], self.ss_stop.size_request()[1])
-		self.ss_randomize.set_size_request(self.ss_start.size_request()[0], -1)
+		#self.ss_exit.set_size_request(self.ss_start.size_request()[0]*2, self.ss_start.size_request()[1]*2)
+		#self.ss_randomize.set_size_request(self.ss_start.size_request()[0]*2, -1)
 		self.ss_start.set_size_request(self.ss_start.size_request()[0]*2, -1)
 		self.ss_stop.set_size_request(self.ss_stop.size_request()[0]*2, -1)
 		self.UIManager.get_widget('/Popup/Exit Full Screen').hide()
@@ -663,24 +663,29 @@ class Base:
 			gtk.accel_map_load(accel)
 
 	def slideshow_setup(self):
+		# Create the left-side controls
 		self.slideshow_window = gtk.Window(gtk.WINDOW_POPUP)
 		self.slideshow_controls = gtk.HBox()
+		# Back button
 		self.ss_back = gtk.Button()
 		self.ss_back.add(gtk.image_new_from_stock(gtk.STOCK_GO_BACK, gtk.ICON_SIZE_BUTTON))
 		self.ss_back.set_property('can-focus', False)
 		self.ss_back.connect('clicked', self.goto_prev_image)
-		self.ss_start = gtk.Button("", gtk.STOCK_MEDIA_PLAY)
-		self.ss_start.get_child().get_child().get_children()[1].set_text('')
+		# Start/Stop buttons
+		self.ss_start = gtk.Button()
+		self.ss_start.add(gtk.image_new_from_stock(gtk.STOCK_MEDIA_PLAY, gtk.ICON_SIZE_BUTTON))
 		self.ss_start.set_property('can-focus', False)
 		self.ss_start.connect('clicked', self.toggle_slideshow)
-		self.ss_stop = gtk.Button("", gtk.STOCK_MEDIA_STOP)
-		self.ss_stop.get_child().get_child().get_children()[1].set_text('')
+		self.ss_stop = gtk.Button()
+		self.ss_stop.add(gtk.image_new_from_stock(gtk.STOCK_MEDIA_STOP, gtk.ICON_SIZE_BUTTON))
 		self.ss_stop.set_property('can-focus', False)
 		self.ss_stop.connect('clicked', self.toggle_slideshow)
-		self.ss_forward = gtk.Button("", gtk.STOCK_GO_FORWARD)
-		self.ss_forward.get_child().get_child().get_children()[1].set_text('')
+		# Forward button
+		self.ss_forward = gtk.Button()
+		self.ss_forward.add(gtk.image_new_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_BUTTON))
 		self.ss_forward.set_property('can-focus', False)
 		self.ss_forward.connect('clicked', self.goto_next_image)
+		# Pack controls into the slideshow window
 		self.slideshow_controls.pack_start(self.ss_back, False, False, 0)
 		self.slideshow_controls.pack_start(self.ss_start, False, False, 0)
 		self.slideshow_controls.pack_start(self.ss_stop, False, False, 0)
@@ -690,23 +695,23 @@ class Base:
 			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, None)
 		else:
 			self.slideshow_window.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
+		
+		# Create the right-side controls
 		self.slideshow_window2 = gtk.Window(gtk.WINDOW_POPUP)
 		self.slideshow_controls2 = gtk.HBox()
 		try:
-			self.ss_exit = gtk.Button("", gtk.STOCK_LEAVE_FULLSCREEN)
-			self.ss_exit.get_child().get_child().get_children()[1].set_text('')
+			self.ss_exit = gtk.Button()
+			self.ss_exit.add(gtk.image_new_from_stock(gtk.STOCK_LEAVE_FULLSCREEN, gtk.ICON_SIZE_BUTTON))
 		except:
 			self.ss_exit = gtk.Button()
-			self.ss_exit.set_image(gtk.image_new_from_stock('leave-fullscreen', gtk.ICON_SIZE_MENU))
+			self.ss_exit.set_image(gtk.image_new_from_stock('leave-fullscreen', gtk.ICON_SIZE_BUTTON))
 		self.ss_exit.set_property('can-focus', False)
 		self.ss_exit.connect('clicked', self.leave_fullscreen)
 		self.ss_randomize = gtk.ToggleButton()
-		icon_path = self.find_path('stock_shuffle.png')
 		try:
-			pixbuf = gtk.gdk.pixbuf_new_from_file(icon_path)
-			iconset = gtk.IconSet(pixbuf)
-			self.iconfactory.add('stock-shuffle', iconset)
-			self.ss_randomize.set_image(gtk.image_new_from_stock('stock-shuffle', gtk.ICON_SIZE_MENU))
+			pixbuf = gtk.gdk.pixbuf_new_from_file(self.find_path('stock_shuffle.png'))
+			self.iconfactory.add('stock-shuffle', gtk.IconSet(pixbuf))
+			self.ss_randomize.set_image(gtk.image_new_from_stock('stock-shuffle', gtk.ICON_SIZE_BUTTON))
 		except:
 			self.ss_randomize.set_label("Rand")
 		self.ss_randomize.connect('toggled', self.random_changed)

@@ -1,3 +1,6 @@
+v1.0 - future
+	+ Fixed bug with missing icons in slideshow controls
+
 v1.0_pre1 - December 10, 2012
 	+ Added Numerical Aware Comparison (numacomp) as a sorting option.
 	+ Added Exif data reading on supported files through pyexiv2
