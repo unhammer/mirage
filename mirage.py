@@ -142,7 +142,7 @@ class Base:
 
 		# Settings, Interface
 		self.usettings['simple_bgcolor'] = False
-		self.usettings['bgcolor'] = False
+		self.usettings['bgcolor'] = {'r':0, 'g':0, 'b': 0}
 		self.usettings['thumbnail_size'] = 128	# Default to 128 x 128
 		self.usettings['start_in_fullscreen'] = False
 
