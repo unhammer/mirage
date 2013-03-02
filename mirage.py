@@ -280,6 +280,7 @@ class Base:
 			('Open Image', gtk.STOCK_FILE, _('_Open Image...'), None, _('Open Image'), self.open_file),
 			('Open Remote Image', gtk.STOCK_NETWORK, _('Open _Remote image...'), None, _('Open Remote Image'), self.open_file_remote),
 			('Open Folder', gtk.STOCK_DIRECTORY, _('Open _Folder...'), '<Ctrl>F', _('Open Folder'), self.open_folder),
+			('Reload', None, _('Reload'), '<Ctrl>F5', _('Reload'), self.reload),
 			('Save', gtk.STOCK_SAVE, _('_Save Image'), None, None, self.save_image),
 			('Save As', gtk.STOCK_SAVE_AS, _('Save Image _As...'), '<Ctrl><Shift>S', None, self.save_image_as),
 			('Copy', gtk.STOCK_COPY, _('Copy to Clipboard...'), '<Ctrl>C', None, self.copy_to_clipboard),
@@ -378,6 +379,7 @@ class Base:
 						<menuitem action="Open Image"/>
 						<menuitem action="Open Folder"/>
 						<menuitem action="Open Remote Image"/>
+						<menuitem action="Reload"/>
 						<separator name="FM1"/>
 						<menuitem action="Save"/>
 						<menuitem action="Save As"/>
@@ -3110,6 +3112,15 @@ class Base:
 			self.last_image_action_was_fit = False
 			self.put_zoom_image_to_window(False, wanted_zoomratio)
 			self.update_statusbar()
+
+	def reload(self, action):
+		# First move the selected image to the top of the list so that
+		# it will be automatically selected. The image list is always sorted so
+		# the position of the image will not be changed because of this.
+		img = self.image_list[self.curr_img_in_list]
+		self.image_list.remove(img)
+		self.image_list.insert(0, img)
+		self.expand_filelist_and_load_image(list(self.image_list))
 
 	def zoom_out(self, action):
 		if self.currimg.isloaded and self.UIManager.get_widget('/MainMenu/ViewMenu/Out').get_property('sensitive'):
