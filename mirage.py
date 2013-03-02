@@ -739,20 +739,22 @@ class Base:
 			self.actionGroupRecent = None
 		self.actionGroupRecent = gtk.ActionGroup('RecentFiles')
 		self.UIManager.ensure_update()
-		for i in range(len(self.usettings['recentfiles'])):
-			if len(self.usettings['recentfiles'][i]) > 0:
-				filename = self.usettings['recentfiles'][i].split("/")[-1]
-				if len(filename) > 0:
-					if len(filename) > 27:
+		for i, file_path in enumerate(self.usettings['recentfiles']):
+			if file_path:
+				filename = os.path.basename(file_path)
+				if filename:
+					base, ext = os.path.splitext(filename)
+					if len(base) > 27:
 						# Replace end of file name (excluding extension) with ..
 						try:
-							menu_name = filename[:25] + '..' + os.path.splitext(filename)[1]
+							menu_name = base[:25] + '..' + ext
 						except:
-							menu_name = filename[0]
+							menu_name = filename
 					else:
 						menu_name = filename
 					menu_name = menu_name.replace('_','__')
-					action = [(str(i), None, menu_name, '<Alt>' + str(i+1), None, self.recent_action_click)]
+					action_id = str(i)
+					action = [(action_id, None, menu_name, '<Alt>' + str(i+1), None, self.recent_action_click)]
 					self.actionGroupRecent.add_actions(action)
 		uiDescription = """
 			<ui>
@@ -760,9 +762,10 @@ class Base:
 				<menu action="FileMenu">
 					<placeholder name="Recent Files">
 			"""
-		for i in range(len(self.usettings['recentfiles'])):
-			if len(self.usettings['recentfiles'][i]) > 0:
-				uiDescription = uiDescription + """<menuitem action=\"""" + str(i) + """\"/>"""
+		for i, file_path in enumerate(self.usettings['recentfiles']):
+			if file_path:
+				action_id = str(i)
+				uiDescription = uiDescription + """<menuitem action=\"""" + action_id + """\"/>"""
 		uiDescription = uiDescription + """</placeholder></menu></menubar></ui>"""
 		self.merge_id_recent = self.UIManager.add_ui_from_string(uiDescription)
 		self.UIManager.insert_action_group(self.actionGroupRecent, 0)
