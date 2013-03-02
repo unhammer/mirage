@@ -1157,26 +1157,14 @@ class Base:
 		self.refresh_recent_files_menu()
 
 	def recent_file_add_and_refresh(self, addfile):
+		if not addfile:
+			# Nothing to work with.
+			return
 		# First check if the filename is already in the list:
-		for i in range(len(self.usettings['recentfiles'])):
-			if len(self.usettings['recentfiles'][i]) > 0:
-				if addfile == self.usettings['recentfiles'][i]:
-					# If found in list, put to position 1 and decrement the rest:
-					j = i
-					while j > 0:
-						self.usettings['recentfiles'][j] = self.usettings['recentfiles'][j-1]
-						j = j - 1
-					self.usettings['recentfiles'][0] = addfile
-					self.refresh_recent_files_menu()
-					return
-		# If not found, put to position 1, decrement the rest:
-		j = len(self.usettings['recentfiles'])-1
-		while j > 0:
-			self.usettings['recentfiles'][j] = self.usettings['recentfiles'][j-1]
-			j = j - 1
-		if len(self.usettings['recentfiles']) > 0:
-			self.usettings['recentfiles'][0] = addfile
-			self.refresh_recent_files_menu()
+		if addfile in self.usettings['recentfiles']:
+			self.usettings['recentfiles'].remove(addfile)
+		self.usettings['recentfiles'].insert(0, addfile)
+		self.refresh_recent_files_menu()
 
 	def custom_action_click(self, action):
 		if self.UIManager.get_widget('/MainMenu/EditMenu/ActionSubMenu/' + action.get_name()).get_property('sensitive'):
@@ -1270,7 +1258,7 @@ class Base:
 		self.UIManager.get_widget('/MainMenu/FileMenu/Save').set_sensitive(False)
 		self.UIManager.get_widget('/MainMenu/FileMenu/Properties').set_sensitive(False)
 		# Only jpeg, png, and bmp images are currently supported for saving
-		if len(self.image_list) > 0:
+		if self.image_list:
 			try:
 				self.UIManager.get_widget('/MainMenu/FileMenu/Properties').set_sensitive(True)
 				if self.currimg.writable_format():
