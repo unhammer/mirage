@@ -4683,6 +4683,7 @@ class ImageData:
 		if not self.isloaded:
 			return False
 		self.fileinfo['is_writable']
+                return True
 
 	def zoom_pixbuf(self, zoomratio, quality, colormap):
 		# Always start with the original image to preserve quality!
