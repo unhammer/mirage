@@ -562,6 +562,7 @@ class Base:
 		self.window.connect("delete_event", self.delete_event)
 		self.window.connect("destroy", self.destroy)
 		self.window.connect("size-allocate", self.window_resized)
+		self.window.connect("configure_event", self.store_window_size)
 		self.window.connect('key-press-event', self.topwindow_keypress)
 		self.toolbar.connect('focus', self.toolbar_focused)
 		self.layout.drag_dest_set(gtk.DEST_DEFAULT_HIGHLIGHT | gtk.DEST_DEFAULT_DROP, [("text/uri-list", 0, 80)], gtk.gdk.ACTION_DEFAULT)
@@ -1455,6 +1456,12 @@ class Base:
 
 		# Also, save accel_map:
 		gtk.accel_map_save(self.config_dir + '/accel_map')
+	
+	def store_window_size(self,widget,event):
+		# When the window is resized, store the size in the settings
+		x,y,w,h = widget.get_allocation()
+		self.usettings['window_width'] = w
+		self.usettings['window_height'] = h
 
 	def delete_event(self, widget, event, data=None):
 		cancel = self.autosave_image()
